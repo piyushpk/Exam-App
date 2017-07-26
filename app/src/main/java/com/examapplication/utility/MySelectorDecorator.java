@@ -17,7 +17,7 @@ public class MySelectorDecorator implements DayViewDecorator {
     private final Drawable drawable;
 
     public MySelectorDecorator(Activity context) {
-        drawable = context.getResources().getDrawable(R.drawable.bazaar_png);
+        drawable = context.getResources().getDrawable(R.drawable.ic_action_search);
 
 
     }

@@ -2,4 +2,14 @@
     <string name="app_name">ExamApplication</string>
 
     <string name="action_settings">Settings</string>
+
+
+    <string-array name="select">
+        <item>Pune-01</item>
+        <item>Pune-02</item>
+        <item>Pune-03</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
