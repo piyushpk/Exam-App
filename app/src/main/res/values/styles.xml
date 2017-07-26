@@ -1,11 +1,36 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <!--Edit text theme-->
+    <style name="EditText" parent="Widget.Design.TextInputLayout">
+        <item name="colorControlNormal">@color/colorWhite</item>
+        <item name="colorControlActivated">@color/colorWhite</item>
+        <item name="colorControlHighlight">@color/colorWhite</item>
+    </style>
+
+    <!--Edit text theme-->
+    <style name="EditTextProfile" parent="Widget.Design.TextInputLayout">
+        <item name="colorControlNormal">@color/colorFaintBlack</item>
+        <item name="colorControlActivated">@color/colorFaintBlack</item>
+        <item name="colorControlHighlight">@color/colorFaintBlack</item>
+    </style>
+
+    <style name="TextAppearance.MyCustomDay" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
 </resources>
