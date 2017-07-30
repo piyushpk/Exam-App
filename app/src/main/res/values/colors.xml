@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#00BCD4</color>
-    <color name="colorPrimaryDark">#00A1B5</color>
+    <color name="colorPrimary">#0080ff</color>
+    <color name="colorPrimaryDark">#0060ff</color>
     <color name="colorAccent">#009598</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorText">#000000</color>
@@ -15,10 +15,7 @@
     <color name="colorTextFaint">#9B9B9B</color>
     <color name="colorTextDate"> #284061</color>
     <color name="colorEditText">#FFC1C1C1</color>
-    <color name="colorthreadText">#FF262628</color>
-    <color name="colormsgText">#FF9E9E9E</color>
     <color name="colorCard">#fdfbd2</color>
-    <color name="colorrsText"> #FF00BCD4</color>
     <color name="colorWhatsUpBack">#F9F9F9</color>
 
 
@@ -33,9 +30,8 @@
 
     <color name="colorTransparent">#80FFFFFF</color>
     <color name="colorBlackTransparent">#99000000</color>
-    <color name="colorBlackTransparantd">#dd000000</color>
-
 
     <color name="colorButton">#1DD53F</color>
+    <color name="circularImage">#D2D1CF</color>
 
 </resources>

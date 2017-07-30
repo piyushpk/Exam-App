@@ -1,0 +1,189 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.examapplication.ui.fragments.AuthorDetailsFragment"
+    android:background="@color/colorBlackTransparent"
+    android:id="@+id/relative_main">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:id="@+id/relativeLayout">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="30dp"
+            app:cardCornerRadius="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp">
+
+                <TextView
+                    android:id="@+id/txt_author"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_h4"
+                    android:text="Author"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/colorBlack"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/default_user"
+                    app:civ_fill_color="@color/circularImage"
+                    android:layout_marginTop="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/txt_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_h2"
+                        android:text="Name: "
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/txt_author_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_h2"
+                        android:text="Something something"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="80dp">
+
+                    <TextView
+                        android:id="@+id/txt_education"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_h2"
+                        android:text="Education: "
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/txt_course_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_h2"
+                        android:text="C.A."
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="80dp">
+
+                    <TextView
+                        android:id="@+id/txt_exp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_h2"
+                        android:text="Exp: "
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/txt_exp_years"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_h2"
+                        android:text="10 years"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="80dp">
+
+                    <TextView
+                        android:id="@+id/txt_dob"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_h2"
+                        android:text="D.O.B: "
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/txt_dob_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_h2"
+                        android:text="15-05-1975"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt_about"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_h3"
+                    android:text="About"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"/>
+
+                <TextView
+                    android:id="@+id/txt_about_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_h2"
+                    android:text="@string/text_dummy_large"
+                    android:textColor="@color/colorBlack"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/img_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_cancel_filled"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignTop="@+id/relativeLayout"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="10dp" />
+
+</RelativeLayout>

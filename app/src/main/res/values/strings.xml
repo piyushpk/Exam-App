@@ -7,7 +7,19 @@
     <string name="for_one_year">For 1 Year</string>
     <string name="start_date">Start Date: 15-07-2017</string>
     <string name="end_date">End Date: 15-08-2017</string>
+    <string name="releasing_date">Releasing Date:</string>
+    <string name="date">15-07-2017</string>
+    <string name="total_dues">Total Dues:</string>
+    <string name="number">500</string>
+    <string name="passing_marks">Passing Marks</string>
+    <string name="max_marks">Max Marks:</string>
+    <string name="start_on">Start On:</string>
+    <string name="ends_on">Ends On:</string>
+    <string name="result">Result:</string>
+    <string name="instruction">Instructions:</string>
 
+    <string name="text_dummy_large">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+    <string name="text_dummy_small">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
 
     <string-array name="select">
         <item>Select</item>
