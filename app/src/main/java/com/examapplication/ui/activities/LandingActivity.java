@@ -7,8 +7,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.examapplication.R;
 import com.examapplication.ui.fragments.ComingSoonFragment;
@@ -43,8 +48,8 @@ public class LandingActivity extends ParentActivity
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new RunningNowFragment(), "Coming Soon");
-        adapter.addFragment(new ComingSoonFragment(), "Running Now");
+        adapter.addFragment(new RunningNowFragment(), "Running Now");
+        adapter.addFragment(new ComingSoonFragment(), "Coming Soon");
         viewPager.setAdapter(adapter);
     }
 

@@ -25,7 +25,7 @@
 
     <color name="colorBlack">#000000</color>
     <color name="colorFaintBlack">#c0c0c0</color>
-    <color name="colorButton">#DC630A</color>
+    <!--<color name="colorButton">#DC630A</color>-->
     <color name="colorGoogleButton">#E25143</color>
     <color name="colorFbButton">#4D6FA6</color>
     <color name="circle">#D0021B</color>
@@ -34,5 +34,8 @@
     <color name="colorTransparent">#80FFFFFF</color>
     <color name="colorBlackTransparent">#99000000</color>
     <color name="colorBlackTransparantd">#dd000000</color>
+
+
+    <color name="colorButton">#1DD53F</color>
 
 </resources>

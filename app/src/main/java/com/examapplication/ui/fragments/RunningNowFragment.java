@@ -6,9 +6,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.examapplication.R;
 import com.examapplication.models.RunningNowModel;
@@ -25,7 +31,8 @@ import java.util.ArrayList;
  * Use the {@link RunningNowFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RunningNowFragment extends Fragment {
+public class RunningNowFragment extends Fragment
+{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -57,7 +64,8 @@ public class RunningNowFragment extends Fragment {
      * @return A new instance of fragment RunningNowFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static RunningNowFragment newInstance(String param1, String param2) {
+    public static RunningNowFragment newInstance(String param1, String param2)
+    {
         RunningNowFragment fragment = new RunningNowFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -67,9 +75,11 @@ public class RunningNowFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        if(getArguments() != null) {
+        if(getArguments() != null)
+        {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
@@ -80,14 +90,16 @@ public class RunningNowFragment extends Fragment {
             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_running_now, container, false);
+        mContext = getActivity().getApplicationContext();
 
         recyclerRunningNow = (RecyclerView)rootView.findViewById(R.id.recycler_running_now);
-        layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        layoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerRunningNow.setLayoutManager(layoutManager);
-        ArrayList<RunningNowModel> runningNowList = new ArrayList<>();
+        ArrayList<RunningNowModel> runningNowModels = new ArrayList<>();
         runningNowModel = new RunningNowModel();
-        runningNowAdapter = new RunningNowAdapter(mContext, runningNowList);
+        runningNowAdapter = new RunningNowAdapter(mContext, runningNowModels, "");
         recyclerRunningNow.setAdapter(runningNowAdapter);
+
         return rootView;
     }
 

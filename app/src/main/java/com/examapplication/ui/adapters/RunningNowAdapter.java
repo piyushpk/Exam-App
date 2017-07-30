@@ -56,7 +56,7 @@ public class RunningNowAdapter extends RecyclerView.Adapter<RunningNowAdapter.Ru
         else{
             return 0;
         }*/
-        return 1;
+        return 10;
     }
 
 
