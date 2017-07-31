@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.examapplication">
+    package="com.examapplication">
 
     <application
         android:name=".utility.App"
@@ -13,17 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateVisible|adjustResize">
-
         <activity android:name=".ui.activities.SplashActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.activities.LandingActivity"/>
-
+        <activity android:name=".ui.activities.LandingActivity" />
+        <activity android:name=".ui.activities.DemoActivity"></activity>
     </application>
 
 </manifest>

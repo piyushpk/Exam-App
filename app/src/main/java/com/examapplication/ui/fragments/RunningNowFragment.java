@@ -93,7 +93,7 @@ public class RunningNowFragment extends Fragment
         mContext = getActivity().getApplicationContext();
 
         recyclerRunningNow = (RecyclerView)rootView.findViewById(R.id.recycler_running_now);
-        layoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        layoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerRunningNow.setLayoutManager(layoutManager);
         ArrayList<RunningNowModel> runningNowModels = new ArrayList<>();
         runningNowModel = new RunningNowModel();

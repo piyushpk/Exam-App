@@ -1,5 +1,6 @@
 package com.examapplication.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -96,10 +97,10 @@ public class LandingActivity extends ParentActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search)
+        if (id == R.id.action_notification)
         {
-            /*Intent intent = new Intent(this, SearchActivity.class);
-            startActivity(intent);*/
+            Intent intent = new Intent(this, DemoActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -112,6 +113,7 @@ public class LandingActivity extends ParentActivity
             fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.fade_out);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();*/
+
 
             return true;
         }
