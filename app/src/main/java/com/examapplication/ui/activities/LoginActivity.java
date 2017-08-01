@@ -65,7 +65,14 @@ public class LoginActivity extends ParentActivity implements View.OnClickListene
 
         if(v == btnLogin)
         {
-            intent = new Intent(this, LandingActivity.class);
+            if(btnName.equals(getString(R.string.student)))
+            {
+                intent = new Intent(this, LandingStudentActivity.class);
+            }
+            else
+            {
+                intent = new Intent(this, LandingFacultyActivity.class);
+            }
             startActivity(intent);
         }
 

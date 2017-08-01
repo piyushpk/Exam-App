@@ -18,7 +18,7 @@ import com.examapplication.ui.fragments.RunningNowFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LandingActivity extends ParentActivity
+public class LandingStudentActivity extends ParentActivity
 {
 
     private Toolbar toolbar;
@@ -29,7 +29,7 @@ public class LandingActivity extends ParentActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_landing);
+        setContentView(R.layout.activity_landing_student);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -94,8 +94,8 @@ public class LandingActivity extends ParentActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_notification)
         {
-            Intent intent = new Intent(this, CreateExamActivity.class);
-            startActivity(intent);
+            /*Intent intent = new Intent(this, CreateExamActivity.class);
+            startActivity(intent);*/
             return true;
         }
 

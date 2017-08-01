@@ -37,5 +37,6 @@
     <color name="colorSignUpImageView">#5E5E5E</color>
     <color name="colorBack">#DDDCDC</color>
     <color name="colorHeading">#00BAEF</color>
+    <color name="colorInputText">#7e7e7e</color>
 
 </resources>

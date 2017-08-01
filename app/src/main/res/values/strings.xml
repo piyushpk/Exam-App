@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">ExamApplication</string>
-    
+    <string name="app_name">Exam Application</string>
+
     <string name="by">By:</string>
     <string name="author_name">Author Name</string>
     <string name="total_marks">Total Marks: 100</string>
@@ -48,11 +48,12 @@
     <string name="section">Section</string>
     <string name="start_date_exam">Start Date</string>
     <string name="end_date_exam">End Date</string>
-    <string name="selling_price">Selling Price</string>
-    <string name="offer_price">Offer Price</string>
+    <string name="selling_price">Selling Price(Rs)</string>
+    <string name="offer_price">Offer Price(Rs)</string>
     <string name="cancel">Cancel</string>
     <string name="next">Next</string>
     <string name="exam_details">Exam Details</string>
+    <string name="exam_time_min">Exam Time(Minutes)</string>
     <string name="exam_time">Exam Time</string>
     <string name="max_mark">Max Mark</string>
     <string name="passing_mark">Passing Mark</string>
@@ -65,6 +66,7 @@
     <string name="save">Save</string>
     <string name="submit">Submit</string>
     <string name="ok">OK</string>
+    <string name="add_questions">Add Questions</string>
 
 
     <string name="text_dummy_large">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>

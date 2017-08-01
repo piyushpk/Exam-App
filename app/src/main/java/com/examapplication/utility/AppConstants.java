@@ -44,5 +44,6 @@ public class AppConstants
 
     public static final String BUTTON_NAME = "button_name";
     public static final String SEND_TO_LOGIN = "send_to_login";
+    public static final String USER = "user";
 
 }

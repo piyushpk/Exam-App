@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.examapplication.R;
+import com.examapplication.utility.App;
+import com.examapplication.utility.AppConstants;
+import com.examapplication.utility.AppPreferences;
 
 public class SignUpActivity extends ParentActivity implements View.OnClickListener
 {
@@ -17,6 +20,9 @@ public class SignUpActivity extends ParentActivity implements View.OnClickListen
     private ImageView imgBack;
     private TextView txtSignUp, txtContinue;
     private EditText edtName, edtEmail, edtPhoneNo, edtAddress;
+    private Intent intent;
+
+    private String user = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,6 +43,8 @@ public class SignUpActivity extends ParentActivity implements View.OnClickListen
         edtEmail = (EditText)findViewById(R.id.edt_email);
         edtPhoneNo = (EditText)findViewById(R.id.edt_phone_no);
         edtAddress = (EditText)findViewById(R.id.edt_address);
+
+        user = AppPreferences.getInstance(mContext).getString(AppConstants.USER, "");
     }
 
     @Override
@@ -49,7 +57,14 @@ public class SignUpActivity extends ParentActivity implements View.OnClickListen
 
         if(v == txtContinue)
         {
-            Intent intent = new Intent(this, LandingActivity.class);
+            if(user.equals(getString(R.string.student)))
+            {
+                intent = new Intent(this, LandingStudentActivity.class);
+            }
+            else
+            {
+                intent = new Intent(this, LandingFacultyActivity.class);
+            }
             startActivity(intent);
             finish();
         }

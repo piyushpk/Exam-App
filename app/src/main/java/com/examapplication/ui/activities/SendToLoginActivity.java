@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.examapplication.R;
 import com.examapplication.utility.AppConstants;
+import com.examapplication.utility.AppPreferences;
 
 public class SendToLoginActivity extends ParentActivity implements View.OnClickListener
 {
@@ -52,6 +53,7 @@ public class SendToLoginActivity extends ParentActivity implements View.OnClickL
 
     private void canLoginScreen(String btnName)
     {
+        AppPreferences.getInstance(mContext).putString(AppConstants.USER, btnName);
         Intent intent = new Intent(this, LoginActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString(AppConstants.BUTTON_NAME, btnName);

@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardBackgroundColor="@android:color/white"
-        app:cardElevation="0dp"
+        app:cardElevation="1dp"
         android:layout_margin="10dp"
         app:cardCornerRadius="5dp"
         android:visibility="gone">
@@ -49,7 +49,7 @@
                     android:hint="@string/exam_name"
                     android:layout_marginTop="60px"
                     android:inputType="textCapWords"
-                    android:textColor="#7e7e7e"
+                    android:textColor="@color/colorInputText"
                     android:textSize="@dimen/text_size_h3"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -69,7 +69,7 @@
                     android:hint="@string/main_category"
                     android:layout_marginTop="60px"
                     android:inputType="textCapWords"
-                    android:textColor="#7e7e7e"
+                    android:textColor="@color/colorInputText"
                     android:textSize="@dimen/text_size_h3"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -89,7 +89,7 @@
                     android:hint="@string/sub_category"
                     android:layout_marginTop="60px"
                     android:inputType="textCapWords"
-                    android:textColor="#7e7e7e"
+                    android:textColor="@color/colorInputText"
                     android:textSize="@dimen/text_size_h3"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -109,7 +109,7 @@
                     android:hint="@string/section"
                     android:layout_marginTop="60px"
                     android:inputType="textCapWords"
-                    android:textColor="#7e7e7e"
+                    android:textColor="@color/colorInputText"
                     android:textSize="@dimen/text_size_h3"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -140,9 +140,10 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/start_date_exam"
                             android:layout_marginTop="60px"
-                            android:inputType="textCapWords"
-                            android:textColor="#7e7e7e"
-                            android:textSize="@dimen/text_size_h3"/>
+                            android:inputType="date"
+                            android:textColor="@color/colorInputText"
+                            android:textSize="@dimen/text_size_h3"
+                            android:paddingRight="30dp"/>
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -175,9 +176,10 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/end_date_exam"
                             android:layout_marginTop="60px"
-                            android:inputType="textCapWords"
-                            android:textColor="#7e7e7e"
-                            android:textSize="@dimen/text_size_h3"/>
+                            android:inputType="date"
+                            android:textColor="@color/colorInputText"
+                            android:textSize="@dimen/text_size_h3"
+                            android:paddingRight="30dp"/>
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -214,8 +216,8 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/selling_price"
                         android:layout_marginTop="60px"
-                        android:inputType="textCapWords"
-                        android:textColor="#7e7e7e"
+                        android:inputType="number"
+                        android:textColor="@color/colorInputText"
                         android:textSize="@dimen/text_size_h3"/>
 
                 </android.support.design.widget.TextInputLayout>
@@ -234,8 +236,8 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/offer_price"
                         android:layout_marginTop="60px"
-                        android:inputType="textCapWords"
-                        android:textColor="#7e7e7e"
+                        android:inputType="number"
+                        android:textColor="@color/colorInputText"
                         android:textSize="@dimen/text_size_h3"/>
 
                 </android.support.design.widget.TextInputLayout>
@@ -282,13 +284,14 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
+        android:id="@+id/card_view2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardBackgroundColor="@android:color/white"
         app:cardElevation="1dp"
         android:layout_margin="10dp"
         app:cardCornerRadius="5dp"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -320,8 +323,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/total_question"
                     android:layout_marginTop="60px"
-                    android:inputType="textCapWords"
-                    android:textColor="#7e7e7e"
+                    android:inputType="number"
+                    android:textColor="@color/colorInputText"
                     android:textSize="@dimen/text_size_h3"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -338,10 +341,10 @@
                     android:id="@+id/input_exam_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/exam_time"
+                    android:hint="@string/exam_time_min"
                     android:layout_marginTop="60px"
-                    android:inputType="textCapWords"
-                    android:textColor="#7e7e7e"
+                    android:inputType="number"
+                    android:textColor="@color/colorInputText"
                     android:textSize="@dimen/text_size_h3"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -367,8 +370,8 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/max_mark"
                         android:layout_marginTop="60px"
-                        android:inputType="textCapWords"
-                        android:textColor="#7e7e7e"
+                        android:inputType="number"
+                        android:textColor="@color/colorInputText"
                         android:textSize="@dimen/text_size_h3"/>
 
                 </android.support.design.widget.TextInputLayout>
@@ -387,8 +390,8 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/passing_mark"
                         android:layout_marginTop="60px"
-                        android:inputType="textCapWords"
-                        android:textColor="#7e7e7e"
+                        android:inputType="number"
+                        android:textColor="@color/colorInputText"
                         android:textSize="@dimen/text_size_h3"/>
 
                 </android.support.design.widget.TextInputLayout>
@@ -419,11 +422,12 @@
                             android:id="@+id/input_result_date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/result_date"
                             android:layout_marginTop="60px"
-                            android:inputType="textCapWords"
-                            android:textColor="#7e7e7e"
-                            android:textSize="@dimen/text_size_h3"/>
+                            android:hint="@string/result_date"
+                            android:inputType="date"
+                            android:textColor="@color/colorInputText"
+                            android:textSize="@dimen/text_size_h3"
+                            android:paddingRight="30dp"/>
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -452,7 +456,7 @@
                         android:hint="@string/offer_price"
                         android:layout_marginTop="60px"
                         android:inputType="textCapWords"
-                        android:textColor="#7e7e7e"
+                        android:textColor="@color/colorInputText"
                         android:textSize="@dimen/text_size_h3"/>
 
                 </android.support.design.widget.TextInputLayout>
@@ -462,20 +466,363 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="120dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom"
-            android:layout_marginBottom="15dp">
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="15dp"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btn_previous_details1"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/grey_square_button"
+                android:text="@string/previous"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_h3"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
 
             <Button
                 android:id="@+id/btn_ok"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="50dp"
+                android:layout_weight="1"
                 android:background="@drawable/green_square_button"
                 android:text="@string/ok"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/text_size_h3"/>
+                android:textSize="@dimen/text_size_h3"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardElevation="1dp"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="5dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="@string/add_questions"
+                android:textColor="@color/colorHeading"
+                android:textSize="@dimen/text_xx_large"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginTop="20dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1.2">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/total_question"
+                        android:textSize="@dimen/text_size_h3"
+                        android:layout_gravity="center"
+                        android:gravity="center"/>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorFaintBlack"
+                        android:layout_marginTop="0dp"
+                        android:layout_margin="5dp"/>
+
+                    <TextView
+                        android:id="@+id/txt_total_question"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/number"
+                        android:textSize="@dimen/text_size_h3"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="@color/colorHeading"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="0.8">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/max_mark"
+                        android:textSize="@dimen/text_size_h3"
+                        android:layout_gravity="center"
+                        android:gravity="center"/>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorFaintBlack"
+                        android:layout_marginTop="0dp"
+                        android:layout_margin="5dp"/>
+
+                    <TextView
+                        android:id="@+id/txt_max_marks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/number"
+                        android:textSize="@dimen/text_size_h3"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="@color/colorHeading"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/exam_time"
+                        android:textSize="@dimen/text_size_h3"
+                        android:layout_gravity="center"
+                        android:gravity="center"/>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorFaintBlack"
+                        android:layout_marginTop="0dp"
+                        android:layout_margin="5dp"/>
+
+                    <TextView
+                        android:id="@+id/txt_exam_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/number"
+                        android:textSize="@dimen/text_size_h3"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="@color/colorHeading"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorFaintBlack"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="15dp"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btn_previous"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/grey_square_button"
+                android:text="@string/previous"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_h3"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+            <Button
+                android:id="@+id/btn_next_question"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/green_square_button"
+                android:text="@string/next"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_h3"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardElevation="1dp"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="5dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/exam_details"
+                android:textSize="@dimen/text_xx_large"
+                android:textColor="@color/colorHeading"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/EditText1"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/input_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/description"
+                    android:layout_marginTop="60px"
+                    android:inputType="number"
+                    android:textColor="@color/colorInputText"
+                    android:textSize="@dimen/text_size_h3"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/EditText1"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/input_short_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/short_description"
+                    android:layout_marginTop="60px"
+                    android:inputType="number"
+                    android:textColor="@color/colorInputText"
+                    android:textSize="@dimen/text_size_h3"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/EditText1"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/input_note"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/note"
+                    android:layout_marginTop="60px"
+                    android:inputType="number"
+                    android:textColor="@color/colorInputText"
+                    android:textSize="@dimen/text_size_h3"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/EditText1"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/input_instruction_set"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/instruction_set"
+                    android:layout_marginTop="60px"
+                    android:inputType="number"
+                    android:textColor="@color/colorInputText"
+                    android:textSize="@dimen/text_size_h3"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="15dp"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btn_previous_details"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/grey_square_button"
+                android:text="@string/previous"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_h3"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/green_square_button"
+                android:text="@string/save"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_h3"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
 
         </LinearLayout>
 
