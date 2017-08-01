@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="55dp"
     android:minHeight="?attr/actionBarSize"
     android:background="@color/colorPrimary"
     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -19,8 +19,8 @@
 
         <ImageView
             android:id="@+id/image_profile"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_centerHorizontal="true"
             android:src="@drawable/ic_action_back"
             android:layout_marginLeft="-8dp"/>

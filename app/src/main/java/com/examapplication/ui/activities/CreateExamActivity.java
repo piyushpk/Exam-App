@@ -12,8 +12,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.examapplication.R;
+import com.examapplication.utility.DateTimeUtility;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
-public class CreateExamActivity extends ParentActivity implements View.OnClickListener
+import java.util.Calendar;
+import java.util.Date;
+
+public class CreateExamActivity extends ParentActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener
 {
 
     private Context mContext;
@@ -148,6 +153,21 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
     @Override
     public void onClick(View v)
     {
+        if(v == relativeStartDate)
+        {
+            showCalendar();
+        }
+
+        if(v == relativeEndDate)
+        {
+
+        }
+
+        if(v == relativeResultDate)
+        {
+
+        }
+
         if(v == btnCancel)
         {
             finish();
@@ -196,5 +216,32 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
         {
 
         }
+    }
+
+    private void showCalendar()
+    {
+        Calendar now = Calendar.getInstance();
+        Date date = new Date();
+        now.setTime(date);
+        DatePickerDialog dpd = DatePickerDialog.newInstance(
+                CreateExamActivity.this,
+                now.get(Calendar.YEAR),
+                now.get(Calendar.MONTH),
+                now.get(Calendar.DAY_OF_MONTH)
+        );
+        dpd.setMinDate(now);
+        dpd.setThemeDark(false);
+        dpd.vibrate(true);
+        dpd.dismissOnPause(false);
+        dpd.showYearPickerFirst(false);
+        dpd.setAccentColor(getResources().getColor(R.color.colorPrimaryDark));
+        dpd.setTitle("Select Date");
+        dpd.show(this.getFragmentManager(), "Date");
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth)
+    {
+        inputStartDate.setText(DateTimeUtility.displayDate());
     }
 }
