@@ -8,13 +8,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.HorizontalScrollView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.examapplication.R;
 import com.examapplication.ui.fragments.ComingSoonFragment;
@@ -99,7 +94,7 @@ public class LandingActivity extends ParentActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_notification)
         {
-            Intent intent = new Intent(this, DemoActivity.class);
+            Intent intent = new Intent(this, CreateExamActivity.class);
             startActivity(intent);
             return true;
         }

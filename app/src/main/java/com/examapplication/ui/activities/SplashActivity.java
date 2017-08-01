@@ -41,7 +41,7 @@ public class SplashActivity extends ParentActivity
 
     private void callNextScreen()
     {
-        Intent intent = new Intent(this, LandingActivity.class);
+        Intent intent = new Intent(this, SendToLoginActivity.class);
         startActivity(intent);
         this.finish();
     }

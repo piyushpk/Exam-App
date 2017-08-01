@@ -40,4 +40,9 @@ public class AppConstants
     public static String CHECK_PLAY_SERVICES = "Update Play Services";
     public static String API_FAIL_MESSAGE = "Something went wrong";
 
+    //Constant Bundle values
+
+    public static final String BUTTON_NAME = "button_name";
+    public static final String SEND_TO_LOGIN = "send_to_login";
+
 }
