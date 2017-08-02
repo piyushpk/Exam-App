@@ -20,18 +20,27 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.LandingStudentActivity"/>
-        <activity android:name=".ui.activities.DemoActivity"/>
-        <activity android:name=".ui.activities.SendToLoginActivity">
-        </activity>
-        <activity android:name=".ui.activities.SignUpActivity">
-        </activity>
-        <activity android:name=".ui.activities.LoginActivity">
-        </activity>
-        <activity android:name=".ui.activities.CreateExamActivity">
-        </activity>
-        <activity android:name=".ui.activities.LandingFacultyActivity">
-        </activity>
+        <activity
+            android:name=".ui.activities.LandingStudentActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activities.DemoActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activities.SendToLoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activities.SignUpActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activities.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activities.CreateExamActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activities.LandingFacultyActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -4,11 +4,19 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.examapplication.R;
+import com.examapplication.models.AddedExamModel;
+import com.examapplication.models.RunningNowModel;
+import com.examapplication.ui.adapters.AddedExamAdapter;
+import com.examapplication.ui.adapters.RunningNowAdapter;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +37,11 @@ public class AddedExamFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private RecyclerView recyclerRunningNow;
+    private Context mContext;
+    private LinearLayoutManager layoutManager;
+    private AddedExamAdapter addedExamAdapter;
+    private AddedExamModel addedExamModel;
 
     public AddedExamFragment() {
         // Required empty public constructor
@@ -65,7 +78,18 @@ public class AddedExamFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_added_exam, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_added_exam, container, false);
+        mContext = getActivity().getApplicationContext();
+
+        recyclerRunningNow = (RecyclerView)rootView.findViewById(R.id.recycler_running_now);
+        layoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerRunningNow.setLayoutManager(layoutManager);
+        ArrayList<AddedExamModel> addedExamModels = new ArrayList<>();
+        addedExamModel = new AddedExamModel();
+        addedExamAdapter = new AddedExamAdapter(mContext, addedExamModels, "");
+        recyclerRunningNow.setAdapter(addedExamAdapter);
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

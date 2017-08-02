@@ -1,11 +1,12 @@
 package com.examapplication.models;
 
 import java.io.Serializable;
+
 /**
- * Created by Piyush on 26-07-2017.
+ * Created by Piyush on 02-08-2017.
  * Bynry
  */
-public class RunningNowModel implements Serializable
+public class AddedExamModel implements Serializable
 {
 
     public String title;
@@ -15,10 +16,10 @@ public class RunningNowModel implements Serializable
 
 
 
-    public RunningNowModel()
+    public AddedExamModel()
     {}
 
-    public RunningNowModel(String title, String content,String txtName,String txtCommentContent)
+    public AddedExamModel(String title, String content,String txtName,String txtCommentContent)
     {
         this.title = title;
         this.txt_content = content;
@@ -28,3 +29,4 @@ public class RunningNowModel implements Serializable
 
 
 }
+

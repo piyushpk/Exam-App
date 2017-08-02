@@ -1,15 +1,21 @@
 package com.examapplication.ui.activities;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.examapplication.R;
 import com.examapplication.utility.DateTimeUtility;
@@ -26,11 +32,13 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
     private TextInputEditText inputExamName, inputMainCategory, inputSubCategory, inputSection, inputStartDate,
             inputEndDate, inputSellingPrice, inputOfferPrice, inputTotalQuestion, inputExamTime, inputMaxMarks,
             inputPassingMarks, inputResultDate, inputDescription, inputShortDescription, inputNote, inputInstructionSet;
-    private Button btnCancel, btnNext, btnPrevious1, btnOk, btnPrevious2, btnNextQuestion, btnPrevious3, btnSave;
-    private RelativeLayout relativeStartDate, relativeEndDate, relativeResultDate;
+    private Button btnCancel, btnNext, btnPrevious1, btnOk, btnPrevious2, btnNextQuestion, btnPrevious3, btnSave, btnAdd;
     private TextView txtTotalQuestion, txtMaxMarks, txtExamTime;
 
-    private String totalQuestions = "", maxMarks = "", examTime = "";
+    private String setDate = "";
+    private ImageView imgStartDate, imgEndDate, imgResultDate;
+
+    int addSubQue = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -54,7 +62,9 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
         inputSubCategory = (TextInputEditText)findViewById(R.id.input_sub_category);
         inputSection = (TextInputEditText)findViewById(R.id.input_section);
         inputStartDate = (TextInputEditText)findViewById(R.id.input_start_date);
+        inputStartDate.setEnabled(false);
         inputEndDate = (TextInputEditText)findViewById(R.id.input_end_date);
+        inputEndDate.setEnabled(false);
         inputSellingPrice = (TextInputEditText)findViewById(R.id.input_selling_price);
         inputOfferPrice = (TextInputEditText)findViewById(R.id.input_offer_price);
 
@@ -63,6 +73,7 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
         inputMaxMarks = (TextInputEditText)findViewById(R.id.input_max_marks);
         inputPassingMarks = (TextInputEditText)findViewById(R.id.input_passing_mark);
         inputResultDate = (TextInputEditText)findViewById(R.id.input_result_date);
+        inputResultDate.setEnabled(false);
 
         inputDescription = (TextInputEditText)findViewById(R.id.input_description);
         inputShortDescription = (TextInputEditText)findViewById(R.id.input_short_description);
@@ -85,87 +96,46 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
         btnPrevious3.setOnClickListener(this);
         btnSave = (Button)findViewById(R.id.btn_save);
         btnSave.setOnClickListener(this);
-
-        relativeStartDate = (RelativeLayout)findViewById(R.id.relative_start_date);
-        relativeStartDate.setOnClickListener(this);
-        relativeEndDate = (RelativeLayout)findViewById(R.id.relative_end_date);
-        relativeEndDate.setOnClickListener(this);
-        relativeResultDate = (RelativeLayout)findViewById(R.id.relative_end_date);
-        relativeResultDate.setOnClickListener(this);
+        btnAdd = (Button)findViewById(R.id.btn_add);
+        btnAdd.setOnClickListener(this);
 
         txtTotalQuestion = (TextView)findViewById(R.id.txt_total_question);
         txtMaxMarks = (TextView)findViewById(R.id.txt_max_marks);
         txtExamTime = (TextView)findViewById(R.id.txt_exam_time);
 
-        inputTotalQuestion.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-                totalQuestions = inputTotalQuestion.getText().toString().trim();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s)
-            {}
-        });
-
-        inputExamTime.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                examTime = inputExamTime.getText().toString().trim();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        inputMaxMarks.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                maxMarks = inputMaxMarks.getText().toString().trim();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        imgStartDate = (ImageView)findViewById(R.id.img_start_date);
+        imgStartDate.setOnClickListener(this);
+        imgEndDate = (ImageView)findViewById(R.id.img_end_date);
+        imgEndDate.setOnClickListener(this);
+        imgResultDate = (ImageView)findViewById(R.id.img_result_date);
+        imgResultDate.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v)
     {
-        if(v == relativeStartDate)
+        if(v == imgStartDate)
         {
+            setDate = getString(R.string.start_date_exam);
             showCalendar();
         }
 
-        if(v == relativeEndDate)
+        if(v == imgEndDate)
         {
-
+            setDate = getString(R.string.end_date_exam);
+            showCalendar();
         }
 
-        if(v == relativeResultDate)
+        if(v == imgResultDate)
         {
+            setDate = getString(R.string.result_date);
+            showCalendar();
+        }
 
+        if(v == btnAdd)
+        {
+            showMessageDialog();
         }
 
         if(v == btnCancel)
@@ -189,9 +159,9 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
         {
             cardView2.setVisibility(View.GONE);
             cardView3.setVisibility(View.VISIBLE);
-            txtTotalQuestion.setText(totalQuestions);
-            txtMaxMarks.setText(maxMarks);
-            txtExamTime.setText(examTime);
+            txtTotalQuestion.setText(inputTotalQuestion.getText().toString().trim());
+            txtMaxMarks.setText(inputMaxMarks.getText().toString().trim());
+            txtExamTime.setText(inputExamTime.getText().toString().trim());
         }
 
         if(v == btnPrevious2)
@@ -242,6 +212,186 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth)
     {
-        inputStartDate.setText(DateTimeUtility.displayDate());
+        if(setDate.equals(getString(R.string.start_date_exam)))
+        {
+            int month1 = monthOfYear;
+            String date1 = dayOfMonth + " " + DateTimeUtility.getMonthInString(month1) + " " + year;
+            inputStartDate.setText(date1);
+        }
+        if(setDate.equals(getString(R.string.end_date_exam)))
+        {
+            int month1 = monthOfYear;
+            String date1 = dayOfMonth + " " + DateTimeUtility.getMonthInString(month1) + " " + year;
+            inputEndDate.setText(date1);
+        }
+        if(setDate.equals(getString(R.string.result_date)))
+        {
+            int month1 = monthOfYear;
+            String date1 = dayOfMonth + " " + DateTimeUtility.getMonthInString(month1) + " " + year;
+            inputResultDate.setText(date1);
+        }
+    }
+
+    public void showMessageDialog()
+    {
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        View promptView = layoutInflater.inflate(R.layout.dialog_add_questions, null);
+        final android.app.AlertDialog alert = new android.app.AlertDialog.Builder(this).create();
+        TextView txtQuestionNo, txtUpload;
+        final EditText edtQuestion, edtSubQueA, edtSubQueB, edtSubQueC, edtSubQueD, edtSubQueE, edtSubQueF;
+        final LinearLayout linearSubQueA, linearSubQueB, linearSubQueC, linearSubQueD, linearSubQueE, linearSubQueF;
+        TextView txtCrossA, txtCrossB, txtCrossC, txtCrossD, txtCrossE, txtCrossF;
+        ImageView imgClose, imgPlus, imgUploaded1, imgUploaded2, imgUploaded3, imgUploaded4, imgUploaded5,imgUploaded6;
+        Button btnAdd;
+
+        txtQuestionNo = (TextView)promptView.findViewById(R.id.txt_question_no);
+        edtQuestion = (EditText)promptView.findViewById(R.id.edt_question);
+        txtUpload = (TextView)promptView.findViewById(R.id.txt_uplaod);
+
+        edtSubQueA = (EditText)promptView.findViewById(R.id.edt_sub_question_a);
+        edtSubQueB = (EditText)promptView.findViewById(R.id.edt_sub_question_b);
+        edtSubQueC = (EditText)promptView.findViewById(R.id.edt_sub_question_c);
+        edtSubQueD = (EditText)promptView.findViewById(R.id.edt_sub_question_d);
+        edtSubQueE = (EditText)promptView.findViewById(R.id.edt_sub_question_e);
+        edtSubQueF = (EditText)promptView.findViewById(R.id.edt_sub_question_f);
+
+        linearSubQueA = (LinearLayout)promptView.findViewById(R.id.linear_sub_question_a);
+        linearSubQueB = (LinearLayout)promptView.findViewById(R.id.linear_sub_question_b);
+        linearSubQueC = (LinearLayout)promptView.findViewById(R.id.linear_sub_question_c);
+        linearSubQueD = (LinearLayout)promptView.findViewById(R.id.linear_sub_question_d);
+        linearSubQueE = (LinearLayout)promptView.findViewById(R.id.linear_sub_question_e);
+        linearSubQueF = (LinearLayout)promptView.findViewById(R.id.linear_sub_question_f);
+
+        txtCrossA = (TextView)promptView.findViewById(R.id.txt_cross_a);
+        txtCrossB = (TextView)promptView.findViewById(R.id.txt_cross_b);
+        txtCrossC = (TextView)promptView.findViewById(R.id.txt_cross_c);
+        txtCrossD = (TextView)promptView.findViewById(R.id.txt_cross_d);
+        txtCrossE = (TextView)promptView.findViewById(R.id.txt_cross_e);
+        txtCrossF = (TextView)promptView.findViewById(R.id.txt_cross_f);
+
+        imgUploaded1 = (ImageView)promptView.findViewById(R.id.img_uploaded1);
+        imgUploaded2 = (ImageView)promptView.findViewById(R.id.img_uploaded2);
+        imgUploaded3 = (ImageView)promptView.findViewById(R.id.img_uploaded3);
+        imgUploaded4 = (ImageView)promptView.findViewById(R.id.img_uploaded4);
+        imgUploaded5 = (ImageView)promptView.findViewById(R.id.img_uploaded5);
+        imgUploaded6 = (ImageView)promptView.findViewById(R.id.img_uploaded6);
+
+        imgClose = (ImageView)promptView.findViewById(R.id.img_close);
+        imgPlus = (ImageView)promptView.findViewById(R.id.img_plus);
+        btnAdd = (Button)promptView.findViewById(R.id.btn_add);
+
+        imgPlus.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if(addSubQue == 1 && !edtQuestion.getText().toString().trim().equals("")){
+                    linearSubQueA.setVisibility(View.VISIBLE);
+                    addSubQue = 2;
+                }
+                else
+                    Toast.makeText(mContext, "Add que filed first", Toast.LENGTH_SHORT).show();
+
+                if(addSubQue == 2 && !edtSubQueA.getText().toString().trim().equals("")){
+                    linearSubQueB.setVisibility(View.VISIBLE);
+                    addSubQue = 3;
+                }
+                else
+                    Toast.makeText(mContext, "Add que filed first", Toast.LENGTH_SHORT).show();
+
+                if(addSubQue == 3 && !edtSubQueB.getText().toString().trim().equals("")){
+                    linearSubQueC.setVisibility(View.VISIBLE);
+                    addSubQue = 4;
+                }
+                else
+                    Toast.makeText(mContext, "Add que filed first", Toast.LENGTH_SHORT).show();
+
+                if(addSubQue == 4 && !edtSubQueC.getText().toString().trim().equals("")){
+                    linearSubQueD.setVisibility(View.VISIBLE);
+                    addSubQue = 5;
+                }
+                else
+                    Toast.makeText(mContext, "Add que filed first", Toast.LENGTH_SHORT).show();
+
+                if(addSubQue == 5 && !edtSubQueD.getText().toString().trim().equals("")){
+                    linearSubQueE.setVisibility(View.VISIBLE);
+                    addSubQue = 6;
+                }
+                else
+                    Toast.makeText(mContext, "Add que filed first", Toast.LENGTH_SHORT).show();
+
+                if(addSubQue == 6 && !edtSubQueE.getText().toString().trim().equals("")){
+                    linearSubQueF.setVisibility(View.VISIBLE);
+                    addSubQue = 1;
+                }
+                else
+                    Toast.makeText(mContext, "Add que filed first", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        txtCrossA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linearSubQueA.setVisibility(View.GONE);
+                edtSubQueA.setText("");
+                addSubQue = 1;
+            }
+        });
+        txtCrossB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linearSubQueB.setVisibility(View.GONE);
+                edtSubQueB.setText("");
+                addSubQue = 2;
+            }
+        });
+        txtCrossC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linearSubQueC.setVisibility(View.GONE);
+                edtSubQueC.setText("");
+                addSubQue = 3;
+            }
+        });
+        txtCrossD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linearSubQueD.setVisibility(View.GONE);
+                edtSubQueD.setText("");
+                addSubQue = 4;
+            }
+        });
+        txtCrossE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linearSubQueE.setVisibility(View.GONE);
+                edtSubQueE.setText("");
+                addSubQue = 5;
+            }
+        });
+        txtCrossF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linearSubQueF.setVisibility(View.GONE);
+                edtSubQueF.setText("");
+                addSubQue = 6;
+            }
+        });
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+
+        imgClose.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+
+        alert.setView(promptView);
+        alert.setCancelable(false);
+        alert.show();
     }
 }
