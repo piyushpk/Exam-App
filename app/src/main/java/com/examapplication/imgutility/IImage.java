@@ -52,7 +52,7 @@ public interface IImage {
 
     String getTitle();
 
-    // Get/Set the title of the image
+    // Get/Set the question of the image
     void setTitle(String name);
 
     // Get metadata of the image

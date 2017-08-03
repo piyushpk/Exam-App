@@ -679,6 +679,14 @@
 
             </LinearLayout>
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_question_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="0dp"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="65dp"/>
+
         </LinearLayout>
 
         <LinearLayout

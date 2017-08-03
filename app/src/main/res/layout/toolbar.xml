@@ -29,7 +29,7 @@
             android:id="@+id/txt_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title"
+            android:text="@string/question"
             android:textColor="@color/colorWhite"
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"

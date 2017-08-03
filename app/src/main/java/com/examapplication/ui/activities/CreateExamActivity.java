@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -18,9 +21,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.examapplication.R;
+import com.examapplication.models.QuestionListModel;
+import com.examapplication.models.RunningNowModel;
+import com.examapplication.ui.adapters.QuestionListAdapter;
+import com.examapplication.ui.adapters.RunningNowAdapter;
+import com.examapplication.ui.fragments.RunningNowFragment;
 import com.examapplication.utility.DateTimeUtility;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -36,9 +45,15 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
     private TextView txtTotalQuestion, txtMaxMarks, txtExamTime;
 
     private String setDate = "";
+    private int totalQuestions = 0;
     private ImageView imgStartDate, imgEndDate, imgResultDate;
 
     int addSubQue = 1;
+    private RecyclerView recyclerQuestionList;
+    private LinearLayoutManager layoutManager;
+    private QuestionListAdapter questionListAdapter;
+    private QuestionListModel questionListModel;
+    private ArrayList<QuestionListModel> questionListModels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -110,6 +125,29 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
         imgResultDate = (ImageView)findViewById(R.id.img_result_date);
         imgResultDate.setOnClickListener(this);
 
+        inputTotalQuestion.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                totalQuestions = Integer.parseInt(inputTotalQuestion.getText().toString().trim());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        recyclerQuestionList = (RecyclerView)findViewById(R.id.recycler_question_list);
+        layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerQuestionList.setLayoutManager(layoutManager);
+        questionListModels = new ArrayList<>();
+        questionListModel = new QuestionListModel();
+
     }
 
     @Override
@@ -133,9 +171,12 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
             showCalendar();
         }
 
-        if(v == btnAdd)
+        if(v == btnAdd && totalQuestions > 0)
         {
-            showMessageDialog();
+            int i = questionListModels.size();
+            if(i == 0) {
+                showMessageDialog(++i);
+            }
         }
 
         if(v == btnCancel)
@@ -232,12 +273,19 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
         }
     }
 
-    public void showMessageDialog()
+    private void addToRecycler()
+    {
+        Log.d("sdgsdfgdfg","sdfsdf: "+questionListModel.getQuestion());
+        questionListAdapter = new QuestionListAdapter(mContext, questionListModels, "");
+        recyclerQuestionList.setAdapter(questionListAdapter);
+    }
+
+    public void showMessageDialog(final int questionNo)
     {
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         View promptView = layoutInflater.inflate(R.layout.dialog_add_questions, null);
         final android.app.AlertDialog alert = new android.app.AlertDialog.Builder(this).create();
-        TextView txtQuestionNo, txtUpload;
+        final TextView txtQuestionNo, txtUpload;
         final EditText edtQuestion, edtSubQueA, edtSubQueB, edtSubQueC, edtSubQueD, edtSubQueE, edtSubQueF;
         final LinearLayout linearSubQueA, linearSubQueB, linearSubQueC, linearSubQueD, linearSubQueE, linearSubQueF;
         TextView txtCrossA, txtCrossB, txtCrossC, txtCrossD, txtCrossE, txtCrossF;
@@ -245,6 +293,7 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
         Button btnAdd;
 
         txtQuestionNo = (TextView)promptView.findViewById(R.id.txt_question_no);
+        txtQuestionNo.setText("Q."+questionNo);
         edtQuestion = (EditText)promptView.findViewById(R.id.edt_question);
         txtUpload = (TextView)promptView.findViewById(R.id.txt_uplaod);
 
@@ -289,43 +338,31 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
                     linearSubQueA.setVisibility(View.VISIBLE);
                     addSubQue = 2;
                 }
-                else
-                    Toast.makeText(mContext, "Add que filed first", Toast.LENGTH_SHORT).show();
 
                 if(addSubQue == 2 && !edtSubQueA.getText().toString().trim().equals("")){
                     linearSubQueB.setVisibility(View.VISIBLE);
                     addSubQue = 3;
                 }
-                else
-                    Toast.makeText(mContext, "Add que filed first", Toast.LENGTH_SHORT).show();
 
                 if(addSubQue == 3 && !edtSubQueB.getText().toString().trim().equals("")){
                     linearSubQueC.setVisibility(View.VISIBLE);
                     addSubQue = 4;
                 }
-                else
-                    Toast.makeText(mContext, "Add que filed first", Toast.LENGTH_SHORT).show();
 
                 if(addSubQue == 4 && !edtSubQueC.getText().toString().trim().equals("")){
                     linearSubQueD.setVisibility(View.VISIBLE);
                     addSubQue = 5;
                 }
-                else
-                    Toast.makeText(mContext, "Add que filed first", Toast.LENGTH_SHORT).show();
 
                 if(addSubQue == 5 && !edtSubQueD.getText().toString().trim().equals("")){
                     linearSubQueE.setVisibility(View.VISIBLE);
                     addSubQue = 6;
                 }
-                else
-                    Toast.makeText(mContext, "Add que filed first", Toast.LENGTH_SHORT).show();
 
                 if(addSubQue == 6 && !edtSubQueE.getText().toString().trim().equals("")){
                     linearSubQueF.setVisibility(View.VISIBLE);
                     addSubQue = 1;
                 }
-                else
-                    Toast.makeText(mContext, "Add que filed first", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -378,15 +415,22 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
             }
         });
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+        imgClose.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 alert.dismiss();
             }
         });
 
-        imgClose.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                alert.dismiss();
+        btnAdd.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                if(edtQuestion.getText().toString().trim() != "") {
+                    questionListModel.setQuestion( txtQuestionNo.getText().toString() + " "
+                            + edtQuestion.getText().toString().trim());
+                    alert.dismiss();
+                    addToRecycler();
+                }
             }
         });
 
