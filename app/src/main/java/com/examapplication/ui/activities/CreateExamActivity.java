@@ -1,16 +1,13 @@
 package com.examapplication.ui.activities;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -18,14 +15,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.examapplication.R;
 import com.examapplication.models.QuestionListModel;
-import com.examapplication.models.RunningNowModel;
 import com.examapplication.ui.adapters.QuestionListAdapter;
-import com.examapplication.ui.adapters.RunningNowAdapter;
-import com.examapplication.ui.fragments.RunningNowFragment;
 import com.examapplication.utility.DateTimeUtility;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
@@ -52,7 +45,6 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
     private RecyclerView recyclerQuestionList;
     private LinearLayoutManager layoutManager;
     private QuestionListAdapter questionListAdapter;
-    private QuestionListModel questionListModel;
     private ArrayList<QuestionListModel> questionListModels;
 
     @Override
@@ -146,7 +138,6 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
         layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerQuestionList.setLayoutManager(layoutManager);
         questionListModels = new ArrayList<>();
-        questionListModel = new QuestionListModel();
 
     }
 
@@ -174,7 +165,9 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
         if(v == btnAdd && totalQuestions > 0)
         {
             int i = questionListModels.size();
-            if(i == 0) {
+
+            if(i >= 0 && i < totalQuestions )
+            {
                 showMessageDialog(++i);
             }
         }
@@ -273,9 +266,9 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
         }
     }
 
-    private void addToRecycler()
+    private void addToRecycler(int position, QuestionListModel model)
     {
-        Log.d("sdgsdfgdfg","sdfsdf: "+questionListModel.getQuestion());
+        questionListModels.add(position, model);
         questionListAdapter = new QuestionListAdapter(mContext, questionListModels, "");
         recyclerQuestionList.setAdapter(questionListAdapter);
     }
@@ -285,7 +278,8 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         View promptView = layoutInflater.inflate(R.layout.dialog_add_questions, null);
         final android.app.AlertDialog alert = new android.app.AlertDialog.Builder(this).create();
-        final TextView txtQuestionNo, txtUpload;
+        final TextView txtQuestionNo, txtUpload, txtSubQuestionA, txtSubQuestionB, txtSubQuestionC, txtSubQuestionD,
+                txtSubQuestionE, txtSubQuestionF;
         final EditText edtQuestion, edtSubQueA, edtSubQueB, edtSubQueC, edtSubQueD, edtSubQueE, edtSubQueF;
         final LinearLayout linearSubQueA, linearSubQueB, linearSubQueC, linearSubQueD, linearSubQueE, linearSubQueF;
         TextView txtCrossA, txtCrossB, txtCrossC, txtCrossD, txtCrossE, txtCrossF;
@@ -296,6 +290,13 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
         txtQuestionNo.setText("Q."+questionNo);
         edtQuestion = (EditText)promptView.findViewById(R.id.edt_question);
         txtUpload = (TextView)promptView.findViewById(R.id.txt_uplaod);
+
+        txtSubQuestionA = (TextView)promptView.findViewById(R.id.txt_sub_question_a);
+        txtSubQuestionB = (TextView)promptView.findViewById(R.id.txt_sub_question_b);
+        txtSubQuestionC = (TextView)promptView.findViewById(R.id.txt_sub_question_c);
+        txtSubQuestionD = (TextView)promptView.findViewById(R.id.txt_sub_question_d);
+        txtSubQuestionE = (TextView)promptView.findViewById(R.id.txt_sub_question_e);
+        txtSubQuestionF = (TextView)promptView.findViewById(R.id.txt_sub_question_f);
 
         edtSubQueA = (EditText)promptView.findViewById(R.id.edt_sub_question_a);
         edtSubQueB = (EditText)promptView.findViewById(R.id.edt_sub_question_b);
@@ -425,11 +426,32 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
         {
             public void onClick(View v)
             {
-                if(edtQuestion.getText().toString().trim() != "") {
-                    questionListModel.setQuestion( txtQuestionNo.getText().toString() + " "
+                if(edtQuestion.getText().toString().trim() == "")
+                {
+
+                }
+                else
+                {
+                    QuestionListModel questionListModel = new QuestionListModel();
+
+                    questionListModel.setQuestion(txtQuestionNo.getText().toString() + " "
                             + edtQuestion.getText().toString().trim());
+
+                    questionListModel.setSubQuestion1(txtSubQuestionA.getText().toString() + " "
+                            + edtSubQueA.getText().toString().trim());
+                    questionListModel.setSubQuestion2(txtSubQuestionB.getText().toString() + " "
+                            + edtSubQueB.getText().toString().trim());
+                    questionListModel.setSubQuestion3(txtSubQuestionC.getText().toString() + " "
+                            + edtSubQueC.getText().toString().trim());
+                    questionListModel.setSubQuestion4(txtSubQuestionD.getText().toString() + " "
+                            + edtSubQueD.getText().toString().trim());
+                    questionListModel.setSubQuestion5(txtSubQuestionE.getText().toString() + " "
+                            + edtSubQueE.getText().toString().trim());
+                    questionListModel.setSubQuestion6(txtSubQuestionF.getText().toString() + " "
+                            + edtSubQueF.getText().toString().trim());
+
                     alert.dismiss();
-                    addToRecycler();
+                    addToRecycler(questionNo -1 , questionListModel);
                 }
             }
         });

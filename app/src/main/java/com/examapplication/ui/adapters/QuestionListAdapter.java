@@ -20,16 +20,16 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapte
 {
 
     public Context mContext;
-    private ArrayList<QuestionListModel> runningNowList;
+    private ArrayList<QuestionListModel> questionListModels;
 
     public QuestionListAdapter(Context mContext, ArrayList<QuestionListModel> runningList)
     {
     }
 
-    public QuestionListAdapter(Context context, ArrayList<QuestionListModel> techBitesCard, String message)
+    public QuestionListAdapter(Context context, ArrayList<QuestionListModel> questionListModels, String message)
     {
         this.mContext = context;
-        this.runningNowList = techBitesCard;
+        this.questionListModels = questionListModels;
     }
 
 
@@ -45,19 +45,25 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapte
     @Override
     public void onBindViewHolder(QuestionListAdapter.QuestionListHolder holder, int position)
     {
-
+        holder.txtQuestion.setText(questionListModels.get(position).getQuestion());
+        holder.txtSubQue1.setText(questionListModels.get(position).getSubQuestion1());
+        holder.txtSubQue2.setText(questionListModels.get(position).getSubQuestion2());
+        holder.txtSubQue3.setText(questionListModels.get(position).getSubQuestion3());
+        holder.txtSubQue4.setText(questionListModels.get(position).getSubQuestion4());
+        holder.txtSubQue5.setText(questionListModels.get(position).getSubQuestion5());
+        holder.txtSubQue6.setText(questionListModels.get(position).getSubQuestion6());
     }
 
     @Override
     public int getItemCount()
     {
-        /*if(mTechBitesCards != null && mTechBitesCards.size() > 0){
-            return mTechBitesCards.size();
+        if(questionListModels != null && questionListModels.size() > 0){
+            return questionListModels.size();
         }
         else{
             return 0;
-        }*/
-        return 10;
+        }
+//        return 10;
     }
 
 
