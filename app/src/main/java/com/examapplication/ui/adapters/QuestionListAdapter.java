@@ -46,12 +46,42 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapte
     public void onBindViewHolder(QuestionListAdapter.QuestionListHolder holder, int position)
     {
         holder.txtQuestion.setText(questionListModels.get(position).getQuestion());
-        holder.txtSubQue1.setText(questionListModels.get(position).getSubQuestion1());
-        holder.txtSubQue2.setText(questionListModels.get(position).getSubQuestion2());
-        holder.txtSubQue3.setText(questionListModels.get(position).getSubQuestion3());
-        holder.txtSubQue4.setText(questionListModels.get(position).getSubQuestion4());
-        holder.txtSubQue5.setText(questionListModels.get(position).getSubQuestion5());
-        holder.txtSubQue6.setText(questionListModels.get(position).getSubQuestion6());
+        if(!questionListModels.get(position).getSubQuestion1().equals("")) {
+            holder.txtSubQue1.setText(questionListModels.get(position).getSubQuestion1());
+        }
+        else {
+            holder.txtSubQue1.setVisibility(View.GONE);
+        }
+        if(!questionListModels.get(position).getSubQuestion2().equals("")) {
+            holder.txtSubQue2.setText(questionListModels.get(position).getSubQuestion2());
+        }
+        else {
+            holder.txtSubQue2.setVisibility(View.GONE);
+        }
+        if(!questionListModels.get(position).getSubQuestion3().equals("")) {
+            holder.txtSubQue3.setText(questionListModels.get(position).getSubQuestion3());
+        }
+        else {
+            holder.txtSubQue3.setVisibility(View.GONE);
+        }
+        if(!questionListModels.get(position).getSubQuestion4().equals("")) {
+            holder.txtSubQue4.setText(questionListModels.get(position).getSubQuestion4());
+        }
+        else {
+            holder.txtSubQue4.setVisibility(View.GONE);
+        }
+        if(!questionListModels.get(position).getSubQuestion5().equals("")) {
+            holder.txtSubQue5.setText(questionListModels.get(position).getSubQuestion5());
+        }
+        else {
+            holder.txtSubQue5.setVisibility(View.GONE);
+        }
+        if(!questionListModels.get(position).getSubQuestion6().equals("")) {
+            holder.txtSubQue6.setText(questionListModels.get(position).getSubQuestion6());
+        }
+        else {
+            holder.txtSubQue6.setVisibility(View.GONE);
+        }
     }
 
     @Override

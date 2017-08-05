@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -125,7 +126,9 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                totalQuestions = Integer.parseInt(inputTotalQuestion.getText().toString().trim());
+                if(count != 0) {
+                    totalQuestions = Integer.parseInt(inputTotalQuestion.getText().toString().trim());
+                }
             }
 
             @Override
@@ -335,6 +338,7 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
             @Override
             public void onClick(View v)
             {
+                Log.d("sdhfofiosj","fosh"+addSubQue);
                 if(addSubQue == 1 && !edtQuestion.getText().toString().trim().equals("")){
                     linearSubQueA.setVisibility(View.VISIBLE);
                     addSubQue = 2;
@@ -426,7 +430,8 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
         {
             public void onClick(View v)
             {
-                if(edtQuestion.getText().toString().trim() == "")
+                Log.d("shgodhgohd","dsd"+edtQuestion.getText().toString().trim());
+                if(edtQuestion.getText().toString().trim().equals(""))
                 {
 
                 }
@@ -436,20 +441,49 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
 
                     questionListModel.setQuestion(txtQuestionNo.getText().toString() + " "
                             + edtQuestion.getText().toString().trim());
-
-                    questionListModel.setSubQuestion1(txtSubQuestionA.getText().toString() + " "
-                            + edtSubQueA.getText().toString().trim());
-                    questionListModel.setSubQuestion2(txtSubQuestionB.getText().toString() + " "
-                            + edtSubQueB.getText().toString().trim());
-                    questionListModel.setSubQuestion3(txtSubQuestionC.getText().toString() + " "
-                            + edtSubQueC.getText().toString().trim());
-                    questionListModel.setSubQuestion4(txtSubQuestionD.getText().toString() + " "
-                            + edtSubQueD.getText().toString().trim());
-                    questionListModel.setSubQuestion5(txtSubQuestionE.getText().toString() + " "
-                            + edtSubQueE.getText().toString().trim());
-                    questionListModel.setSubQuestion6(txtSubQuestionF.getText().toString() + " "
-                            + edtSubQueF.getText().toString().trim());
-
+                    if(!edtSubQueA.getText().toString().trim().equals("")) {
+                        questionListModel.setSubQuestion1(txtSubQuestionA.getText().toString() + " "
+                                + edtSubQueA.getText().toString().trim());
+                    }
+                    else{
+                        questionListModel.setSubQuestion1("");
+                    }
+                    if(!edtSubQueB.getText().toString().trim().equals("")) {
+                        questionListModel.setSubQuestion2(txtSubQuestionB.getText().toString() + " "
+                                + edtSubQueB.getText().toString().trim());
+                    }
+                    else{
+                        questionListModel.setSubQuestion2("");
+                    }
+                    if(!edtSubQueC.getText().toString().trim().equals("")) {
+                        questionListModel.setSubQuestion3(txtSubQuestionC.getText().toString() + " "
+                                + edtSubQueC.getText().toString().trim());
+                    }
+                    else{
+                        questionListModel.setSubQuestion3("");
+                    }
+                    if(!edtSubQueD.getText().toString().trim().equals("")) {
+                        questionListModel.setSubQuestion4(txtSubQuestionD.getText().toString() + " "
+                                + edtSubQueD.getText().toString().trim());
+                    }
+                    else{
+                        questionListModel.setSubQuestion4("");
+                    }
+                    if(!edtSubQueE.getText().toString().trim().equals("")) {
+                        questionListModel.setSubQuestion5(txtSubQuestionE.getText().toString() + " "
+                                + edtSubQueE.getText().toString().trim());
+                    }
+                    else{
+                        questionListModel.setSubQuestion5("");
+                    }
+                    if(!edtSubQueF.getText().toString().trim().equals("")) {
+                        questionListModel.setSubQuestion6(txtSubQuestionF.getText().toString() + " "
+                                + edtSubQueF.getText().toString().trim());
+                    }
+                    else{
+                        questionListModel.setSubQuestion6("");
+                    }
+                    addSubQue = 1;
                     alert.dismiss();
                     addToRecycler(questionNo -1 , questionListModel);
                 }
