@@ -93,7 +93,6 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapte
         else{
             return 0;
         }
-//        return 10;
     }
 
 

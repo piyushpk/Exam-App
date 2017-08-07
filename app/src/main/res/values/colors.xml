@@ -13,7 +13,7 @@
     <!-- text color-->
     <color name="colorTextBlack">#4A4A4A</color>
     <color name="colorTextFaint">#9B9B9B</color>
-    <color name="colorTextDate"> #284061</color>
+    <color name="colorTextDate">#284061</color>
     <color name="colorEditText">#FFC1C1C1</color>
     <color name="colorCard">#fdfbd2</color>
     <color name="colorWhatsUpBack">#F9F9F9</color>

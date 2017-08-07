@@ -73,7 +73,7 @@
                 android:paddingLeft="10dp"
                 android:textColorHint="@color/colorWhite"
                 android:textSize="@dimen/text_size_h3"
-                android:inputType="text"/>
+                android:inputType="textEmailAddress"/>
 
         </LinearLayout>
 

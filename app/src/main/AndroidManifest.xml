@@ -41,6 +41,8 @@
         <activity
             android:name=".ui.activities.LandingFacultyActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activities.DashboardActivity">
+        </activity>
     </application>
 
 </manifest>

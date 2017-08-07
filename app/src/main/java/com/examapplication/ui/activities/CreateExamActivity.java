@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -338,7 +337,6 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
             @Override
             public void onClick(View v)
             {
-                Log.d("sdhfofiosj","fosh"+addSubQue);
                 if(addSubQue == 1 && !edtQuestion.getText().toString().trim().equals("")){
                     linearSubQueA.setVisibility(View.VISIBLE);
                     addSubQue = 2;
@@ -430,7 +428,6 @@ public class CreateExamActivity extends ParentActivity implements View.OnClickLi
         {
             public void onClick(View v)
             {
-                Log.d("shgodhgohd","dsd"+edtQuestion.getText().toString().trim());
                 if(edtQuestion.getText().toString().trim().equals(""))
                 {
 

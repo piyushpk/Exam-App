@@ -12,11 +12,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
+
+
+import org.json.JSONObject;
+
 import com.examapplication.interfaces.ApiServiceCaller;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-
-import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -27,8 +29,8 @@ public class WebRequest
 {
     public static String TAG = "WebRequest";
 
-    public static JsonObjectRequest callPostMethod(Context context, String reader_id, JSONObject jsonObject, int request_type,
-                                                   String url, final String label, final ApiServiceCaller caller, final String token)
+    public static JsonObjectRequest callPostMethod(Context context, JSONObject jsonObject,
+            int request_type, String url, final String label, final ApiServiceCaller caller, final String token)
     {
 
         if(ApiConstants.LOG_STATUS == 0)
@@ -36,25 +38,26 @@ public class WebRequest
             Log.d("Api_Calling", "" + url);
             Log.d("JSONObject", "" + jsonObject);
         }
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(request_type, url, jsonObject, new Response.Listener<JSONObject>()
-        {
-            @Override
-            public void onResponse(JSONObject response)
-            {
-                try
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(request_type, url, jsonObject,
+                new Response.Listener<JSONObject>()
                 {
-//                    Log.d(TAG, response.toString());
-                    Gson gson = new Gson();
-                    JsonResponse jsonResponse = gson.fromJson(response.toString(), JsonResponse.class);
-                    caller.onAsyncSuccess(jsonResponse, label);
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                    caller.onAsyncCompletelyFail("Failed", label);
-                }
-            }
-        }, new Response.ErrorListener()
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        try
+                        {
+                            Log.d(TAG, response.toString());
+                            Gson gson = new Gson();
+                            JsonResponse jsonResponse = gson.fromJson(response.toString(), JsonResponse.class);
+                            caller.onAsyncSuccess(jsonResponse, label);
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                            caller.onAsyncCompletelyFail("Failed", label);
+                        }
+                    }
+                }, new Response.ErrorListener()
         {
             @Override
             public void onErrorResponse(VolleyError error)
@@ -70,11 +73,7 @@ public class WebRequest
                         JsonResponse jsonResponse = gson.fromJson(res, JsonResponse.class);
                         caller.onAsyncSuccess(jsonResponse, label);
                     }
-                    catch (UnsupportedEncodingException e1)
-                    {
-                        e1.printStackTrace();
-                    }
-                    catch (JsonSyntaxException je)
+                    catch (Exception je)
                     {
                         caller.onAsyncFail(error.getMessage() != null && !error.getMessage().equals("") ? error.getMessage() : "Please Contact Server Admin", label, response);
                     }
@@ -99,8 +98,8 @@ public class WebRequest
         return jsonObjReq;
     }
 
-    public static JsonObjectRequest callPostMethod1(Context context, String reader_id, JSONObject jsonObject, int request_type,
-                                                    String url, final String label, final ApiServiceCaller caller, final String token)
+    public static JsonObjectRequest callPostMethod1(Context context, String reader_id, JSONObject jsonObject,
+            int request_type, String url, final String label, final ApiServiceCaller caller, final String token)
     {
         if(ApiConstants.LOG_STATUS == 0)
         {
