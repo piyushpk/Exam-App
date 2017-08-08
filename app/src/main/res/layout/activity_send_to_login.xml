@@ -6,20 +6,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.examapplication.ui.activities.SendToLoginActivity"
-    android:background="@color/colorBlack">
-
-    <ImageView
-        android:id="@+id/img_logo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"
-        android:layout_centerInParent="true"/>
+    android:background="@color/colorTextDate">
 
     <LinearLayout
+        android:id="@+id/linear_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@+id/img_logo">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/txt_dashboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dashboard"
+            android:textColor="@color/colorWhite"
+            android:gravity="center"
+            android:textSize="@dimen/text_xxx_large"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"/>
 
         <TextView
             android:id="@+id/txt_login_as"
@@ -28,34 +35,84 @@
             android:text="@string/login_as"
             android:textColor="@color/colorWhite"
             android:gravity="center"
-            android:textSize="@dimen/text_xx_large"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"/>
+            android:textSize="@dimen/text_x_large"
+            android:textStyle="italic"
+            android:layout_marginTop="5dp"/>
 
-        <Button
-            android:id="@+id/btn_faculty"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/faculty"
+            android:orientation="horizontal"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:textAllCaps="false"
-            android:background="@color/colorCard"
-            android:textSize="@dimen/text_size_h4"/>
+            android:weightSum="2">
 
-        <Button
-            android:id="@+id/btn_student"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/student"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:textAllCaps="false"
-            android:background="@color/colorCard"
-            android:textSize="@dimen/text_size_h4"/>
+            <Button
+                android:id="@+id/btn_faculty"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/faculty"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textAllCaps="false"
+                android:background="@drawable/green_rounded_button"
+                android:textSize="@dimen/text_size_h4"
+                android:layout_weight="1"
+                android:textColor="@color/colorWhite"/>
+
+            <Button
+                android:id="@+id/btn_student"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/student"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textAllCaps="false"
+                android:background="@drawable/green_rounded_button"
+                android:textSize="@dimen/text_size_h4"
+                android:layout_weight="1"
+                android:textColor="@color/colorWhite"/>
+
+        </LinearLayout>
 
     </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/linear_main"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_category_list"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/view"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="70dp"
+        android:orientation="vertical"/>
+
+    <TextView
+        android:id="@+id/txt_continue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/continues"
+        android:textSize="@dimen/text_x_large"
+        android:textColor="@color/colorWhite"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="0dp"
+        android:layout_above="@+id/txt_continue"
+        android:layout_marginBottom="15dp"/>
 
 </RelativeLayout>

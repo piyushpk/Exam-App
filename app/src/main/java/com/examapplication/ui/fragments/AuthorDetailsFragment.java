@@ -12,6 +12,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.examapplication.R;
+import com.examapplication.models.RunningNowModel;
+
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -36,6 +39,9 @@ public class AuthorDetailsFragment extends Fragment implements View.OnClickListe
     private CircleImageView imgProfile;
     private TextView txtAuthor, txtAuthorName, txtCourseName, txtExperienceYear, txtDOBDate, txtAboutDesc;
 
+    private ArrayList<RunningNowModel> runningNowList;
+    private int position = 0;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -45,6 +51,12 @@ public class AuthorDetailsFragment extends Fragment implements View.OnClickListe
     public AuthorDetailsFragment()
     {
         // Required empty public constructor
+    }
+
+    public void getDetails(ArrayList<RunningNowModel> runningNowModels, int pos)
+    {
+        this.runningNowList = runningNowModels;
+        this.position = pos;
     }
 
     /**
@@ -99,6 +111,12 @@ public class AuthorDetailsFragment extends Fragment implements View.OnClickListe
         txtExperienceYear = (TextView)rootView.findViewById(R.id.txt_exp_years);
         txtDOBDate = (TextView)rootView.findViewById(R.id.txt_dob_date);
         txtAboutDesc = (TextView)rootView.findViewById(R.id.txt_about_desc);
+
+        txtAuthorName.setText(runningNowList.get(position).getExamAuthor());
+        txtCourseName.setText(runningNowList.get(position).getExamEducation());
+        txtExperienceYear.setText(runningNowList.get(position).getExamExperience());
+        txtDOBDate.setText("");
+        txtAboutDesc.setText(runningNowList.get(position).getExamAbout());
 
         return rootView;
     }

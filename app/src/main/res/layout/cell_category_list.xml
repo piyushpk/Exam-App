@@ -7,13 +7,14 @@
 
     <Button
         android:id="@+id/btn_category_items"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/dashboard_button"
+        android:background="@drawable/dashboard_button_unselected"
         android:layout_margin="5dp"
         android:layout_centerInParent="true"
         android:textColor="@color/colorWhite"
         android:textAllCaps="false"
+        android:layout_centerHorizontal="true"
         android:padding="5dp"
         android:textAlignment="center"/>
 

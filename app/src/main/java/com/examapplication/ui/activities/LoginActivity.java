@@ -18,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.examapplication.R;
 import com.examapplication.interfaces.ApiServiceCaller;
+import com.examapplication.models.CategoryListModel;
 import com.examapplication.utility.App;
 import com.examapplication.utility.AppConstants;
 import com.examapplication.utility.CommonUtility;
@@ -26,6 +27,8 @@ import com.examapplication.webservices.JsonResponse;
 import com.examapplication.webservices.WebRequest;
 
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class LoginActivity extends ParentActivity implements View.OnClickListener, ApiServiceCaller
 {
@@ -39,6 +42,7 @@ public class LoginActivity extends ParentActivity implements View.OnClickListene
 
     private String btnName = "", userName = "", password = "";
     private Intent intent;
+    private ArrayList<CategoryListModel> categoryListModels = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -79,7 +83,7 @@ public class LoginActivity extends ParentActivity implements View.OnClickListene
 
         if(v == btnLogin)
         {
-            userName = edtUserName.getText().toString().trim();
+            /*userName = edtUserName.getText().toString().trim();
             password = edtPassword.getText().toString().trim();
 
             if(userName.isEmpty() || userName.equals(null) || userName.equals(""))
@@ -96,7 +100,17 @@ public class LoginActivity extends ParentActivity implements View.OnClickListene
                 {
                     callApiLogin(btnName);
                 }
+            }*/
+
+            if(btnName.equals(getString(R.string.student)))
+            {
+                intent = new Intent(this, LandingStudentActivity.class);
             }
+            else
+            {
+                intent = new Intent(this, LandingFacultyActivity.class);
+            }
+            startActivity(intent);
         }
 
         if(v == txtSignUp)
@@ -146,7 +160,6 @@ public class LoginActivity extends ParentActivity implements View.OnClickListene
                     {
                         try
                         {
-                            Log.d("sdfhsiodhf","sdfsdhfof"+jsonResponse.authorization);
                             if(btnName.equals(getString(R.string.student)))
                             {
                                 intent = new Intent(this, LandingStudentActivity.class);

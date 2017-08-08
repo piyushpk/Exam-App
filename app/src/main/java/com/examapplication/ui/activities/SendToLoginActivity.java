@@ -2,29 +2,49 @@ package com.examapplication.ui.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.examapplication.R;
+import com.examapplication.interfaces.ApiServiceCaller;
+import com.examapplication.models.CategoryListModel;
+import com.examapplication.ui.adapters.CategoryListAdapter;
 import com.examapplication.utility.App;
 import com.examapplication.utility.AppConstants;
 import com.examapplication.utility.AppPreferences;
 import com.examapplication.utility.CommonUtility;
+import com.examapplication.webservices.ApiConstants;
+import com.examapplication.webservices.JsonResponse;
+import com.examapplication.webservices.WebRequest;
 
-public class SendToLoginActivity extends ParentActivity implements View.OnClickListener
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+public class SendToLoginActivity extends ParentActivity implements View.OnClickListener, ApiServiceCaller
 {
 
     private Context mContext;
     private RelativeLayout relativeMain;
-    private TextView txtLoginAs;
+    private TextView txtContinue;
     private ImageView imgLogo;
     private Button btnFaculty, btnStudent;
+
+    private RecyclerView recyclerCategoryList;
+    private StaggeredGridLayoutManager staggeredGridLayoutManager;
+    private CategoryListAdapter categoryListAdapter;
+    private ArrayList<CategoryListModel> categoryListModels = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -34,8 +54,9 @@ public class SendToLoginActivity extends ParentActivity implements View.OnClickL
 
         mContext = this;
         relativeMain = (RelativeLayout)findViewById(R.id.relative_main);
-        txtLoginAs = (TextView)findViewById(R.id.txt_login_as);
         imgLogo = (ImageView)findViewById(R.id.img_logo);
+        txtContinue = (TextView)findViewById(R.id.txt_continue);
+        txtContinue.setOnClickListener(this);
 
         btnFaculty = (Button)findViewById(R.id.btn_faculty);
         btnFaculty.setOnClickListener(this);
@@ -46,6 +67,12 @@ public class SendToLoginActivity extends ParentActivity implements View.OnClickL
         {
             CommonUtility.askForPermissions(this, App.getInstance().permissions);
         }
+
+        getCategoryList();
+
+        recyclerCategoryList = (RecyclerView)findViewById(R.id.recycler_category_list);
+        staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, 1);
+        recyclerCategoryList.setLayoutManager(staggeredGridLayoutManager);
     }
 
     @Override
@@ -53,16 +80,22 @@ public class SendToLoginActivity extends ParentActivity implements View.OnClickL
     {
         if(v == btnFaculty)
         {
-            canLoginScreen(getString(R.string.faculty));
+            callLoginScreen(getString(R.string.faculty));
         }
 
         if(v == btnStudent)
         {
-            canLoginScreen(getString(R.string.student));
+            callLoginScreen(getString(R.string.student));
+        }
+
+        if(v == txtContinue)
+        {
+            Intent intent = new Intent(this, LandingStudentActivity.class);
+            startActivity(intent);
         }
     }
 
-    private void canLoginScreen(String btnName)
+    private void callLoginScreen(String btnName)
     {
         AppPreferences.getInstance(mContext).putString(AppConstants.USER, btnName);
         Intent intent = new Intent(this, LoginActivity.class);
@@ -70,5 +103,90 @@ public class SendToLoginActivity extends ParentActivity implements View.OnClickL
         bundle.putString(AppConstants.BUTTON_NAME, btnName);
         intent.putExtra(AppConstants.SEND_TO_LOGIN, bundle);
         startActivity(intent);
+    }
+
+    private void getCategoryList()
+    {
+        if (CommonUtility.getInstance(this).checkConnectivity(mContext))
+        {
+            try
+            {
+                JSONObject jsonObject = new JSONObject();
+
+                JsonObjectRequest request = WebRequest.callPostMethod(mContext, jsonObject, Request.Method.GET,
+                        ApiConstants.GET_CATEGORY_URL, ApiConstants.GET_CATEGORY, this, "");
+                App.getInstance().addToRequestQueue(request, ApiConstants.GET_CATEGORY);
+
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+            Toast.makeText(mContext, getString(R.string.internet_failed), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onAsyncSuccess(JsonResponse jsonResponse, String label)
+    {
+        switch (label)
+        {
+            case ApiConstants.GET_CATEGORY:
+            {
+                if (jsonResponse != null)
+                {
+                    if (jsonResponse.SUCCESS != null && jsonResponse.result.equals(jsonResponse.SUCCESS))
+                    {
+                        try
+                        {
+                            categoryListModels.addAll(jsonResponse.categories);
+                            categoryListAdapter = new CategoryListAdapter(mContext, categoryListModels, "");
+                            recyclerCategoryList.setAdapter(categoryListAdapter);
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                    else
+                    {
+                        if (jsonResponse.result != null && jsonResponse.result.equals(JsonResponse.FAILURE))
+                        {
+
+                        }
+                    }
+                }
+            }
+            break;
+        }
+    }
+
+    @Override
+    public void onAsyncFail(String message, String label, NetworkResponse response)
+    {
+        switch (label)
+        {
+            case ApiConstants.GET_CATEGORY:
+            {
+                Toast.makeText(mContext, AppConstants.API_FAIL_MESSAGE, Toast.LENGTH_SHORT).show();
+            }
+            break;
+        }
+    }
+
+    @Override
+    public void onAsyncCompletelyFail(String message, String label)
+    {
+        switch (label)
+        {
+            case ApiConstants.GET_CATEGORY:
+            {
+                Toast.makeText(mContext, AppConstants.API_FAIL_MESSAGE, Toast.LENGTH_SHORT).show();
+            }
+            break;
+        }
     }
 }

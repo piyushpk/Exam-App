@@ -13,6 +13,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.examapplication.R;
+import com.examapplication.models.RunningNowModel;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,9 +34,12 @@ public class ExamDetailsFragment extends Fragment implements View.OnClickListene
 
     private RelativeLayout relativeMain;
     private ImageView imgCancel;
-    private TextView txtExamName, txtAuthorName, txtReleasingDate, txtTotalDues, txtMaxMarks,
+    private TextView txtExamName, txtAuthorName, txtReleasingDate, txtTotalQues, txtMaxMarks,
             txtPassingMarks, txtStartOn, txtEndsOn, txtResultDate, txtInstruction, txtInstructionDesc;
     private Button btnCourseName;
+
+    private ArrayList<RunningNowModel> runningNowList;
+    private int position = 0;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -44,6 +50,12 @@ public class ExamDetailsFragment extends Fragment implements View.OnClickListene
     public ExamDetailsFragment()
     {
         // Required empty public constructor
+    }
+
+    public void getDetails(ArrayList<RunningNowModel> runningNowModels, int pos)
+    {
+        this.runningNowList = runningNowModels;
+        this.position = pos;
     }
 
     /**
@@ -77,7 +89,7 @@ public class ExamDetailsFragment extends Fragment implements View.OnClickListene
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
+            Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_exam_details, container, false);
@@ -92,7 +104,7 @@ public class ExamDetailsFragment extends Fragment implements View.OnClickListene
         txtExamName = (TextView)rootView.findViewById(R.id.txt_exam_name);
         txtAuthorName = (TextView)rootView.findViewById(R.id.txt_author_name);
         txtReleasingDate = (TextView)rootView.findViewById(R.id.txt_releasing_date);
-        txtTotalDues = (TextView)rootView.findViewById(R.id.txt_total_dues);
+        txtTotalQues = (TextView)rootView.findViewById(R.id.txt_total_dues);
         txtMaxMarks = (TextView)rootView.findViewById(R.id.txt_max_marks);
         txtPassingMarks = (TextView)rootView.findViewById(R.id.txt_passing_marks);
         txtStartOn = (TextView)rootView.findViewById(R.id.txt_start_date);
@@ -100,6 +112,18 @@ public class ExamDetailsFragment extends Fragment implements View.OnClickListene
         txtResultDate = (TextView)rootView.findViewById(R.id.txt_result_date);
         txtInstruction = (TextView)rootView.findViewById(R.id.txt_instruction);
         txtInstructionDesc = (TextView)rootView.findViewById(R.id.txt_instruction_desc);
+
+        btnCourseName.setText(runningNowList.get(position).getExamEducation());
+        txtExamName.setText(runningNowList.get(position).getExamName());
+        txtAuthorName.setText(runningNowList.get(position).getExamAuthor());
+        txtReleasingDate.setText(runningNowList.get(position).getExamSaleStartDate());
+        txtTotalQues.setText(runningNowList.get(position).getExamTotalQuestion());
+        txtMaxMarks.setText(runningNowList.get(position).getExamTotalMarks());
+        txtPassingMarks.setText(runningNowList.get(position).getExamPassingMarks());
+        txtStartOn.setText(runningNowList.get(position).getExamStartDate());
+        txtEndsOn.setText(runningNowList.get(position).getExamEndDate());
+        txtResultDate.setText(runningNowList.get(position).getExamResultDate());
+        txtInstructionDesc.setText(runningNowList.get(position).getExamInstructionSet());
 
         return rootView;
     }

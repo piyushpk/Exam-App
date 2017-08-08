@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,14 +30,14 @@ public class RunningNowAdapter extends RecyclerView.Adapter<RunningNowAdapter.Ru
     public Context mContext;
     private ArrayList<RunningNowModel> runningNowList;
 
-    public RunningNowAdapter(Context mContext, ArrayList<RunningNowModel> runningList)
+    public RunningNowAdapter(Context mContext, ArrayList<RunningNowModel> runningNowModels)
     {
     }
 
-    public RunningNowAdapter(Context context, ArrayList<RunningNowModel> techBitesCard, String message)
+    public RunningNowAdapter(Context context, ArrayList<RunningNowModel> runningNowModels, String message)
     {
         this.mContext = context;
-        this.runningNowList = techBitesCard;
+        this.runningNowList = runningNowModels;
     }
 
 
@@ -50,8 +51,26 @@ public class RunningNowAdapter extends RecyclerView.Adapter<RunningNowAdapter.Ru
     }
 
     @Override
-    public void onBindViewHolder(RunningNowHolder holder, int position)
+    public void onBindViewHolder(RunningNowHolder holder, final int position)
     {
+        holder.txtExamName.setText(runningNowList.get(position).getExamName());
+        holder.txtAuthorName.setText(runningNowList.get(position).getExamAuthor());
+        holder.btnCourseName.setText(runningNowList.get(position).getExamEducation());
+        holder.txtTotalMarks.setText(mContext.getString(R.string.total_marks)+" "+
+                runningNowList.get(position).getExamTotalMarks());
+        holder.txtMaxMarks.setText(mContext.getString(R.string.max_mark_s)+" "+
+                runningNowList.get(position).getExamPassingMarks());
+        holder.txtStartDate.setText(mContext.getString(R.string.start_date)+" "+
+                runningNowList.get(position).getExamStartDate());
+        holder.txtEndDate.setText(mContext.getString(R.string.end_date)+" "+
+                runningNowList.get(position).getExamEndDate());
+        holder.txtSaveRs.setText(mContext.getString(R.string.save_rs)+" "+
+                runningNowList.get(position).getExamOfferPrice());
+        holder.txtRs1.setText(runningNowList.get(position).getExamSalePrice());
+        float pricePaid = Float.parseFloat(runningNowList.get(position).getExamSalePrice())
+                - Float.parseFloat(runningNowList.get(position).getExamOfferPrice());
+        holder.txtRs2.setText(mContext.getString(R.string.rs)+""+pricePaid);
+
         holder.txtAuthorName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -74,6 +93,7 @@ public class RunningNowAdapter extends RecyclerView.Adapter<RunningNowAdapter.Ru
                 FragmentManager fragmentManager = ((FragmentActivity)mContext).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 ExamDetailsFragment fragment = new ExamDetailsFragment();
+                fragment.getDetails(runningNowList, position);
                 fragmentTransaction.add(android.R.id.content, fragment);
                 fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.fade_out);
                 fragmentTransaction.addToBackStack(null);
@@ -86,13 +106,13 @@ public class RunningNowAdapter extends RecyclerView.Adapter<RunningNowAdapter.Ru
     @Override
     public int getItemCount()
     {
-        /*if(mTechBitesCards != null && mTechBitesCards.size() > 0){
-            return mTechBitesCards.size();
+        if(runningNowList != null && runningNowList.size() > 0){
+            return runningNowList.size();
         }
         else{
             return 0;
-        }*/
-        return 10;
+        }
+//        return 10;
     }
 
 
@@ -107,8 +127,8 @@ public class RunningNowAdapter extends RecyclerView.Adapter<RunningNowAdapter.Ru
             super(itemView);
             txtExamName = (TextView)itemView.findViewById(R.id.txt_exam_name);
             txtAuthorName = (TextView)itemView.findViewById(R.id.txt_author_name);
-            txtTotalMarks = (TextView)itemView.findViewById(R.id.txt_max_marks);
-            txtMaxMarks = (TextView)itemView.findViewById(R.id.txt_exam_name);
+            txtTotalMarks = (TextView)itemView.findViewById(R.id.txt_total_marks);
+            txtMaxMarks = (TextView)itemView.findViewById(R.id.txt_max_marks);
             txtInfo = (TextView)itemView.findViewById(R.id.txt_info);
             txtReleasingDate = (TextView)itemView.findViewById(R.id.txt_releasing_date);
             txtStartDate = (TextView)itemView.findViewById(R.id.txt_start_date);
@@ -117,6 +137,9 @@ public class RunningNowAdapter extends RecyclerView.Adapter<RunningNowAdapter.Ru
             txtRs1 = (TextView)itemView.findViewById(R.id.txt_rs_1);
             txtRs2 = (TextView)itemView.findViewById(R.id.txt_rs_2);
             txtYear = (TextView)itemView.findViewById(R.id.txt_year);
+
+            btnCourseName = (Button) itemView.findViewById(R.id.btn_course_name);
+            btnBuyNow = (Button)itemView.findViewById(R.id.btn_buy_now);
         }
     }
 }

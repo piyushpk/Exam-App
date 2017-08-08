@@ -31,7 +31,7 @@
     <color name="colorTransparent">#80FFFFFF</color>
     <color name="colorBlackTransparent">#99000000</color>
 
-    <color name="colorButton">#1DD53F</color>
+    <color name="colorButton">#00A54F</color>
     <color name="circularImage">#D2D1CF</color>
     <color name="colorSignUpEditText">#737373</color>
     <color name="colorSignUpImageView">#5E5E5E</color>

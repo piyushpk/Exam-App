@@ -9,12 +9,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.examapplication.R;
 import com.examapplication.models.AddedExamModel;
-import com.examapplication.models.RunningNowModel;
 import com.examapplication.ui.adapters.AddedExamAdapter;
-import com.examapplication.ui.adapters.RunningNowAdapter;
+import com.examapplication.utility.App;
+import com.examapplication.utility.CommonUtility;
+import com.examapplication.webservices.ApiConstants;
+import com.examapplication.webservices.WebRequest;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -26,7 +33,8 @@ import java.util.ArrayList;
  * Use the {@link AddedExamFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddedExamFragment extends Fragment {
+public class AddedExamFragment extends Fragment
+{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -43,7 +51,8 @@ public class AddedExamFragment extends Fragment {
     private AddedExamAdapter addedExamAdapter;
     private AddedExamModel addedExamModel;
 
-    public AddedExamFragment() {
+    public AddedExamFragment()
+    {
         // Required empty public constructor
     }
 
@@ -56,7 +65,8 @@ public class AddedExamFragment extends Fragment {
      * @return A new instance of fragment AddedExamFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AddedExamFragment newInstance(String param1, String param2) {
+    public static AddedExamFragment newInstance(String param1, String param2)
+    {
         AddedExamFragment fragment = new AddedExamFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -66,9 +76,11 @@ public class AddedExamFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        if(getArguments() != null) {
+        if(getArguments() != null)
+        {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
@@ -76,7 +88,8 @@ public class AddedExamFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+            Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_added_exam, container, false);
         mContext = getActivity().getApplicationContext();
@@ -93,19 +106,23 @@ public class AddedExamFragment extends Fragment {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if(mListener != null) {
+    public void onButtonPressed(Uri uri)
+    {
+        if(mListener != null)
+        {
             mListener.onFragmentInteraction(uri);
         }
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Context context)
+    {
         super.onAttach(context);
     }
 
     @Override
-    public void onDetach() {
+    public void onDetach()
+    {
         super.onDetach();
         mListener = null;
     }
@@ -120,7 +137,8 @@ public class AddedExamFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface OnFragmentInteractionListener
+    {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
