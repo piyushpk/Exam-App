@@ -13,7 +13,7 @@ import com.examapplication.ui.adapters.RecyclerViewDataAdapter;
 
 import java.util.ArrayList;
 
-public class DemoActivity extends AppCompatActivity {
+public class  DemoActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 

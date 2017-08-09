@@ -22,6 +22,7 @@ public class JsonResponse
     public UserModel responsedata;
     public ArrayList<CategoryListModel> categories;
     public Model examdata;
+    public Model coming_soon;
 
     //List of String
 

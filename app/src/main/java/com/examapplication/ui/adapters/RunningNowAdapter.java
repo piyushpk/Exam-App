@@ -78,6 +78,7 @@ public class RunningNowAdapter extends RecyclerView.Adapter<RunningNowAdapter.Ru
                 FragmentManager fragmentManager = ((FragmentActivity)mContext).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 AuthorDetailsFragment fragment = new AuthorDetailsFragment();
+                fragment.getDetails(runningNowList, position);
                 fragmentTransaction.add(android.R.id.content, fragment);
                 fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.fade_out);
                 fragmentTransaction.addToBackStack(null);

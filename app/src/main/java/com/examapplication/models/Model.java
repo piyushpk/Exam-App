@@ -15,7 +15,14 @@ public class Model implements Serializable
     String pageNo;
 
     @SerializedName("exam")
-    ArrayList<RunningNowModel> examList;
+    ArrayList<RunningNowModel> runningExamList;
+
+    @SerializedName("coming_page")
+    String comingPageNo;
+
+    @SerializedName("coming_exam")
+    ArrayList<RunningNowModel> comingExamList;
+
 
     public String getPageNo() {
         return pageNo;
@@ -25,11 +32,27 @@ public class Model implements Serializable
         this.pageNo = pageNo;
     }
 
-    public ArrayList<RunningNowModel> getExamList() {
-        return examList;
+    public ArrayList<RunningNowModel> getRunningExamList() {
+        return runningExamList;
     }
 
-    public void setExamList(ArrayList<RunningNowModel> examList) {
-        this.examList = examList;
+    public void setRunningExamList(ArrayList<RunningNowModel> runningExamList) {
+        this.runningExamList = runningExamList;
+    }
+
+    public String getComingPageNo() {
+        return comingPageNo;
+    }
+
+    public void setComingPageNo(String comingPageNo) {
+        this.comingPageNo = comingPageNo;
+    }
+
+    public ArrayList<RunningNowModel> getComingExamList() {
+        return comingExamList;
+    }
+
+    public void setComingExamList(ArrayList<RunningNowModel> comingExamList) {
+        this.comingExamList = comingExamList;
     }
 }

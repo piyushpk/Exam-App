@@ -1,21 +1,14 @@
 package com.examapplication.ui.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.HorizontalScrollView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.NetworkResponse;
@@ -23,11 +16,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.examapplication.R;
 import com.examapplication.interfaces.ApiServiceCaller;
-import com.examapplication.models.Model;
 import com.examapplication.models.RunningNowModel;
-import com.examapplication.ui.activities.LandingFacultyActivity;
-import com.examapplication.ui.activities.LandingStudentActivity;
-import com.examapplication.ui.adapters.ComingSoonAdapter;
 import com.examapplication.ui.adapters.RunningNowAdapter;
 import com.examapplication.utility.App;
 import com.examapplication.utility.AppConstants;
@@ -36,9 +25,11 @@ import com.examapplication.webservices.ApiConstants;
 import com.examapplication.webservices.JsonResponse;
 import com.examapplication.webservices.WebRequest;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,12 +46,16 @@ public class RunningNowFragment extends Fragment implements ApiServiceCaller
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private RecyclerView recyclerRunningNow;
     private OnFragmentInteractionListener Listener;
+    private RecyclerView recyclerComingSoon;
     private Context mContext;
     private LinearLayoutManager layoutManager;
     private RunningNowAdapter runningNowAdapter;
     private ArrayList<RunningNowModel> runningNowModels;
+
+    private List<String> categories = new ArrayList<>();
+    private List<String> faculties = new ArrayList<>();
+    private List<String> sortBy = new ArrayList<>();
 
     private int pageNo = 1;
 
@@ -111,9 +106,9 @@ public class RunningNowFragment extends Fragment implements ApiServiceCaller
         View rootView = inflater.inflate(R.layout.fragment_running_now, container, false);
         mContext = getActivity().getApplicationContext();
 
-        recyclerRunningNow = (RecyclerView)rootView.findViewById(R.id.recycler_running_now);
+        recyclerComingSoon = (RecyclerView)rootView.findViewById(R.id.recycler_running_now);
         layoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        recyclerRunningNow.setLayoutManager(layoutManager);
+        recyclerComingSoon.setLayoutManager(layoutManager);
 
         getExamList(pageNo);
 
@@ -160,8 +155,14 @@ public class RunningNowFragment extends Fragment implements ApiServiceCaller
             try
             {
                 JSONObject jsonObject = new JSONObject();
+                JSONArray arrayCategories = new JSONArray(categories);
+                JSONArray arrayFaculties = new JSONArray(faculties);
+                JSONArray arraySortBy = new JSONArray(sortBy);
+                jsonObject.put("categories", arrayCategories);
+                jsonObject.put("faculties", arrayFaculties);
+                jsonObject.put("sortedby", arraySortBy);
 
-                JsonObjectRequest request = WebRequest.callPostMethod(mContext, jsonObject, Request.Method.GET,
+                JsonObjectRequest request = WebRequest.callPostMethod(mContext, jsonObject, Request.Method.POST,
                         ApiConstants.GET_RUNNING_EXAM_LIST_URL+page+"/", ApiConstants.GET_RUNNING_EXAM_LIST, this, "");
                 App.getInstance().addToRequestQueue(request, ApiConstants.GET_RUNNING_EXAM_LIST);
 
@@ -191,9 +192,9 @@ public class RunningNowFragment extends Fragment implements ApiServiceCaller
                         try
                         {
                             runningNowModels = new ArrayList<>();
-                            runningNowModels.addAll(jsonResponse.examdata.getExamList());
+                            runningNowModels.addAll(jsonResponse.examdata.getRunningExamList());
                             runningNowAdapter = new RunningNowAdapter(mContext, runningNowModels, "");
-                            recyclerRunningNow.setAdapter(runningNowAdapter);
+                            recyclerComingSoon.setAdapter(runningNowAdapter);
                         }
                         catch (Exception e)
                         {
