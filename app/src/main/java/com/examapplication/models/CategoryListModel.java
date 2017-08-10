@@ -9,12 +9,12 @@ import java.io.Serializable;
  * Bynry
  */
 public class CategoryListModel implements Serializable
-    {
-        @SerializedName("category")
-        String categoryName;
+{
+    @SerializedName("category")
+    String categoryName;
 
-        @SerializedName("id")
-        String categoryId;
+    @SerializedName("id")
+    String categoryId;
 
     public String getCategoryName() {
         return categoryName;

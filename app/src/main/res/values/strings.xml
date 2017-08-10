@@ -81,6 +81,12 @@
     <string name="student_name">Student Name</string>
     <string name="student_list">Student List</string>
 
+    <string name="filter_by">Filter By</string>
+    <string name="apply">Apply</string>
+    <string name="clear">Clear</string>
+    <string name="sort">Sort</string>
+    <string name="stream">Stream</string>
+
 
     <!--Api related strings-->
     <string name="internet_failed">Please check your internet connection</string>

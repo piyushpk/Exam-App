@@ -38,5 +38,6 @@
     <color name="colorBack">#DDDCDC</color>
     <color name="colorHeading">#00BAEF</color>
     <color name="colorInputText">#7e7e7e</color>
+    <color name="colorFilterButton">#F18066</color>
 
 </resources>

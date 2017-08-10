@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -19,6 +20,7 @@ import android.widget.RelativeLayout;
 
 import com.examapplication.R;
 import com.examapplication.ui.fragments.ComingSoonFragment;
+import com.examapplication.ui.fragments.FilterFragment;
 import com.examapplication.ui.fragments.RunningNowFragment;
 
 import java.util.ArrayList;
@@ -26,7 +28,6 @@ import java.util.List;
 
 public class LandingStudentActivity extends ParentActivity implements NavigationView.OnNavigationItemSelectedListener
 {
-
     private Toolbar toolbar;
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -34,8 +35,8 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
 
-    RelativeLayout drawerView;
-    RelativeLayout mainView;
+    private RelativeLayout drawerView;
+    private RelativeLayout mainView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -143,15 +144,13 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
 
         if (id == R.id.action_filter)
         {
-            /*FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             FilterFragment fragment = new FilterFragment();
             fragmentTransaction.add(android.R.id.content, fragment);
             fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.fade_out);
             fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();*/
-
-
+            fragmentTransaction.commit();
             return true;
         }
 
