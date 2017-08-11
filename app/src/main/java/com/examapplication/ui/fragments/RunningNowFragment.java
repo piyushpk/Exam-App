@@ -4,8 +4,10 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.examapplication.R;
 import com.examapplication.interfaces.ApiServiceCaller;
+import com.examapplication.interfaces.FilterInterface;
 import com.examapplication.models.RunningNowModel;
 import com.examapplication.ui.adapters.RunningNowAdapter;
 import com.examapplication.utility.App;
@@ -29,6 +32,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -39,7 +43,7 @@ import java.util.List;
  * Use the {@link RunningNowFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RunningNowFragment extends Fragment implements ApiServiceCaller
+public class RunningNowFragment extends ParentFragment implements ApiServiceCaller
 {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,14 +54,12 @@ public class RunningNowFragment extends Fragment implements ApiServiceCaller
     private RecyclerView recyclerComingSoon;
     private Context mContext;
     private LinearLayoutManager layoutManager;
-    private RunningNowAdapter runningNowAdapter;
-    private ArrayList<RunningNowModel> runningNowModels;
 
-    private List<String> categories = new ArrayList<>();
-    private List<String> faculties = new ArrayList<>();
-    private List<String> sortBy = new ArrayList<>();
+    public static List<String> sort = new ArrayList<>();
+    public static List<String> stream = new ArrayList<>();
+    public static List<String> faculty = new ArrayList<>();
 
-    private int pageNo = 1;
+    private static int pageNo = 1;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -104,15 +106,23 @@ public class RunningNowFragment extends Fragment implements ApiServiceCaller
             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_running_now, container, false);
-        mContext = getActivity().getApplicationContext();
+        mContext = getContext();
 
         recyclerComingSoon = (RecyclerView)rootView.findViewById(R.id.recycler_running_now);
         layoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerComingSoon.setLayoutManager(layoutManager);
 
-        getExamList(pageNo);
-
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        try {
+            getExamList(pageNo);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -148,16 +158,17 @@ public class RunningNowFragment extends Fragment implements ApiServiceCaller
         void onFragmentInteraction(Uri uri);
     }
 
-    private void getExamList(int page)
+    public void getExamList(int page)
     {
         if (CommonUtility.getInstance(mContext).checkConnectivity(mContext))
         {
             try
             {
+                showLoadingDialog(mContext);
                 JSONObject jsonObject = new JSONObject();
-                JSONArray arrayCategories = new JSONArray(categories);
-                JSONArray arrayFaculties = new JSONArray(faculties);
-                JSONArray arraySortBy = new JSONArray(sortBy);
+                JSONArray arraySortBy = new JSONArray(sort);
+                JSONArray arrayCategories = new JSONArray(stream);
+                JSONArray arrayFaculties = new JSONArray(faculty);
                 jsonObject.put("categories", arrayCategories);
                 jsonObject.put("faculties", arrayFaculties);
                 jsonObject.put("sortedby", arraySortBy);
@@ -191,21 +202,15 @@ public class RunningNowFragment extends Fragment implements ApiServiceCaller
                     {
                         try
                         {
-                            runningNowModels = new ArrayList<>();
+                            dismissLoadingDialog();
+                            ArrayList<RunningNowModel> runningNowModels = new ArrayList<>();
                             runningNowModels.addAll(jsonResponse.examdata.getRunningExamList());
-                            runningNowAdapter = new RunningNowAdapter(mContext, runningNowModels, "");
+                            RunningNowAdapter runningNowAdapter = new RunningNowAdapter(mContext, runningNowModels, "");
                             recyclerComingSoon.setAdapter(runningNowAdapter);
                         }
                         catch (Exception e)
                         {
                             e.printStackTrace();
-                        }
-                    }
-                    else
-                    {
-                        if (jsonResponse.result != null && jsonResponse.result.equals(JsonResponse.FAILURE))
-                        {
-
                         }
                     }
                 }
@@ -217,6 +222,7 @@ public class RunningNowFragment extends Fragment implements ApiServiceCaller
     @Override
     public void onAsyncFail(String message, String label, NetworkResponse response)
     {
+        dismissLoadingDialog();
         switch (label)
         {
             case ApiConstants.GET_RUNNING_EXAM_LIST:
@@ -230,6 +236,7 @@ public class RunningNowFragment extends Fragment implements ApiServiceCaller
     @Override
     public void onAsyncCompletelyFail(String message, String label)
     {
+        dismissLoadingDialog();
         switch (label)
         {
             case ApiConstants.GET_RUNNING_EXAM_LIST:
@@ -238,5 +245,12 @@ public class RunningNowFragment extends Fragment implements ApiServiceCaller
             }
             break;
         }
+    }
+
+    public static void setValues(List<String> mSort, List<String> mStream, List<String> mFaculty)
+    {
+        sort = mSort;
+        stream = mStream;
+        faculty = mFaculty;
     }
 }

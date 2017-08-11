@@ -7,12 +7,14 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,8 +22,8 @@ import android.widget.RelativeLayout;
 
 import com.examapplication.R;
 import com.examapplication.ui.fragments.ComingSoonFragment;
-import com.examapplication.ui.fragments.FilterFragment;
 import com.examapplication.ui.fragments.RunningNowFragment;
+import com.examapplication.utility.AppConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +37,8 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
 
-    private RelativeLayout drawerView;
     private RelativeLayout mainView;
+    private String visibleFragment = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,7 +57,6 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
         tabLayout.setupWithViewPager(viewPager);
 
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        drawerView = (RelativeLayout) findViewById(R.id.drawerView);
         mainView = (RelativeLayout) findViewById(R.id.mainView);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.app_name, R.string.app_name) {
@@ -83,13 +84,34 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        visibleFragment = getString(R.string.running_now);
+
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new RunningNowFragment(), "Running Now");
-        adapter.addFragment(new ComingSoonFragment(), "Coming Soon");
+        adapter.addFragment(new RunningNowFragment(), getString(R.string.running_now));
+        adapter.addFragment(new ComingSoonFragment(), getString(R.string.coming_soon));
         viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if(position == 0)
+                    visibleFragment = getString(R.string.running_now);
+                else
+                    visibleFragment = getString(R.string.coming_soon);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -131,10 +153,7 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_notification)
         {
             /*Intent intent = new Intent(this, CreateExamActivity.class);
@@ -144,13 +163,18 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
 
         if (id == R.id.action_filter)
         {
-            FragmentManager fragmentManager = getSupportFragmentManager();
+            /*FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             FilterFragment fragment = new FilterFragment();
             fragmentTransaction.add(android.R.id.content, fragment);
             fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.fade_out);
             fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
+            fragmentTransaction.commit();*/
+            Intent intent = new Intent(this, FilterActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString(AppConstants.VISIBLE_FRAG, visibleFragment);
+            intent.putExtra(AppConstants.LANDING_STUDENT, bundle);
+            startActivity(intent);
             return true;
         }
 
@@ -158,7 +182,6 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
         {
             return true;
         }
-
 
         return super.onOptionsItemSelected(item);
     }

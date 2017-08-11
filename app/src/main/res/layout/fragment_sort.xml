@@ -2,15 +2,29 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorBackground">
+    android:padding="10dp">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_sort"
+    <RadioGroup
+        android:id="@+id/radio"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="0dp"
-        android:background="@color/colorBackground"
-        android:layout_below="@+id/img_courses"
-        android:layout_centerInParent="true"/>
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radio_ascending"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/price_low_to_high"
+            android:buttonTint="@color/colorButton"
+            android:paddingLeft="10dp"/>
+
+        <RadioButton
+            android:id="@+id/radio_descending"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/price_low_to_high"
+            android:buttonTint="@color/colorButton"
+            android:paddingLeft="10dp"/>
+
+    </RadioGroup>
 
 </RelativeLayout>

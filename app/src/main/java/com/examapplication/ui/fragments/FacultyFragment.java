@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +16,11 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.examapplication.R;
 import com.examapplication.interfaces.ApiServiceCaller;
-import com.examapplication.models.RunningNowModel;
-import com.examapplication.ui.adapters.RunningNowAdapter;
+import com.examapplication.interfaces.FilterInterface;
+import com.examapplication.models.FacultyModel;
+import com.examapplication.ui.activities.FilterActivity;
+import com.examapplication.ui.adapters.FacultyAdapter;
+import com.examapplication.ui.adapters.StreamAdapter;
 import com.examapplication.utility.App;
 import com.examapplication.utility.AppConstants;
 import com.examapplication.utility.CommonUtility;
@@ -26,21 +28,21 @@ import com.examapplication.webservices.ApiConstants;
 import com.examapplication.webservices.JsonResponse;
 import com.examapplication.webservices.WebRequest;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ComingSoonFragment.OnFragmentInteractionListener} interface
+ * {@link FacultyFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ComingSoonFragment#newInstance} factory method to
+ * Use the {@link FacultyFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ComingSoonFragment extends Fragment implements ApiServiceCaller
+public class FacultyFragment extends Fragment implements ApiServiceCaller, FilterInterface
 {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,19 +54,14 @@ public class ComingSoonFragment extends Fragment implements ApiServiceCaller
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-    private RecyclerView recyclerRunningNow;
+
+    private RecyclerView recyclerFaculty;
     private Context mContext;
     private LinearLayoutManager layoutManager;
-    private RunningNowAdapter runningNowAdapter;
-    private ArrayList<RunningNowModel> runningNowModels;
+    private FacultyAdapter facultyAdapter;
+    private ArrayList<FacultyModel> facultyModels;
 
-    public static List<String> sort = new ArrayList<>();
-    public static List<String> stream = new ArrayList<>();
-    public static List<String> faculty = new ArrayList<>();
-
-    private int pageNo = 1;
-
-    public ComingSoonFragment() {
+    public FacultyFragment() {
         // Required empty public constructor
     }
 
@@ -74,11 +71,11 @@ public class ComingSoonFragment extends Fragment implements ApiServiceCaller
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ComingSoonFragment.
+     * @return A new instance of fragment FacultyFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ComingSoonFragment newInstance(String param1, String param2) {
-        ComingSoonFragment fragment = new ComingSoonFragment();
+    public static FacultyFragment newInstance(String param1, String param2) {
+        FacultyFragment fragment = new FacultyFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -99,24 +96,17 @@ public class ComingSoonFragment extends Fragment implements ApiServiceCaller
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_coming_soon, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_faculty, container, false);
         mContext = getActivity().getApplicationContext();
 
-        recyclerRunningNow = (RecyclerView)rootView.findViewById(R.id.recycler_coming_soon);
+        recyclerFaculty = (RecyclerView)rootView.findViewById(R.id.recycler_faculty);
         layoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        recyclerRunningNow.setLayoutManager(layoutManager);
+        recyclerFaculty.setLayoutManager(layoutManager);
+        facultyModels = new ArrayList<>();
+
+        getFacultyList();
 
         return rootView;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        try {
-            getExamList(pageNo);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -152,23 +142,35 @@ public class ComingSoonFragment extends Fragment implements ApiServiceCaller
         void onFragmentInteraction(Uri uri);
     }
 
-    private void getExamList(int page)
+    @Override
+    public void hashMapSort(HashMap sort) {
+    }
+
+    @Override
+    public void hashMapStream(HashMap stream) {
+    }
+
+    @Override
+    public void hashMapFaculty(HashMap faculty) {
+        Collection<String> facultyValues = faculty.values();
+        ArrayList<String> listOfFaculty = new ArrayList<String>(facultyValues);
+        for (String value : listOfFaculty)
+        {
+        }
+        FilterActivity.getFaculty(listOfFaculty);
+    }
+
+    private void getFacultyList()
     {
         if (CommonUtility.getInstance(mContext).checkConnectivity(mContext))
         {
             try
             {
                 JSONObject jsonObject = new JSONObject();
-                JSONArray arraySortBy = new JSONArray(sort);
-                JSONArray arrayCategories = new JSONArray(stream);
-                JSONArray arrayFaculties = new JSONArray(faculty);
-                jsonObject.put("categories", arrayCategories);
-                jsonObject.put("faculties", arrayFaculties);
-                jsonObject.put("sortedby", arraySortBy);
 
-                JsonObjectRequest request = WebRequest.callPostMethod(mContext, jsonObject, Request.Method.POST,
-                        ApiConstants.GET_COMING_EXAM_LIST_URL+page+"/", ApiConstants.GET_COMING_EXAM_LIST, this, "");
-                App.getInstance().addToRequestQueue(request, ApiConstants.GET_COMING_EXAM_LIST);
+                JsonObjectRequest request = WebRequest.callPostMethod(mContext, jsonObject, Request.Method.GET,
+                        ApiConstants.GET_FACULTY_URL, ApiConstants.GET_FACULTY, this, "");
+                App.getInstance().addToRequestQueue(request, ApiConstants.GET_FACULTY);
 
             }
             catch (Exception e)
@@ -187,7 +189,7 @@ public class ComingSoonFragment extends Fragment implements ApiServiceCaller
     {
         switch (label)
         {
-            case ApiConstants.GET_COMING_EXAM_LIST:
+            case ApiConstants.GET_FACULTY:
             {
                 if (jsonResponse != null)
                 {
@@ -195,10 +197,9 @@ public class ComingSoonFragment extends Fragment implements ApiServiceCaller
                     {
                         try
                         {
-                            runningNowModels = new ArrayList<>();
-                            runningNowModels.addAll(jsonResponse.coming_soon.getComingExamList());
-                            runningNowAdapter = new RunningNowAdapter(mContext, runningNowModels, "");
-                            recyclerRunningNow.setAdapter(runningNowAdapter);
+                            facultyModels.addAll(jsonResponse.faculties);
+                            facultyAdapter = new FacultyAdapter(mContext, facultyModels, FacultyFragment.this);
+                            recyclerFaculty.setAdapter(facultyAdapter);
                         }
                         catch (Exception e)
                         {
@@ -223,7 +224,7 @@ public class ComingSoonFragment extends Fragment implements ApiServiceCaller
     {
         switch (label)
         {
-            case ApiConstants.GET_COMING_EXAM_LIST:
+            case ApiConstants.GET_FACULTY:
             {
                 Toast.makeText(mContext, AppConstants.API_FAIL_MESSAGE, Toast.LENGTH_SHORT).show();
             }
@@ -236,18 +237,11 @@ public class ComingSoonFragment extends Fragment implements ApiServiceCaller
     {
         switch (label)
         {
-            case ApiConstants.GET_COMING_EXAM_LIST:
+            case ApiConstants.GET_FACULTY:
             {
                 Toast.makeText(mContext, AppConstants.API_FAIL_MESSAGE, Toast.LENGTH_SHORT).show();
             }
             break;
         }
-    }
-
-    public static void setValues(List<String> mSort, List<String> mStream, List<String> mFaculty)
-    {
-        sort = mSort;
-        stream = mStream;
-        faculty = mFaculty;
     }
 }

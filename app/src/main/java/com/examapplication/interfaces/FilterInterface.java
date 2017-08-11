@@ -7,5 +7,7 @@ import java.util.HashMap;
  * Bynry
  */
 public interface FilterInterface {
-        void onItemSelected(HashMap key);
+        void hashMapSort(HashMap sort);
+        void hashMapStream(HashMap stream);
+        void hashMapFaculty(HashMap faculty);
 }

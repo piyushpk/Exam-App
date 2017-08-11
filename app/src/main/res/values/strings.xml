@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Test Series</string>
 
+    <string name="running_now">Running Now</string>
+    <string name="coming_soon">Coming Soon</string>
+
     <string name="by">By:</string>
     <string name="author_name">Author Name</string>
     <string name="total_marks">Total Marks:</string>
@@ -86,6 +89,9 @@
     <string name="clear">Clear</string>
     <string name="sort">Sort</string>
     <string name="stream">Stream</string>
+
+    <string name="price_low_to_high">Price - Low to High</string>
+    <string name="price_high_to_low">Price - High to Low</string>
 
 
     <!--Api related strings-->

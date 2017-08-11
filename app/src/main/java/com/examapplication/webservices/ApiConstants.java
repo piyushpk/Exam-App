@@ -20,6 +20,7 @@ public class ApiConstants
     public static final String GET_CATEGORY_URL = BASE_URL + "categories/";
     public static final String GET_RUNNING_EXAM_LIST_URL = BASE_URL + "exams/";
     public static final String GET_COMING_EXAM_LIST_URL = BASE_URL + "coming-soon-exam/";
+    public static final String GET_FACULTY_URL = BASE_URL + "faculties/";
 
 
 
@@ -27,7 +28,8 @@ public class ApiConstants
     public static final String LOGIN = "1";
     public static final String GET_CATEGORY = "2";
     public static final String GET_RUNNING_EXAM_LIST = "3";
-    public static final String GET_COMING_EXAM_LIST = "3";
+    public static final String GET_COMING_EXAM_LIST = "4";
+    public static final String GET_FACULTY = "5";
 
 
 

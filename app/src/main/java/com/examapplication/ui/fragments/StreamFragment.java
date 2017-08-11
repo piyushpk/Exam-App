@@ -19,6 +19,7 @@ import com.examapplication.R;
 import com.examapplication.interfaces.ApiServiceCaller;
 import com.examapplication.interfaces.FilterInterface;
 import com.examapplication.models.CategoryListModel;
+import com.examapplication.ui.activities.FilterActivity;
 import com.examapplication.ui.adapters.StreamAdapter;
 import com.examapplication.utility.App;
 import com.examapplication.utility.AppConstants;
@@ -30,6 +31,7 @@ import com.examapplication.webservices.WebRequest;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -126,10 +128,25 @@ public class StreamFragment extends Fragment implements ApiServiceCaller, Filter
     }
 
     @Override
-    public void onItemSelected(HashMap key)
-    {
-        Log.d("sdkfhs: ", "sdofhsoi: "+key);
+    public void hashMapSort(HashMap sort) {
+
     }
+
+    @Override
+    public void hashMapStream(HashMap stream) {
+        Collection<String> streamValues = stream.values();
+        ArrayList<String> listOfStreams = new ArrayList<String>(streamValues);
+        for (String value : listOfStreams)
+        {
+        }
+        FilterActivity.getStream(listOfStreams);
+    }
+
+    @Override
+    public void hashMapFaculty(HashMap faculty) {
+
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this

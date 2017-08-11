@@ -3,6 +3,7 @@ package com.examapplication.webservices;
 
 import com.examapplication.models.AddedExamModel;
 import com.examapplication.models.CategoryListModel;
+import com.examapplication.models.FacultyModel;
 import com.examapplication.models.Model;
 import com.examapplication.models.UserModel;
 
@@ -23,6 +24,7 @@ public class JsonResponse
     public ArrayList<CategoryListModel> categories;
     public Model examdata;
     public Model coming_soon;
+    public ArrayList<FacultyModel> faculties;
 
     //List of String
 

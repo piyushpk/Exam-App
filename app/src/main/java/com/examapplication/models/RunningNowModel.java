@@ -75,6 +75,9 @@ public class RunningNowModel implements Serializable
     @SerializedName("result_date")
     String examResultDate;
 
+    @SerializedName("category")
+    String examCategory;
+
     public String getExamResultDate() {
         return examResultDate;
     }
@@ -249,5 +252,13 @@ public class RunningNowModel implements Serializable
 
     public void setExamEndDate(String examEndDate) {
         this.examEndDate = examEndDate;
+    }
+
+    public String getExamCategory() {
+        return examCategory;
+    }
+
+    public void setExamCategory(String examCategory) {
+        this.examCategory = examCategory;
     }
 }

@@ -74,6 +74,10 @@ public class AddedExamModel implements Serializable
     @SerializedName("exam_end_date")
     String examEndDate;
 
+    @SerializedName("category")
+    String examCategory;
+
+
     public String getExamTotalTime() {
         return examTotalTime;
     }
@@ -240,6 +244,14 @@ public class AddedExamModel implements Serializable
 
     public void setExamEndDate(String examEndDate) {
         this.examEndDate = examEndDate;
+    }
+
+    public String getExamCategory() {
+        return examCategory;
+    }
+
+    public void setExamCategory(String examCategory) {
+        this.examCategory = examCategory;
     }
 }
 

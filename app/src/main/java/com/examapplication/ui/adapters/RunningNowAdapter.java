@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +54,7 @@ public class RunningNowAdapter extends RecyclerView.Adapter<RunningNowAdapter.Ru
     {
         holder.txtExamName.setText(runningNowList.get(position).getExamName());
         holder.txtAuthorName.setText(runningNowList.get(position).getExamAuthor());
-        holder.btnCourseName.setText(runningNowList.get(position).getExamEducation());
+        holder.btnCourseName.setText(runningNowList.get(position).getExamCategory());
         holder.txtTotalMarks.setText(mContext.getString(R.string.total_marks)+" "+
                 runningNowList.get(position).getExamTotalMarks());
         holder.txtMaxMarks.setText(mContext.getString(R.string.max_mark_s)+" "+

@@ -7,8 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
 
 import com.examapplication.R;
+import com.examapplication.ui.activities.FilterActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,7 +24,8 @@ import com.examapplication.R;
  * Use the {@link SortFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SortFragment extends Fragment {
+public class SortFragment extends Fragment implements View.OnClickListener
+{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,6 +36,12 @@ public class SortFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private Context mContext;
+    private RadioButton chkAscending, chkDescending;
+    private List<String> sort = new ArrayList<>();
+    private List<String> stream = new ArrayList<>();
+    private List<String> faculty = new ArrayList<>();
+
 
     public SortFragment() {
         // Required empty public constructor
@@ -65,7 +78,15 @@ public class SortFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sort, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_sort, container, false);
+        mContext = getActivity().getApplicationContext();
+
+        chkAscending = (RadioButton) rootView.findViewById(R.id.radio_ascending);
+        chkAscending.setOnClickListener(this);
+        chkDescending = (RadioButton) rootView.findViewById(R.id.radio_descending);
+        chkDescending.setOnClickListener(this);
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -86,6 +107,33 @@ public class SortFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onClick(View v)
+    {
+        if(v == chkAscending)
+        {
+            if(chkAscending.isChecked())
+            {
+                try{sort.remove(0);}
+                catch(Exception e){}
+                sort.add(0, "Sale");
+                FilterActivity.getSort(sort);
+            }
+        }
+
+        if(v == chkDescending)
+        {
+            if(chkDescending.isChecked())
+            {
+                try{sort.remove(0);}
+                catch(Exception e){}
+                sort.add(0, "-Sale");
+                FilterActivity.getSort(sort);
+            }
+        }
+    }
+
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -100,4 +148,5 @@ public class SortFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }
