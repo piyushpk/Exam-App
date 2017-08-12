@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,8 +19,10 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.examapplication.R;
 import com.examapplication.interfaces.ApiServiceCaller;
+import com.examapplication.interfaces.FilterInterface;
 import com.examapplication.models.CategoryListModel;
 import com.examapplication.ui.adapters.CategoryListAdapter;
+import com.examapplication.ui.fragments.RunningNowFragment;
 import com.examapplication.utility.App;
 import com.examapplication.utility.AppConstants;
 import com.examapplication.utility.AppPreferences;
@@ -31,8 +34,10 @@ import com.examapplication.webservices.WebRequest;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 
-public class SendToLoginActivity extends ParentActivity implements View.OnClickListener, ApiServiceCaller
+public class SendToLoginActivity extends ParentActivity implements View.OnClickListener, ApiServiceCaller, FilterInterface
 {
 
     private Context mContext;
@@ -45,6 +50,10 @@ public class SendToLoginActivity extends ParentActivity implements View.OnClickL
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
     private CategoryListAdapter categoryListAdapter;
     private ArrayList<CategoryListModel> categoryListModels = new ArrayList<>();
+
+    private ArrayList<String> listOfSort = new ArrayList<>();
+    private ArrayList<String> listOfStreams = new ArrayList<>();
+    private ArrayList<String> listOfFaculty = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -90,6 +99,7 @@ public class SendToLoginActivity extends ParentActivity implements View.OnClickL
 
         if(v == txtContinue)
         {
+            RunningNowFragment.setValues(listOfSort, listOfStreams, listOfFaculty);
             Intent intent = new Intent(this, LandingStudentActivity.class);
             startActivity(intent);
         }
@@ -111,6 +121,7 @@ public class SendToLoginActivity extends ParentActivity implements View.OnClickL
         {
             try
             {
+                showLoadingDialog();
                 JSONObject jsonObject = new JSONObject();
 
                 JsonObjectRequest request = WebRequest.callPostMethod(mContext, jsonObject, Request.Method.GET,
@@ -142,20 +153,14 @@ public class SendToLoginActivity extends ParentActivity implements View.OnClickL
                     {
                         try
                         {
+                            dismissLoadingDialog();
                             categoryListModels.addAll(jsonResponse.categories);
-                            categoryListAdapter = new CategoryListAdapter(mContext, categoryListModels, "");
+                            categoryListAdapter = new CategoryListAdapter(mContext, categoryListModels, this);
                             recyclerCategoryList.setAdapter(categoryListAdapter);
                         }
                         catch (Exception e)
                         {
                             e.printStackTrace();
-                        }
-                    }
-                    else
-                    {
-                        if (jsonResponse.result != null && jsonResponse.result.equals(JsonResponse.FAILURE))
-                        {
-
                         }
                     }
                 }
@@ -167,6 +172,7 @@ public class SendToLoginActivity extends ParentActivity implements View.OnClickL
     @Override
     public void onAsyncFail(String message, String label, NetworkResponse response)
     {
+        dismissLoadingDialog();
         switch (label)
         {
             case ApiConstants.GET_CATEGORY:
@@ -180,6 +186,7 @@ public class SendToLoginActivity extends ParentActivity implements View.OnClickL
     @Override
     public void onAsyncCompletelyFail(String message, String label)
     {
+        dismissLoadingDialog();
         switch (label)
         {
             case ApiConstants.GET_CATEGORY:
@@ -188,5 +195,24 @@ public class SendToLoginActivity extends ParentActivity implements View.OnClickL
             }
             break;
         }
+    }
+
+    @Override
+    public void hashMapSort(HashMap sort) {
+
+    }
+
+    @Override
+    public void hashMapStream(HashMap stream) {
+        Collection<String> streamValues = stream.values();
+        listOfStreams = new ArrayList<String>(streamValues);
+        for (String value : listOfStreams)
+        {
+        }
+    }
+
+    @Override
+    public void hashMapFaculty(HashMap faculty) {
+
     }
 }

@@ -20,39 +20,38 @@ import com.examapplication.ui.fragments.ExamDetailsFragment;
 import java.util.ArrayList;
 
 /**
- * Created by Piyush on 26-07-2017.
+ * Created by Piyush on 12-08-2017.
  * Bynry
  */
-public class RunningNowAdapter extends RecyclerView.Adapter<RunningNowAdapter.RunningNowHolder>
+public class MyRunningExamAdapter extends RecyclerView.Adapter<MyRunningExamAdapter.MyRunningExamHolder>
 {
 
     public Context mContext;
     private ArrayList<RunningNowModel> runningNowList;
 
-    public RunningNowAdapter(Context mContext, ArrayList<RunningNowModel> runningNowModels)
+    public MyRunningExamAdapter(Context mContext, ArrayList<RunningNowModel> runningNowModels)
     {
     }
 
-    public RunningNowAdapter(Context context, ArrayList<RunningNowModel> runningNowModels, String message)
+    public MyRunningExamAdapter(Context context, ArrayList<RunningNowModel> runningNowModels, String message)
     {
         this.mContext = context;
         this.runningNowList = runningNowModels;
     }
 
-
     @Override
-    public RunningNowHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    public MyRunningExamHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_running_now, null);
-        RunningNowHolder viewHolder = new RunningNowHolder(view);
+        MyRunningExamAdapter.MyRunningExamHolder viewHolder = new MyRunningExamAdapter.MyRunningExamHolder(view);
         mContext = parent.getContext();
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(RunningNowHolder holder, final int position)
+    public void onBindViewHolder(MyRunningExamHolder holder, int position)
     {
-        holder.txtExamName.setText(runningNowList.get(position).getExamName());
+        /*holder.txtExamName.setText(runningNowList.get(position).getExamName());
         holder.txtAuthorName.setText(runningNowList.get(position).getExamAuthor());
         holder.btnCourseName.setText(runningNowList.get(position).getExamCategory());
         holder.txtTotalMarks.setText(mContext.getString(R.string.total_marks)+" "+
@@ -99,34 +98,35 @@ public class RunningNowAdapter extends RecyclerView.Adapter<RunningNowAdapter.Ru
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
-        });
-
+        });*/
     }
 
     @Override
     public int getItemCount()
     {
-        if(runningNowList != null && runningNowList.size() > 0){
+       /* if(runningNowList != null && runningNowList.size() > 0){
             return runningNowList.size();
         }
         else{
             return 0;
-        }
-//        return 10;
+        }*/
+        return 10;
     }
 
 
-    public class RunningNowHolder extends RecyclerView.ViewHolder
+
+    public class MyRunningExamHolder extends RecyclerView.ViewHolder
     {
         public TextView txtExamName, txtAuthorName, txtTotalMarks, txtMaxMarks, txtInfo, txtReleasingDate, txtStartDate,
                 txtEndDate, txtSaveRs, txtRs1, txtRs2, txtYear;
         public Button btnCourseName, btnBuyNow;
         public CardView cardViewPrice;
 
-        public RunningNowHolder(View itemView)
+        public MyRunningExamHolder(View itemView)
         {
             super(itemView);
-            txtExamName = (TextView)itemView.findViewById(R.id.txt_exam_name);
+
+            /*txtExamName = (TextView)itemView.findViewById(R.id.txt_exam_name);
             txtAuthorName = (TextView)itemView.findViewById(R.id.txt_author_name);
             txtTotalMarks = (TextView)itemView.findViewById(R.id.txt_total_marks);
             txtMaxMarks = (TextView)itemView.findViewById(R.id.txt_max_marks);
@@ -140,7 +140,7 @@ public class RunningNowAdapter extends RecyclerView.Adapter<RunningNowAdapter.Ru
             txtYear = (TextView)itemView.findViewById(R.id.txt_year);
 
             btnCourseName = (Button) itemView.findViewById(R.id.btn_course_name);
-            btnBuyNow = (Button)itemView.findViewById(R.id.btn_buy_now);
+            btnBuyNow = (Button)itemView.findViewById(R.id.btn_buy_now);*/
         }
     }
 }

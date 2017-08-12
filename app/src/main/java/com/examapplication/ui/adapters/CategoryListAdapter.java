@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.examapplication.R;
+import com.examapplication.interfaces.FilterInterface;
 import com.examapplication.models.CategoryListModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Piyush on 07-08-2017.
@@ -23,6 +25,8 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 {
     public Context mContext;
     private ArrayList<CategoryListModel> categoryListModels;
+    private FilterInterface filterInterface;
+    private HashMap<Integer, String> hashMapStream = new HashMap<>();
 
     private static final long DOUBLE_PRESS_INTERVAL = 250; // in millis
     private long lastPressTime;
@@ -31,10 +35,11 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     public CategoryListAdapter(Context mContext, ArrayList<CategoryListModel> categoryList)
     {}
 
-    public CategoryListAdapter(Context context, ArrayList<CategoryListModel> categoryListModels, String message)
+    public CategoryListAdapter(Context context, ArrayList<CategoryListModel> categoryListModels, FilterInterface fContext)
     {
         this.mContext = context;
         this.categoryListModels = categoryListModels;
+        this.filterInterface = (FilterInterface) fContext;
     }
     
     @Override
@@ -47,7 +52,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     }
 
     @Override
-    public void onBindViewHolder(final CategoryListHolder holder, int position)
+    public void onBindViewHolder(final CategoryListHolder holder, final int position)
     {
         holder.btnCategoryItems.setText(categoryListModels.get(position).getCategoryName());
 
@@ -63,6 +68,8 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
                 {
                     holder.btnCategoryItems.setBackgroundResource(R.drawable.dashboard_button_unselected);
                     mHasDoubleClicked = true;
+                    hashMapStream.remove(position);
+                    filterInterface.hashMapStream(hashMapStream);
                 }
                 else
                 {
@@ -75,6 +82,8 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
                             if (!mHasDoubleClicked)
                             {
                                 holder.btnCategoryItems.setBackgroundResource(R.drawable.dashboard_button_selected);
+                                hashMapStream.put(position, categoryListModels.get(position).getCategoryId());
+                                filterInterface.hashMapStream(hashMapStream);
                             }
                         }
                     };

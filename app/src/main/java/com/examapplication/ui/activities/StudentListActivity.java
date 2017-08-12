@@ -11,9 +11,7 @@ import android.widget.TextView;
 
 import com.examapplication.R;
 import com.examapplication.models.StudentListModel;
-import com.examapplication.models.SubmittedExamModel;
 import com.examapplication.ui.adapters.StudentListAdapter;
-import com.examapplication.ui.adapters.SubmittedExamAdapter;
 
 import java.util.ArrayList;
 
@@ -26,7 +24,6 @@ public class StudentListActivity extends ParentActivity implements View.OnClickL
     private RecyclerView recyclerStudentList;
     private LinearLayoutManager layoutManager;
     private StudentListAdapter studentListAdapter;
-    private StudentListModel studentListModel;
 
     private TextView txtTitle;
     private ImageView imgBack;
@@ -47,7 +44,6 @@ public class StudentListActivity extends ParentActivity implements View.OnClickL
         layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerStudentList.setLayoutManager(layoutManager);
         ArrayList<StudentListModel> studentListModels = new ArrayList<>();
-        studentListModel = new StudentListModel();
         studentListAdapter = new StudentListAdapter(mContext, studentListModels, "");
         recyclerStudentList.setAdapter(studentListAdapter);
     }

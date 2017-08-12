@@ -23,8 +23,6 @@ public class FacultyAdapter extends RecyclerView.Adapter<FacultyAdapter.FacultyH
 
     public Context mContext;
     private ArrayList<FacultyModel> facultyModels;
-    private HashMap<Integer, String> hashMapSort = new HashMap<>();
-    private HashMap<Integer, String> hashMapStream = new HashMap<>();
     private HashMap<Integer, String> hashMapFaculty = new HashMap<>();
     private FilterInterface filterInterface;
 

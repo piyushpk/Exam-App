@@ -14,10 +14,4 @@
         app:showAsAction="always"
         android:title="action_search" />
 
-    <item
-        android:id="@+id/action_setting"
-        android:icon="@drawable/ic_action_setting"
-        app:showAsAction="always"
-        android:title="action_search" />
-
 </menu>

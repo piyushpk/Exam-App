@@ -1,6 +1,7 @@
 package com.examapplication.ui.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -11,14 +12,13 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.examapplication.R;
 import com.examapplication.ui.fragments.ComingSoonFragment;
@@ -27,6 +27,8 @@ import com.examapplication.utility.AppConstants;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class LandingStudentActivity extends ParentActivity implements NavigationView.OnNavigationItemSelectedListener
 {
@@ -39,6 +41,10 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
 
     private RelativeLayout mainView;
     private String visibleFragment = "";
+    private Intent intent;
+
+    private TextView txtFullName, txtEmail;
+    private CircleImageView imgProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -82,7 +88,14 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
         mDrawerToggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View header = navigationView.getHeaderView(0);
         navigationView.setNavigationItemSelectedListener(this);
+
+        txtFullName = (TextView)header.findViewById(R.id.txt_full_name);
+        txtFullName.setText("Piyush Kalmegh");
+        txtEmail = (TextView)header.findViewById(R.id.txt_email);
+        txtEmail.setText("p.kalmegh1@gmail.com");
+        imgProfile = (CircleImageView)header.findViewById(R.id.img_profile);
 
         visibleFragment = getString(R.string.running_now);
 
@@ -178,11 +191,6 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
             return true;
         }
 
-        if(id == R.id.action_setting)
-        {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -203,22 +211,39 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if(id == R.id.nav_camera) {
-            // Handle the camera action
+        if(id == R.id.nav_profile)
+        {
+            intent = new Intent(this, EditProfileActivity.class);
+            startActivity(intent);
+            item.setChecked(false);
         }
-        else if(id == R.id.nav_gallery) {
-
+        else if(id == R.id.nav_my_exam)
+        {
+            intent = new Intent(this, MyExamActivity.class);
+            startActivity(intent);
+            item.setChecked(false);
         }
-        else if(id == R.id.nav_slideshow) {
-
+        else if(id == R.id.nav_my_submitted_exam)
+        {
+            intent = new Intent(this, MySubmittedExam.class);
+            startActivity(intent);
         }
-        else if(id == R.id.nav_manage) {
-
+        else if(id == R.id.nav_share)
+        {
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "Hello there,\n");
+            sendIntent.setType("text/plain");
+            startActivity(sendIntent);
         }
-        else if(id == R.id.nav_share) {
-
+        else if(id == R.id.nav_rate_app)
+        {
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse(
+                    "https://play.google.com/store/apps/"));
+            startActivity(intent);
         }
-        else if(id == R.id.nav_send) {
+        else if(id == R.id.nav_logout)
+        {
 
         }
 

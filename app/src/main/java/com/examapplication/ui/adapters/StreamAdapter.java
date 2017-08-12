@@ -23,9 +23,7 @@ public class StreamAdapter extends RecyclerView.Adapter<StreamAdapter.StreamHold
 
     public Context mContext;
     private ArrayList<CategoryListModel> categoryListModels;
-    private HashMap<Integer, String> hashMapSort = new HashMap<>();
     private HashMap<Integer, String> hashMapStream = new HashMap<>();
-    private HashMap<Integer, String> hashMapFaculty = new HashMap<>();
     private FilterInterface filterInterface;
 
     public StreamAdapter(Context mContext, ArrayList<CategoryListModel> submittedExamModels)

@@ -149,11 +149,6 @@ public class LandingFacultyActivity extends ParentActivity implements Navigation
             return true;
         }
 
-        if(id == R.id.action_setting) {
-            return true;
-        }
-
-
         return super.onOptionsItemSelected(item);
     }
 

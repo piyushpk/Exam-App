@@ -45,6 +45,12 @@
         </activity>
         <activity android:name=".ui.activities.FilterActivity">
         </activity>
+        <activity android:name=".ui.activities.EditProfileActivity">
+        </activity>
+        <activity android:name=".ui.activities.MyExamActivity">
+        </activity>
+        <activity android:name=".ui.activities.MySubmittedExam">
+        </activity>
     </application>
 
 </manifest>

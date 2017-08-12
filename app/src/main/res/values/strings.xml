@@ -3,6 +3,8 @@
 
     <string name="running_now">Running Now</string>
     <string name="coming_soon">Coming Soon</string>
+    <string name="my_running_exam">My Running Exam</string>
+    <string name="my_coming_exam">My Coming Exam</string>
 
     <string name="by">By:</string>
     <string name="author_name">Author Name</string>
@@ -92,6 +94,10 @@
 
     <string name="price_low_to_high">Price - Low to High</string>
     <string name="price_high_to_low">Price - High to Low</string>
+
+    <string name="my_profile">My Profile</string>
+    <string name="my_exams">My Exams</string>
+    <string name="my_submitted_exam">Submitted Exam</string>
 
 
     <!--Api related strings-->

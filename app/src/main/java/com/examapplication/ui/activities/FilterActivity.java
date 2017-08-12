@@ -8,14 +8,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.examapplication.R;
-import com.examapplication.ui.adapters.StreamAdapter;
 import com.examapplication.ui.fragments.ComingSoonFragment;
 import com.examapplication.ui.fragments.FacultyFragment;
 import com.examapplication.ui.fragments.RunningNowFragment;
