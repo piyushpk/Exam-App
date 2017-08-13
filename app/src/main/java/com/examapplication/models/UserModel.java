@@ -31,6 +31,9 @@ public class UserModel implements Serializable
     @SerializedName("id")
     String UserId;
 
+    @SerializedName("authorization")
+    String authorizationToken;
+
     public String getUserName() {
         return userName;
     }
@@ -85,5 +88,13 @@ public class UserModel implements Serializable
 
     public void setUserId(String userId) {
         UserId = userId;
+    }
+
+    public String getAuthorizationToken() {
+        return authorizationToken;
+    }
+
+    public void setAuthorizationToken(String authorizationToken) {
+        this.authorizationToken = authorizationToken;
     }
 }

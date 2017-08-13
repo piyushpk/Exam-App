@@ -40,7 +40,7 @@ import java.util.HashMap;
 public class SendToLoginActivity extends ParentActivity implements View.OnClickListener, ApiServiceCaller, FilterInterface
 {
 
-    private Context mContext;
+    private static Context mContext;
     private RelativeLayout relativeMain;
     private TextView txtContinue;
     private ImageView imgLogo;
@@ -102,6 +102,7 @@ public class SendToLoginActivity extends ParentActivity implements View.OnClickL
             RunningNowFragment.setValues(listOfSort, listOfStreams, listOfFaculty);
             Intent intent = new Intent(this, LandingStudentActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 
@@ -214,5 +215,10 @@ public class SendToLoginActivity extends ParentActivity implements View.OnClickL
     @Override
     public void hashMapFaculty(HashMap faculty) {
 
+    }
+
+    public void finishThis()
+    {
+        finish();
     }
 }

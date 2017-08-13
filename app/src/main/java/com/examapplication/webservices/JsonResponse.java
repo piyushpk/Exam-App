@@ -25,6 +25,9 @@ public class JsonResponse
     public Model examdata;
     public Model coming_soon;
     public ArrayList<FacultyModel> faculties;
+    public Model myexamorder;
+    public Model myexamcomingorder;
+    public Model submitteddata;
 
     //List of String
 

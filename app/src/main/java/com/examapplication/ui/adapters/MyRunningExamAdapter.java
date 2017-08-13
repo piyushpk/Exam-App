@@ -28,6 +28,7 @@ public class MyRunningExamAdapter extends RecyclerView.Adapter<MyRunningExamAdap
 
     public Context mContext;
     private ArrayList<RunningNowModel> runningNowList;
+    private String check = "";
 
     public MyRunningExamAdapter(Context mContext, ArrayList<RunningNowModel> runningNowModels)
     {
@@ -37,21 +38,22 @@ public class MyRunningExamAdapter extends RecyclerView.Adapter<MyRunningExamAdap
     {
         this.mContext = context;
         this.runningNowList = runningNowModels;
+        this.check = message;
     }
 
     @Override
     public MyRunningExamHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_running_now, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_my_exams, null);
         MyRunningExamAdapter.MyRunningExamHolder viewHolder = new MyRunningExamAdapter.MyRunningExamHolder(view);
         mContext = parent.getContext();
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(MyRunningExamHolder holder, int position)
+    public void onBindViewHolder(final MyRunningExamHolder holder, final int position)
     {
-        /*holder.txtExamName.setText(runningNowList.get(position).getExamName());
+        holder.txtExamName.setText(runningNowList.get(position).getExamName());
         holder.txtAuthorName.setText(runningNowList.get(position).getExamAuthor());
         holder.btnCourseName.setText(runningNowList.get(position).getExamCategory());
         holder.txtTotalMarks.setText(mContext.getString(R.string.total_marks)+" "+
@@ -62,12 +64,6 @@ public class MyRunningExamAdapter extends RecyclerView.Adapter<MyRunningExamAdap
                 runningNowList.get(position).getExamStartDate());
         holder.txtEndDate.setText(mContext.getString(R.string.end_date)+" "+
                 runningNowList.get(position).getExamEndDate());
-        holder.txtSaveRs.setText(mContext.getString(R.string.save_rs)+" "+
-                runningNowList.get(position).getExamOfferPrice());
-        holder.txtRs1.setText(runningNowList.get(position).getExamSalePrice());
-        float pricePaid = Float.parseFloat(runningNowList.get(position).getExamSalePrice())
-                - Float.parseFloat(runningNowList.get(position).getExamOfferPrice());
-        holder.txtRs2.setText(mContext.getString(R.string.rs)+""+pricePaid);
 
         holder.txtAuthorName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,19 +94,19 @@ public class MyRunningExamAdapter extends RecyclerView.Adapter<MyRunningExamAdap
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
-        });*/
+        });
     }
 
     @Override
     public int getItemCount()
     {
-       /* if(runningNowList != null && runningNowList.size() > 0){
+        if(runningNowList != null && runningNowList.size() > 0){
             return runningNowList.size();
         }
         else{
             return 0;
-        }*/
-        return 10;
+        }
+//        return 10;
     }
 
 
@@ -118,15 +114,14 @@ public class MyRunningExamAdapter extends RecyclerView.Adapter<MyRunningExamAdap
     public class MyRunningExamHolder extends RecyclerView.ViewHolder
     {
         public TextView txtExamName, txtAuthorName, txtTotalMarks, txtMaxMarks, txtInfo, txtReleasingDate, txtStartDate,
-                txtEndDate, txtSaveRs, txtRs1, txtRs2, txtYear;
-        public Button btnCourseName, btnBuyNow;
-        public CardView cardViewPrice;
+                txtEndDate;
+        public Button btnCourseName, btnStartExam;
 
         public MyRunningExamHolder(View itemView)
         {
             super(itemView);
 
-            /*txtExamName = (TextView)itemView.findViewById(R.id.txt_exam_name);
+            txtExamName = (TextView)itemView.findViewById(R.id.txt_exam_name);
             txtAuthorName = (TextView)itemView.findViewById(R.id.txt_author_name);
             txtTotalMarks = (TextView)itemView.findViewById(R.id.txt_total_marks);
             txtMaxMarks = (TextView)itemView.findViewById(R.id.txt_max_marks);
@@ -134,13 +129,14 @@ public class MyRunningExamAdapter extends RecyclerView.Adapter<MyRunningExamAdap
             txtReleasingDate = (TextView)itemView.findViewById(R.id.txt_releasing_date);
             txtStartDate = (TextView)itemView.findViewById(R.id.txt_start_date);
             txtEndDate = (TextView)itemView.findViewById(R.id.txt_end_date);
-            txtSaveRs = (TextView)itemView.findViewById(R.id.txt_save_rs);
-            txtRs1 = (TextView)itemView.findViewById(R.id.txt_rs_1);
-            txtRs2 = (TextView)itemView.findViewById(R.id.txt_rs_2);
-            txtYear = (TextView)itemView.findViewById(R.id.txt_year);
 
             btnCourseName = (Button) itemView.findViewById(R.id.btn_course_name);
-            btnBuyNow = (Button)itemView.findViewById(R.id.btn_buy_now);*/
+            btnStartExam = (Button)itemView.findViewById(R.id.btn_start_exam);
+            
+            if(check.equals("Running"))
+                btnStartExam.setVisibility(View.VISIBLE);
+            else
+                btnStartExam.setVisibility(View.GONE);
         }
     }
 }

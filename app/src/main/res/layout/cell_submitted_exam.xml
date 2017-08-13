@@ -41,6 +41,7 @@
                     android:layout_gravity="center">
 
                     <TextView
+                        android:id="@+id/lbl_first"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/exam_name"
@@ -48,7 +49,7 @@
                         android:textSize="@dimen/text_size_h2" />
 
                     <TextView
-                        android:id="@+id/txt_exam_name"
+                        android:id="@+id/txt_first"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/dummy"
@@ -72,6 +73,7 @@
                     android:layout_gravity="center">
 
                     <TextView
+                        android:id="@+id/lbl_second"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/result_date"
@@ -79,7 +81,7 @@
                         android:textSize="@dimen/text_size_h2"/>
 
                     <TextView
-                        android:id="@+id/txt_releasing_date"
+                        android:id="@+id/txt_second"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/date"
@@ -132,6 +134,7 @@
                     android:layout_gravity="center">
 
                     <TextView
+                        android:id="@+id/lbl_third"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/total_student"
@@ -139,7 +142,7 @@
                         android:textSize="@dimen/text_size_h2" />
 
                     <TextView
-                        android:id="@+id/txt_total_student"
+                        android:id="@+id/txt_third"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/number"
@@ -163,6 +166,7 @@
                     android:layout_gravity="center">
 
                     <TextView
+                        android:id="@+id/lbl_fourth"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/submitted_student"
@@ -170,7 +174,7 @@
                         android:textSize="@dimen/text_size_h2"/>
 
                     <TextView
-                        android:id="@+id/txt_submitted_student"
+                        android:id="@+id/txt_fourth"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/number"

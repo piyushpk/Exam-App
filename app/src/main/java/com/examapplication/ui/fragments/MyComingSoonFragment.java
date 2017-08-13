@@ -20,6 +20,7 @@ import com.examapplication.models.RunningNowModel;
 import com.examapplication.ui.adapters.MyRunningExamAdapter;
 import com.examapplication.utility.App;
 import com.examapplication.utility.AppConstants;
+import com.examapplication.utility.AppPreferences;
 import com.examapplication.utility.CommonUtility;
 import com.examapplication.webservices.ApiConstants;
 import com.examapplication.webservices.JsonResponse;
@@ -97,7 +98,8 @@ public class MyComingSoonFragment extends ParentFragment implements ApiServiceCa
         layoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerComingSoon.setLayoutManager(layoutManager);
         ArrayList<RunningNowModel> runningNowModels = new ArrayList<>();
-        MyRunningExamAdapter runningNowAdapter = new MyRunningExamAdapter(mContext, runningNowModels, "");
+        MyRunningExamAdapter runningNowAdapter = new MyRunningExamAdapter(mContext, runningNowModels,
+                getString(R.string.coming));
         recyclerComingSoon.setAdapter(runningNowAdapter);
 
         return rootView;
@@ -154,16 +156,11 @@ public class MyComingSoonFragment extends ParentFragment implements ApiServiceCa
             {
                 showLoadingDialog(mContext);
                 JSONObject jsonObject = new JSONObject();
-                /*JSONArray arraySortBy = new JSONArray(sort);
-                JSONArray arrayCategories = new JSONArray(stream);
-                JSONArray arrayFaculties = new JSONArray(faculty);
-                jsonObject.put("categories", arrayCategories);
-                jsonObject.put("faculties", arrayFaculties);
-                jsonObject.put("sortedby", arraySortBy);*/
+                String token = AppPreferences.getInstance(mContext).getString(AppConstants.TOKEN, "");
 
                 JsonObjectRequest request = WebRequest.callPostMethod(mContext, jsonObject, Request.Method.GET,
-                        ApiConstants.GET_RUNNING_EXAM_LIST_URL+page+"/", ApiConstants.GET_RUNNING_EXAM_LIST, this, "");
-                App.getInstance().addToRequestQueue(request, ApiConstants.GET_RUNNING_EXAM_LIST);
+                        ApiConstants.GET_MY_COMING_EXAM_URL+page+"/", ApiConstants.GET_MY_COMING_EXAM, this, token);
+                App.getInstance().addToRequestQueue(request, ApiConstants.GET_MY_COMING_EXAM);
 
             }
             catch (Exception e)
@@ -182,7 +179,7 @@ public class MyComingSoonFragment extends ParentFragment implements ApiServiceCa
     {
         switch (label)
         {
-            case ApiConstants.GET_RUNNING_EXAM_LIST:
+            case ApiConstants.GET_MY_COMING_EXAM:
             {
                 if (jsonResponse != null)
                 {
@@ -192,8 +189,9 @@ public class MyComingSoonFragment extends ParentFragment implements ApiServiceCa
                         {
                             dismissLoadingDialog();
                             ArrayList<RunningNowModel> runningNowModels = new ArrayList<>();
-                            runningNowModels.addAll(jsonResponse.examdata.getRunningExamList());
-                            MyRunningExamAdapter runningNowAdapter = new MyRunningExamAdapter(mContext, runningNowModels, "");
+                            runningNowModels.addAll(jsonResponse.myexamcomingorder.getMyComingExam());
+                            MyRunningExamAdapter runningNowAdapter = new MyRunningExamAdapter(mContext, runningNowModels,
+                                    getString(R.string.coming));
                             recyclerComingSoon.setAdapter(runningNowAdapter);
                         }
                         catch (Exception e)
@@ -213,7 +211,7 @@ public class MyComingSoonFragment extends ParentFragment implements ApiServiceCa
         dismissLoadingDialog();
         switch (label)
         {
-            case ApiConstants.GET_RUNNING_EXAM_LIST:
+            case ApiConstants.GET_MY_COMING_EXAM:
             {
                 Toast.makeText(mContext, AppConstants.API_FAIL_MESSAGE, Toast.LENGTH_SHORT).show();
             }
@@ -227,7 +225,7 @@ public class MyComingSoonFragment extends ParentFragment implements ApiServiceCa
         dismissLoadingDialog();
         switch (label)
         {
-            case ApiConstants.GET_RUNNING_EXAM_LIST:
+            case ApiConstants.GET_MY_COMING_EXAM:
             {
                 Toast.makeText(mContext, AppConstants.API_FAIL_MESSAGE, Toast.LENGTH_SHORT).show();
             }

@@ -15,11 +15,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.examapplication.R;
 import com.examapplication.interfaces.ApiServiceCaller;
 import com.examapplication.models.RunningNowModel;
-import com.examapplication.models.SubmittedExamModel;
-import com.examapplication.ui.adapters.MyRunningExamAdapter;
-import com.examapplication.ui.adapters.SubmittedExamAdapter;
+import com.examapplication.ui.adapters.MySubmittedExamAdapter;
 import com.examapplication.utility.App;
 import com.examapplication.utility.AppConstants;
+import com.examapplication.utility.AppPreferences;
 import com.examapplication.utility.CommonUtility;
 import com.examapplication.webservices.ApiConstants;
 import com.examapplication.webservices.JsonResponse;
@@ -40,7 +39,6 @@ public class MySubmittedExam extends ParentActivity implements ApiServiceCaller,
     private TextView txtTitle;
     private ImageView imgBack;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -50,10 +48,6 @@ public class MySubmittedExam extends ParentActivity implements ApiServiceCaller,
         recyclerComingSoon = (RecyclerView)findViewById(R.id.recycler_my_submitted_exam);
         layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerComingSoon.setLayoutManager(layoutManager);
-        ArrayList<SubmittedExamModel> submittedExamModels = new ArrayList<>();
-        SubmittedExamAdapter submittedExamAdapter = new SubmittedExamAdapter(mContext,
-                submittedExamModels, "");
-        recyclerComingSoon.setAdapter(submittedExamAdapter);
 
         txtTitle = (TextView)findViewById(R.id.txt_name);
         txtTitle.setText(getString(R.string.my_submitted_exam));
@@ -79,16 +73,12 @@ public class MySubmittedExam extends ParentActivity implements ApiServiceCaller,
             {
                 showLoadingDialog();
                 JSONObject jsonObject = new JSONObject();
-                /*JSONArray arraySortBy = new JSONArray(sort);
-                JSONArray arrayCategories = new JSONArray(stream);
-                JSONArray arrayFaculties = new JSONArray(faculty);
-                jsonObject.put("categories", arrayCategories);
-                jsonObject.put("faculties", arrayFaculties);
-                jsonObject.put("sortedby", arraySortBy);*/
+                String token = AppPreferences.getInstance(mContext).getString(AppConstants.TOKEN, "");
 
                 JsonObjectRequest request = WebRequest.callPostMethod(mContext, jsonObject, Request.Method.GET,
-                        ApiConstants.GET_RUNNING_EXAM_LIST_URL+page+"/", ApiConstants.GET_RUNNING_EXAM_LIST, this, "");
-                App.getInstance().addToRequestQueue(request, ApiConstants.GET_RUNNING_EXAM_LIST);
+                        ApiConstants.GET_MY_SUBMITTED_EXAM_STUDENT_URL +page+"/",
+                        ApiConstants.GET_MY_SUBMITTED_EXAM_STUDENT, this, token);
+                App.getInstance().addToRequestQueue(request, ApiConstants.GET_MY_SUBMITTED_EXAM_STUDENT);
 
             }
             catch (Exception e)
@@ -107,7 +97,7 @@ public class MySubmittedExam extends ParentActivity implements ApiServiceCaller,
     {
         switch (label)
         {
-            case ApiConstants.GET_RUNNING_EXAM_LIST:
+            case ApiConstants.GET_MY_SUBMITTED_EXAM_STUDENT:
             {
                 if (jsonResponse != null)
                 {
@@ -116,11 +106,11 @@ public class MySubmittedExam extends ParentActivity implements ApiServiceCaller,
                         try
                         {
                             dismissLoadingDialog();
-                            ArrayList<SubmittedExamModel> submittedExamModels = new ArrayList<>();
-//                            runningNowModels.addAll(jsonResponse.examdata.getRunningExamList());
-                            SubmittedExamAdapter submittedExamAdapter = new SubmittedExamAdapter(mContext,
-                                    submittedExamModels, "");
-                            recyclerComingSoon.setAdapter(submittedExamAdapter);
+                            ArrayList<RunningNowModel> runningNowModels = new ArrayList<>();
+                            runningNowModels.addAll(jsonResponse.submitteddata.getMySubmittedExam());
+                            MySubmittedExamAdapter mySubmittedExamAdapter = new MySubmittedExamAdapter(mContext,
+                                    runningNowModels, getString(R.string.student));
+                            recyclerComingSoon.setAdapter(mySubmittedExamAdapter);
                         }
                         catch (Exception e)
                         {
@@ -139,7 +129,7 @@ public class MySubmittedExam extends ParentActivity implements ApiServiceCaller,
         dismissLoadingDialog();
         switch (label)
         {
-            case ApiConstants.GET_RUNNING_EXAM_LIST:
+            case ApiConstants.GET_MY_SUBMITTED_EXAM_STUDENT:
             {
                 Toast.makeText(mContext, AppConstants.API_FAIL_MESSAGE, Toast.LENGTH_SHORT).show();
             }
@@ -153,7 +143,7 @@ public class MySubmittedExam extends ParentActivity implements ApiServiceCaller,
         dismissLoadingDialog();
         switch (label)
         {
-            case ApiConstants.GET_RUNNING_EXAM_LIST:
+            case ApiConstants.GET_MY_SUBMITTED_EXAM_STUDENT:
             {
                 Toast.makeText(mContext, AppConstants.API_FAIL_MESSAGE, Toast.LENGTH_SHORT).show();
             }

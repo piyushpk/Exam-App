@@ -39,6 +39,13 @@ public class AppConstants
     public static String INTERNET_FAILED = "Please check your internet connection";
     public static String CHECK_PLAY_SERVICES = "Update Play Services";
     public static String API_FAIL_MESSAGE = "Something went wrong";
+    public static String USER_NAME = "user_name";
+    public static String USER_MOBILE = "user_mobile";
+    public static String USER_STATE = "user_state";
+    public static String USER_CITY = "user_city";
+    public static String USER_ADDRESS = "user_address";
+    public static String USER_EMAIL = "user_email";
+    public static String TOKEN = "token";
 
     //Constant Bundle values
 

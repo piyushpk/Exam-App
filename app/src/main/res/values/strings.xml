@@ -43,6 +43,7 @@
     <string name="student">Student</string>
     <string name="faculty">Faculty</string>
     <string name="login">Login</string>
+    <string name="logout">Logout</string>
     <string name="user_name">User Name</string>
     <string name="password">Password</string>
 
@@ -75,6 +76,8 @@
     <string name="add_questions">Add Questions</string>
     <string name="add">Add</string>
     <string name="action">Action</string>
+    <string name="submitted_date">Submitted Date</string>
+    <string name="end_date_card">End Date </string>
 
     <string name="upload">Upload</string>
 
@@ -98,9 +101,14 @@
     <string name="my_profile">My Profile</string>
     <string name="my_exams">My Exams</string>
     <string name="my_submitted_exam">Submitted Exam</string>
+    <string name="start_exam">Start Exam</string>
+    <string name="running">Running</string>
+    <string name="coming">Coming</string>
+    <string name="notifications">Notifications</string>
 
 
     <!--Api related strings-->
+    <string name="to_use_this_login_first">To use this please Login</string>
     <string name="internet_failed">Please check your internet connection</string>
     <string name="please_add_user_name">User Name field should not be empty</string>
     <string name="please_add_password">Password field should not be empty</string>

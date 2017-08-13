@@ -19,8 +19,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.examapplication.R;
 import com.examapplication.interfaces.ApiServiceCaller;
 import com.examapplication.models.CategoryListModel;
+import com.examapplication.models.UserModel;
 import com.examapplication.utility.App;
 import com.examapplication.utility.AppConstants;
+import com.examapplication.utility.AppPreferences;
 import com.examapplication.utility.CommonUtility;
 import com.examapplication.webservices.ApiConstants;
 import com.examapplication.webservices.JsonResponse;
@@ -42,7 +44,6 @@ public class LoginActivity extends ParentActivity implements View.OnClickListene
 
     private String btnName = "", userName = "", password = "";
     private Intent intent;
-    private ArrayList<CategoryListModel> categoryListModels = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -83,7 +84,7 @@ public class LoginActivity extends ParentActivity implements View.OnClickListene
 
         if(v == btnLogin)
         {
-            /*userName = edtUserName.getText().toString().trim();
+            userName = edtUserName.getText().toString().trim();
             password = edtPassword.getText().toString().trim();
 
             if(userName.isEmpty() || userName.equals(null) || userName.equals(""))
@@ -100,9 +101,9 @@ public class LoginActivity extends ParentActivity implements View.OnClickListene
                 {
                     callApiLogin(btnName);
                 }
-            }*/
+            }
 
-            if(btnName.equals(getString(R.string.student)))
+            /*if(btnName.equals(getString(R.string.student)))
             {
                 intent = new Intent(this, LandingStudentActivity.class);
             }
@@ -110,7 +111,7 @@ public class LoginActivity extends ParentActivity implements View.OnClickListene
             {
                 intent = new Intent(this, LandingFacultyActivity.class);
             }
-            startActivity(intent);
+            startActivity(intent);*/
         }
 
         if(v == txtSignUp)
@@ -127,8 +128,8 @@ public class LoginActivity extends ParentActivity implements View.OnClickListene
             try
             {
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("username", userName);
-                jsonObject.put("password", password);
+                jsonObject.put("username", "priyanka@bynry.com");
+                jsonObject.put("password", "admin");
                 jsonObject.put("type", type);
 
                 JsonObjectRequest request = WebRequest.callPostMethod(mContext, jsonObject, Request.Method.POST,
@@ -163,12 +164,28 @@ public class LoginActivity extends ParentActivity implements View.OnClickListene
                             if(btnName.equals(getString(R.string.student)))
                             {
                                 intent = new Intent(this, LandingStudentActivity.class);
+                                AppPreferences.getInstance(mContext).putString(AppConstants.USER_NAME,
+                                        jsonResponse.responsedata.getUserName());
+                                AppPreferences.getInstance(mContext).putString(AppConstants.USER_EMAIL,
+                                        jsonResponse.responsedata.getEmailId());
+                                AppPreferences.getInstance(mContext).putString(AppConstants.USER_MOBILE,
+                                        jsonResponse.responsedata.getMobileNo());
+                                AppPreferences.getInstance(mContext).putString(AppConstants.USER_ADDRESS,
+                                        jsonResponse.responsedata.getAddress());
+                                AppPreferences.getInstance(mContext).putString(AppConstants.USER_STATE,
+                                        jsonResponse.responsedata.getState());
+                                AppPreferences.getInstance(mContext).putString(AppConstants.USER_CITY,
+                                        jsonResponse.responsedata.getCity());
+                                AppPreferences.getInstance(mContext).putString(AppConstants.TOKEN,
+                                        jsonResponse.responsedata.getAuthorizationToken());
                             }
                             else
                             {
                                 intent = new Intent(this, LandingFacultyActivity.class);
                             }
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                             startActivity(intent);
+                            finish();
                         }
                         catch (Exception e)
                         {

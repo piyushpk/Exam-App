@@ -1,5 +1,6 @@
 package com.examapplication.ui.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,17 +14,20 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.examapplication.R;
 import com.examapplication.ui.fragments.ComingSoonFragment;
 import com.examapplication.ui.fragments.RunningNowFragment;
 import com.examapplication.utility.AppConstants;
+import com.examapplication.utility.AppPreferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +36,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class LandingStudentActivity extends ParentActivity implements NavigationView.OnNavigationItemSelectedListener
 {
+    private Context mContext;
     private Toolbar toolbar;
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -45,13 +50,15 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
 
     private TextView txtFullName, txtEmail;
     private CircleImageView imgProfile;
+    private String userName = "", userEmail = "", userMobileNo = "";
+    private boolean isLogin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_student);
-
+        mContext = this;
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -80,8 +87,6 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
                 mainView.setTranslationX(slideOffset * drawerView.getWidth());
                 mDrawerLayout.bringChildToFront(drawerView);
                 mDrawerLayout.requestLayout();
-
-
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
@@ -91,11 +96,31 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
         View header = navigationView.getHeaderView(0);
         navigationView.setNavigationItemSelectedListener(this);
 
+        userName = AppPreferences.getInstance(mContext).getString(AppConstants.USER_NAME, "");
+        userMobileNo = AppPreferences.getInstance(mContext).getString(AppConstants.USER_MOBILE, "");
+        userEmail = AppPreferences.getInstance(mContext).getString(AppConstants.USER_EMAIL, "");
+
+        if(userName.equals(""))
+            isLogin = false;
+        else
+            isLogin = true;
+
         txtFullName = (TextView)header.findViewById(R.id.txt_full_name);
-        txtFullName.setText("Piyush Kalmegh");
+        txtFullName.setText(userName);
         txtEmail = (TextView)header.findViewById(R.id.txt_email);
-        txtEmail.setText("p.kalmegh1@gmail.com");
+        txtEmail.setText(userEmail);
         imgProfile = (CircleImageView)header.findViewById(R.id.img_profile);
+
+        // get menu from navigationView
+        Menu menu = navigationView.getMenu();
+
+        MenuItem nav_logout = menu.findItem(R.id.nav_logout);
+
+        // set new title to the MenuItem
+        if(isLogin)
+            nav_logout.setTitle(getString(R.string.logout));
+        else
+            nav_logout.setTitle(getString(R.string.login));
 
         visibleFragment = getString(R.string.running_now);
 
@@ -169,8 +194,8 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
         int id = item.getItemId();
         if (id == R.id.action_notification)
         {
-            /*Intent intent = new Intent(this, CreateExamActivity.class);
-            startActivity(intent);*/
+            intent = new Intent(this, NotificationActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -213,20 +238,39 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
 
         if(id == R.id.nav_profile)
         {
-            intent = new Intent(this, EditProfileActivity.class);
-            startActivity(intent);
-            item.setChecked(false);
+            if(isLogin)
+            {
+                intent = new Intent(this, EditProfileActivity.class);
+                startActivity(intent);
+            }
+            else
+            {
+                Toast.makeText(mContext, getString(R.string.to_use_this_login_first), Toast.LENGTH_SHORT).show();
+            }
         }
         else if(id == R.id.nav_my_exam)
         {
-            intent = new Intent(this, MyExamActivity.class);
-            startActivity(intent);
-            item.setChecked(false);
+            if(isLogin)
+            {
+                intent = new Intent(this, MyExamActivity.class);
+                startActivity(intent);
+            }
+            else
+            {
+                Toast.makeText(mContext, getString(R.string.to_use_this_login_first), Toast.LENGTH_SHORT).show();
+            }
         }
         else if(id == R.id.nav_my_submitted_exam)
         {
-            intent = new Intent(this, MySubmittedExam.class);
-            startActivity(intent);
+            if(isLogin)
+            {
+                intent = new Intent(this, MySubmittedExam.class);
+                startActivity(intent);
+            }
+            else
+            {
+                Toast.makeText(mContext, getString(R.string.to_use_this_login_first), Toast.LENGTH_SHORT).show();
+            }
         }
         else if(id == R.id.nav_share)
         {
@@ -244,7 +288,25 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
         }
         else if(id == R.id.nav_logout)
         {
-
+            if(isLogin)
+            {
+                AppPreferences.getInstance(mContext).putString(AppConstants.USER_NAME, "");
+                AppPreferences.getInstance(mContext).putString(AppConstants.USER_EMAIL, "");
+                AppPreferences.getInstance(mContext).putString(AppConstants.USER_MOBILE, "");
+                AppPreferences.getInstance(mContext).putString(AppConstants.USER_ADDRESS, "");
+                AppPreferences.getInstance(mContext).putString(AppConstants.USER_STATE, "");
+                AppPreferences.getInstance(mContext).putString(AppConstants.USER_CITY, "");
+                AppPreferences.getInstance(mContext).putString(AppConstants.TOKEN, "");
+                intent = new Intent(this, SendToLoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            else
+            {
+                intent = new Intent(this, SendToLoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

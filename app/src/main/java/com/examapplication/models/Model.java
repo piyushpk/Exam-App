@@ -23,6 +23,18 @@ public class Model implements Serializable
     @SerializedName("coming_exam")
     ArrayList<RunningNowModel> comingExamList;
 
+    @SerializedName("order_exam")
+    ArrayList<RunningNowModel> myRunningExam;
+
+    @SerializedName("order_comming_exam")
+    ArrayList<RunningNowModel> myComingExam;
+
+    @SerializedName("submitted_exam")
+    ArrayList<RunningNowModel> mySubmittedExam;
+
+    @SerializedName("submitted_page")
+    String submittedPageNo;
+
 
     public String getPageNo() {
         return pageNo;
@@ -54,5 +66,37 @@ public class Model implements Serializable
 
     public void setComingExamList(ArrayList<RunningNowModel> comingExamList) {
         this.comingExamList = comingExamList;
+    }
+
+    public ArrayList<RunningNowModel> getMyRunningExam() {
+        return myRunningExam;
+    }
+
+    public void setMyRunningExam(ArrayList<RunningNowModel> myRunningExam) {
+        this.myRunningExam = myRunningExam;
+    }
+
+    public ArrayList<RunningNowModel> getMyComingExam() {
+        return myComingExam;
+    }
+
+    public void setMyComingExam(ArrayList<RunningNowModel> myComingExam) {
+        this.myComingExam = myComingExam;
+    }
+
+    public ArrayList<RunningNowModel> getMySubmittedExam() {
+        return mySubmittedExam;
+    }
+
+    public void setMySubmittedExam(ArrayList<RunningNowModel> mySubmittedExam) {
+        this.mySubmittedExam = mySubmittedExam;
+    }
+
+    public String getSubmittedPageNo() {
+        return submittedPageNo;
+    }
+
+    public void setSubmittedPageNo(String submittedPageNo) {
+        this.submittedPageNo = submittedPageNo;
     }
 }

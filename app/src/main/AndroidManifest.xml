@@ -51,6 +51,8 @@
         </activity>
         <activity android:name=".ui.activities.MySubmittedExam">
         </activity>
+        <activity android:name=".ui.activities.NotificationActivity">
+        </activity>
     </application>
 
 </manifest>

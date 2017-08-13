@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +18,12 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.examapplication.R;
 import com.examapplication.interfaces.ApiServiceCaller;
 import com.examapplication.models.RunningNowModel;
+import com.examapplication.models.UserModel;
 import com.examapplication.ui.adapters.MyRunningExamAdapter;
 import com.examapplication.ui.adapters.RunningNowAdapter;
 import com.examapplication.utility.App;
 import com.examapplication.utility.AppConstants;
+import com.examapplication.utility.AppPreferences;
 import com.examapplication.utility.CommonUtility;
 import com.examapplication.webservices.ApiConstants;
 import com.examapplication.webservices.JsonResponse;
@@ -99,9 +102,6 @@ public class MyRunningExamFragment extends ParentFragment implements ApiServiceC
         recyclerComingSoon = (RecyclerView)rootView.findViewById(R.id.recycler_my_running_exam);
         layoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerComingSoon.setLayoutManager(layoutManager);
-        ArrayList<RunningNowModel> runningNowModels = new ArrayList<>();
-        MyRunningExamAdapter runningNowAdapter = new MyRunningExamAdapter(mContext, runningNowModels, "");
-        recyclerComingSoon.setAdapter(runningNowAdapter);
 
         return rootView;
     }
@@ -157,16 +157,11 @@ public class MyRunningExamFragment extends ParentFragment implements ApiServiceC
             {
                 showLoadingDialog(mContext);
                 JSONObject jsonObject = new JSONObject();
-                /*JSONArray arraySortBy = new JSONArray(sort);
-                JSONArray arrayCategories = new JSONArray(stream);
-                JSONArray arrayFaculties = new JSONArray(faculty);
-                jsonObject.put("categories", arrayCategories);
-                jsonObject.put("faculties", arrayFaculties);
-                jsonObject.put("sortedby", arraySortBy);*/
+                String token = AppPreferences.getInstance(mContext).getString(AppConstants.TOKEN, "");
 
                 JsonObjectRequest request = WebRequest.callPostMethod(mContext, jsonObject, Request.Method.GET,
-                        ApiConstants.GET_RUNNING_EXAM_LIST_URL+page+"/", ApiConstants.GET_RUNNING_EXAM_LIST, this, "");
-                App.getInstance().addToRequestQueue(request, ApiConstants.GET_RUNNING_EXAM_LIST);
+                        ApiConstants.GET_MY_RUNNING_EXAM_URL+page+"/", ApiConstants.GET_MY_RUNNING_EXAM, this, token);
+                App.getInstance().addToRequestQueue(request, ApiConstants.GET_MY_RUNNING_EXAM);
 
             }
             catch (Exception e)
@@ -185,7 +180,7 @@ public class MyRunningExamFragment extends ParentFragment implements ApiServiceC
     {
         switch (label)
         {
-            case ApiConstants.GET_RUNNING_EXAM_LIST:
+            case ApiConstants.GET_MY_RUNNING_EXAM:
             {
                 if (jsonResponse != null)
                 {
@@ -195,8 +190,9 @@ public class MyRunningExamFragment extends ParentFragment implements ApiServiceC
                         {
                             dismissLoadingDialog();
                             ArrayList<RunningNowModel> runningNowModels = new ArrayList<>();
-                            runningNowModels.addAll(jsonResponse.examdata.getRunningExamList());
-                            MyRunningExamAdapter runningNowAdapter = new MyRunningExamAdapter(mContext, runningNowModels, "");
+                            runningNowModels.addAll(jsonResponse.myexamorder.getMyRunningExam());
+                            MyRunningExamAdapter runningNowAdapter = new MyRunningExamAdapter(mContext, runningNowModels,
+                                    getString(R.string.running));
                             recyclerComingSoon.setAdapter(runningNowAdapter);
                         }
                         catch (Exception e)
@@ -216,7 +212,7 @@ public class MyRunningExamFragment extends ParentFragment implements ApiServiceC
         dismissLoadingDialog();
         switch (label)
         {
-            case ApiConstants.GET_RUNNING_EXAM_LIST:
+            case ApiConstants.GET_MY_RUNNING_EXAM:
             {
                 Toast.makeText(mContext, AppConstants.API_FAIL_MESSAGE, Toast.LENGTH_SHORT).show();
             }
@@ -230,7 +226,7 @@ public class MyRunningExamFragment extends ParentFragment implements ApiServiceC
         dismissLoadingDialog();
         switch (label)
         {
-            case ApiConstants.GET_RUNNING_EXAM_LIST:
+            case ApiConstants.GET_MY_RUNNING_EXAM:
             {
                 Toast.makeText(mContext, AppConstants.API_FAIL_MESSAGE, Toast.LENGTH_SHORT).show();
             }

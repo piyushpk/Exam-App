@@ -11,12 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.examapplication.R;
-import com.examapplication.models.AddedExamModel;
-import com.examapplication.models.SubmittedExamModel;
-import com.examapplication.ui.adapters.AddedExamAdapter;
-import com.examapplication.ui.adapters.SubmittedExamAdapter;
-
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,8 +34,6 @@ public class SubmittedExamFragment extends Fragment {
     private RecyclerView recyclerSubmittedExam;
     private Context mContext;
     private LinearLayoutManager layoutManager;
-    private SubmittedExamAdapter submittedExamAdapter;
-    private SubmittedExamModel submittedExamModel;
 
     public SubmittedExamFragment() {
         // Required empty public constructor
@@ -84,10 +76,6 @@ public class SubmittedExamFragment extends Fragment {
         recyclerSubmittedExam = (RecyclerView)rootView.findViewById(R.id.recycler_submitted_exam);
         layoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerSubmittedExam.setLayoutManager(layoutManager);
-        ArrayList<SubmittedExamModel> addedExamModels = new ArrayList<>();
-        submittedExamModel = new SubmittedExamModel();
-        submittedExamAdapter = new SubmittedExamAdapter(mContext, addedExamModels, "");
-        recyclerSubmittedExam.setAdapter(submittedExamAdapter);
 
         return rootView;
     }

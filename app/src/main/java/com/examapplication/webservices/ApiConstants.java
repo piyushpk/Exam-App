@@ -4,7 +4,9 @@ package com.examapplication.webservices;
 public class ApiConstants
 {
 
-    public static final String DOMAIN_URL = "http://192.168.1.13:8987"; //  UAT
+    public static final String DOMAIN_URL = "http://192.168.1.13:8987"; //  Mayur
+
+//    public static final String DOMAIN_URL = "http://192.168.1.47:9999"; //  Sirji
 
 
     public static final String BASE_URL = DOMAIN_URL+"/api/";
@@ -21,6 +23,9 @@ public class ApiConstants
     public static final String GET_RUNNING_EXAM_LIST_URL = BASE_URL + "exams/";
     public static final String GET_COMING_EXAM_LIST_URL = BASE_URL + "coming-soon-exam/";
     public static final String GET_FACULTY_URL = BASE_URL + "faculties/";
+    public static final String GET_MY_SUBMITTED_EXAM_STUDENT_URL = BASE_URL + "my-submitted-exam/";
+    public static final String GET_MY_RUNNING_EXAM_URL = BASE_URL + "my-running-exam/";
+    public static final String GET_MY_COMING_EXAM_URL = BASE_URL + "my-comingsoon-exam/";
 
 
 
@@ -30,6 +35,9 @@ public class ApiConstants
     public static final String GET_RUNNING_EXAM_LIST = "3";
     public static final String GET_COMING_EXAM_LIST = "4";
     public static final String GET_FACULTY = "5";
+    public static final String GET_MY_SUBMITTED_EXAM_STUDENT = "6";
+    public static final String GET_MY_RUNNING_EXAM = "7";
+    public static final String GET_MY_COMING_EXAM = "8";
 
 
 
