@@ -28,157 +28,189 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_below="@+id/toolbar">
+        android:text="@string/sign_up"
+        android:textSize="@dimen/text_xx_large"
+        android:textColor="@color/colorWhite"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_marginBottom="30dp"
+        android:layout_below="@+id/toolbar"/>
 
-        <TextView
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/heading"
+        android:layout_marginBottom="60dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sign_up"
-            android:textSize="@dimen/text_xx_large"
-            android:textColor="@color/colorWhite"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:layout_marginBottom="50dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@color/colorSignUpImageView">
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
 
-                <ImageView
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_action_default_user"
-                    android:padding="8dp"
-                    android:layout_gravity="center"/>
+                    android:layout_height="match_parent"
+                    android:background="@color/colorSignUpImageView">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_action_default_user"
+                        android:padding="8dp"
+                        android:layout_gravity="center"
+                        android:background="@color/colorSignUpImageView"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:background="@color/colorBlack"
+                    android:layout_gravity="center">
+
+                    <EditText
+                        android:id="@+id/edt_first_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorSignUpEditText"
+                        android:textColor="@color/colorWhite"
+                        android:hint="@string/first_name"
+                        android:paddingLeft="5dp"
+                        android:textColorHint="@color/colorWhite"
+                        android:textSize="@dimen/text_size_h3"
+                        android:layout_weight="1"
+                        android:layout_marginRight="2dp"/>
+
+                    <EditText
+                        android:id="@+id/edt_last_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorSignUpEditText"
+                        android:textColor="@color/colorWhite"
+                        android:hint="@string/last_name"
+                        android:paddingLeft="5dp"
+                        android:textColorHint="@color/colorWhite"
+                        android:textSize="@dimen/text_size_h3"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="0dp"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/edt_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorSignUpEditText"
-                android:textColor="@color/colorWhite"
-                android:hint="@string/name"
-                android:paddingLeft="10dp"
-                android:textColorHint="@color/colorWhite"
-                android:textSize="@dimen/text_size_h3"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp">
-
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@color/colorSignUpImageView">
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp">
 
-                <ImageView
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_action_email"
-                    android:padding="8dp"
-                    android:layout_gravity="center"/>
+                    android:layout_height="match_parent"
+                    android:background="@color/colorSignUpImageView">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:src="@drawable/ic_action_location"
+                        android:padding="8dp"
+                        android:layout_gravity="center"/>
+
+                </LinearLayout>
+
+                <Spinner
+                    android:id="@+id/spinner_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@color/colorSignUpEditText"
+                    android:spinnerMode="dropdown"/>
 
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/edt_email"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorSignUpEditText"
-                android:textColor="@color/colorWhite"
-                android:hint="@string/email"
-                android:paddingLeft="10dp"
-                android:textColorHint="@color/colorWhite"
-                android:textSize="@dimen/text_size_h3"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp">
-
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@color/colorSignUpImageView">
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp">
 
-                <ImageView
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_action_phone"
-                    android:padding="8dp"
-                    android:layout_gravity="center"/>
+                    android:layout_height="match_parent"
+                    android:background="@color/colorSignUpImageView">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_action_email"
+                        android:padding="8dp"
+                        android:layout_gravity="center"/>
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/edt_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorSignUpEditText"
+                    android:textColor="@color/colorWhite"
+                    android:hint="@string/email"
+                    android:paddingLeft="10dp"
+                    android:textColorHint="@color/colorWhite"
+                    android:textSize="@dimen/text_size_h3"/>
 
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/edt_phone_no"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorSignUpEditText"
-                android:textColor="@color/colorWhite"
-                android:hint="@string/phone_no"
-                android:paddingLeft="10dp"
-                android:textColorHint="@color/colorWhite"
-                android:textSize="@dimen/text_size_h3"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp">
-
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@color/colorSignUpImageView">
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp">
 
-                <ImageView
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:src="@drawable/ic_action_location"
-                    android:padding="8dp"
-                    android:layout_gravity="center"/>
+                    android:layout_height="match_parent"
+                    android:background="@color/colorSignUpImageView">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_action_phone"
+                        android:padding="8dp"
+                        android:layout_gravity="center"/>
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/edt_phone_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorSignUpEditText"
+                    android:textColor="@color/colorWhite"
+                    android:hint="@string/phone_no"
+                    android:paddingLeft="10dp"
+                    android:textColorHint="@color/colorWhite"
+                    android:textSize="@dimen/text_size_h3"/>
 
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/edt_address"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorSignUpEditText"
-                android:textColor="@color/colorWhite"
-                android:hint="@string/address"
-                android:paddingLeft="10dp"
-                android:textColorHint="@color/colorWhite"
-                android:textSize="@dimen/text_size_h3"/>
-
         </LinearLayout>
 
-    </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 
     <TextView
         android:id="@+id/txt_continue"

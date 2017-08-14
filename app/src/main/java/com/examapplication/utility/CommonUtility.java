@@ -2,14 +2,22 @@ package com.examapplication.utility;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.examapplication.R;
 
 import java.util.ArrayList;
 
@@ -19,6 +27,7 @@ public class CommonUtility
 
     private static CommonUtility nUtilHelper;
     private static Context mContext;
+    public static ProgressDialog pDialog;
 
     public static float density = 1;
 
@@ -69,17 +78,17 @@ public class CommonUtility
 
 
     public static int getColor(Context context, int id)
-{
-    final int version = Build.VERSION.SDK_INT;
-    if (version >= 23)
     {
-        return ContextCompat.getColor(context, id);
+        final int version = Build.VERSION.SDK_INT;
+        if (version >= 23)
+        {
+            return ContextCompat.getColor(context, id);
+        }
+        else
+        {
+            return context.getResources().getColor(id);
+        }
     }
-    else
-    {
-        return context.getResources().getColor(id);
-    }
-}
 
     @TargetApi(Build.VERSION_CODES.M)
     public static void askForPermissions(final Context context, ArrayList<String> permissions) {
@@ -227,5 +236,30 @@ public class CommonUtility
     public static int dp(float value) {
         return (int)Math.ceil(density * value);
     }
+
+    /*public static void customToast(Activity activity, String message)
+    {
+        LayoutInflater li = activity.getLayoutInflater();
+        View layout = li.inflate(R.layout.toast_layout,
+                (ViewGroup) activity.findViewById(R.id.custom_toast_layout));
+        TextView tv_toastmsg = (TextView) layout.findViewById(R.id.txt_toastmsg);
+        tv_toastmsg.setText(message);
+        Toast toast = new Toast(activity);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.TOP, 0, 70);
+        toast.setView(layout);//setting the view of custom toast layout
+        toast.show();
+    }
+
+
+    public static ProgressDialog showProgressDialog(Context context, String message){
+        ProgressDialog pDialog = new ProgressDialog(context);
+        pDialog.setMessage(message);
+        pDialog.setProgressStyle(R.style.ProgressBar);
+        pDialog.setCancelable(false);
+        pDialog.show();
+        return pDialog;
+    }*/
+
 
 }

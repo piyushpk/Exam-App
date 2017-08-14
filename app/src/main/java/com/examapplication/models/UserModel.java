@@ -10,8 +10,14 @@ import java.io.Serializable;
  */
 public class UserModel implements Serializable
 {
-    @SerializedName("username")
-    String userName;
+    @SerializedName("first_name")
+    String userFirstName;
+
+    @SerializedName("last_name")
+    String userLastName;
+
+    @SerializedName("user_image")
+    String userImage;
 
     @SerializedName("city")
     String city;
@@ -34,12 +40,28 @@ public class UserModel implements Serializable
     @SerializedName("authorization")
     String authorizationToken;
 
-    public String getUserName() {
-        return userName;
+    public String getUserFirstName() {
+        return userFirstName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserFirstName(String userFirstName) {
+        this.userFirstName = userFirstName;
+    }
+
+    public String getUserLastName() {
+        return userLastName;
+    }
+
+    public void setUserLastName(String userLastName) {
+        this.userLastName = userLastName;
+    }
+
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
     }
 
     public String getCity() {

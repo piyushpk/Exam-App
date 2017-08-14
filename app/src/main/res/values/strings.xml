@@ -32,7 +32,8 @@
     <string name="instruction">Instructions:</string>
 
     <string name="sign_up">Sign Up</string>
-    <string name="name">Name</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
     <string name="email">Email</string>
     <string name="phone_no">Phone No.</string>
     <string name="address">Address</string>
@@ -105,6 +106,7 @@
     <string name="running">Running</string>
     <string name="coming">Coming</string>
     <string name="notifications">Notifications</string>
+    <string name="hello_guest">Hello Guest</string>
 
 
     <!--Api related strings-->

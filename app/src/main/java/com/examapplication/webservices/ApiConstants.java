@@ -26,6 +26,7 @@ public class ApiConstants
     public static final String GET_MY_SUBMITTED_EXAM_STUDENT_URL = BASE_URL + "my-submitted-exam/";
     public static final String GET_MY_RUNNING_EXAM_URL = BASE_URL + "my-running-exam/";
     public static final String GET_MY_COMING_EXAM_URL = BASE_URL + "my-comingsoon-exam/";
+    public static final String GET_CITY_LIST_URL = BASE_URL + "get-city/";
 
 
 
@@ -38,6 +39,7 @@ public class ApiConstants
     public static final String GET_MY_SUBMITTED_EXAM_STUDENT = "6";
     public static final String GET_MY_RUNNING_EXAM = "7";
     public static final String GET_MY_COMING_EXAM = "8";
+    public static final String GET_CITY_LIST = "9";
 
 
 

@@ -28,6 +28,7 @@ public class JsonResponse
     public Model myexamorder;
     public Model myexamcomingorder;
     public Model submitteddata;
+    public ArrayList<CategoryListModel> city;
 
     //List of String
 

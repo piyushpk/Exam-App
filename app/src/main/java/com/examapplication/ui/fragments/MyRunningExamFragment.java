@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +17,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.examapplication.R;
 import com.examapplication.interfaces.ApiServiceCaller;
 import com.examapplication.models.RunningNowModel;
-import com.examapplication.models.UserModel;
 import com.examapplication.ui.adapters.MyRunningExamAdapter;
-import com.examapplication.ui.adapters.RunningNowAdapter;
 import com.examapplication.utility.App;
 import com.examapplication.utility.AppConstants;
 import com.examapplication.utility.AppPreferences;
@@ -29,11 +26,9 @@ import com.examapplication.webservices.ApiConstants;
 import com.examapplication.webservices.JsonResponse;
 import com.examapplication.webservices.WebRequest;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.

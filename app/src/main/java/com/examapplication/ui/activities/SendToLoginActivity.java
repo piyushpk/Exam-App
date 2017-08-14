@@ -1,5 +1,6 @@
 package com.examapplication.ui.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -40,7 +41,8 @@ import java.util.HashMap;
 public class SendToLoginActivity extends ParentActivity implements View.OnClickListener, ApiServiceCaller, FilterInterface
 {
 
-    private static Context mContext;
+    private Context mContext;
+    public static Activity activityContext;
     private RelativeLayout relativeMain;
     private TextView txtContinue;
     private ImageView imgLogo;
@@ -62,6 +64,13 @@ public class SendToLoginActivity extends ParentActivity implements View.OnClickL
         setContentView(R.layout.activity_send_to_login);
 
         mContext = this;
+        activityContext = this;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+        {
+            CommonUtility.askForPermissions(mContext, App.getInstance().permissions);
+        }
+
         relativeMain = (RelativeLayout)findViewById(R.id.relative_main);
         imgLogo = (ImageView)findViewById(R.id.img_logo);
         txtContinue = (TextView)findViewById(R.id.txt_continue);
@@ -72,12 +81,7 @@ public class SendToLoginActivity extends ParentActivity implements View.OnClickL
         btnStudent = (Button)findViewById(R.id.btn_student);
         btnStudent.setOnClickListener(this);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        {
-            CommonUtility.askForPermissions(this, App.getInstance().permissions);
-        }
-
-        getCategoryList();
+//        getCategoryList();
 
         recyclerCategoryList = (RecyclerView)findViewById(R.id.recycler_category_list);
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, 1);
@@ -217,8 +221,8 @@ public class SendToLoginActivity extends ParentActivity implements View.OnClickL
 
     }
 
-    public void finishThis()
+    public static void finishThis(Activity activityContext)
     {
-        finish();
+        activityContext.finish();
     }
 }

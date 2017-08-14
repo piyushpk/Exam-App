@@ -18,7 +18,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +27,7 @@ import com.examapplication.ui.fragments.ComingSoonFragment;
 import com.examapplication.ui.fragments.RunningNowFragment;
 import com.examapplication.utility.AppConstants;
 import com.examapplication.utility.AppPreferences;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,7 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
 
     private TextView txtFullName, txtEmail;
     private CircleImageView imgProfile;
-    private String userName = "", userEmail = "", userMobileNo = "";
+    private String userFirstName = "", userEmail = "", userToken = "", userImage = "";
     private boolean isLogin = false;
 
     @Override
@@ -59,6 +59,7 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_student);
         mContext = this;
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -96,20 +97,35 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
         View header = navigationView.getHeaderView(0);
         navigationView.setNavigationItemSelectedListener(this);
 
-        userName = AppPreferences.getInstance(mContext).getString(AppConstants.USER_NAME, "");
-        userMobileNo = AppPreferences.getInstance(mContext).getString(AppConstants.USER_MOBILE, "");
+        userFirstName = AppPreferences.getInstance(mContext).getString(AppConstants.USER_FIRST_NAME, "");
+        userToken = AppPreferences.getInstance(mContext).getString(AppConstants.TOKEN, "");
         userEmail = AppPreferences.getInstance(mContext).getString(AppConstants.USER_EMAIL, "");
-
-        if(userName.equals(""))
-            isLogin = false;
-        else
-            isLogin = true;
+        userImage = AppPreferences.getInstance(mContext).getString(AppConstants.USER_IMAGE, "");
 
         txtFullName = (TextView)header.findViewById(R.id.txt_full_name);
-        txtFullName.setText(userName);
         txtEmail = (TextView)header.findViewById(R.id.txt_email);
-        txtEmail.setText(userEmail);
         imgProfile = (CircleImageView)header.findViewById(R.id.img_profile);
+        if(userImage.equals("") || userImage.isEmpty() || userImage == null)
+        {}
+        else
+        {
+            Picasso.with(mContext)
+                   .load(userImage)
+                   .into(imgProfile);
+        }
+
+        if(userToken.equals(""))
+        {
+            txtFullName.setText(getString(R.string.hello_guest));
+            txtEmail.setText(userEmail);
+            isLogin = false;
+        }
+        else
+        {
+            txtFullName.setText("Hi "+userFirstName);
+            txtEmail.setText(userEmail);
+            isLogin = true;
+        }
 
         // get menu from navigationView
         Menu menu = navigationView.getMenu();
@@ -290,7 +306,9 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
         {
             if(isLogin)
             {
-                AppPreferences.getInstance(mContext).putString(AppConstants.USER_NAME, "");
+                AppPreferences.getInstance(mContext).putString(AppConstants.USER_FIRST_NAME, "");
+                AppPreferences.getInstance(mContext).putString(AppConstants.USER_LAST_NAME, "");
+                AppPreferences.getInstance(mContext).putString(AppConstants.USER_IMAGE, "");
                 AppPreferences.getInstance(mContext).putString(AppConstants.USER_EMAIL, "");
                 AppPreferences.getInstance(mContext).putString(AppConstants.USER_MOBILE, "");
                 AppPreferences.getInstance(mContext).putString(AppConstants.USER_ADDRESS, "");

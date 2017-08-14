@@ -164,8 +164,12 @@ public class LoginActivity extends ParentActivity implements View.OnClickListene
                             if(btnName.equals(getString(R.string.student)))
                             {
                                 intent = new Intent(this, LandingStudentActivity.class);
-                                AppPreferences.getInstance(mContext).putString(AppConstants.USER_NAME,
-                                        jsonResponse.responsedata.getUserName());
+                                AppPreferences.getInstance(mContext).putString(AppConstants.USER_FIRST_NAME,
+                                        jsonResponse.responsedata.getUserFirstName());
+                                AppPreferences.getInstance(mContext).putString(AppConstants.USER_LAST_NAME,
+                                        jsonResponse.responsedata.getUserLastName());
+                                AppPreferences.getInstance(mContext).putString(AppConstants.USER_IMAGE,
+                                        jsonResponse.responsedata.getUserImage());
                                 AppPreferences.getInstance(mContext).putString(AppConstants.USER_EMAIL,
                                         jsonResponse.responsedata.getEmailId());
                                 AppPreferences.getInstance(mContext).putString(AppConstants.USER_MOBILE,
@@ -183,7 +187,7 @@ public class LoginActivity extends ParentActivity implements View.OnClickListene
                             {
                                 intent = new Intent(this, LandingFacultyActivity.class);
                             }
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                            SendToLoginActivity.finishThis(SendToLoginActivity.activityContext);
                             startActivity(intent);
                             finish();
                         }
