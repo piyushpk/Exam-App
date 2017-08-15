@@ -11,8 +11,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
 
     <!-- Dangerous Permission STORAGE category -->
     <uses-permission android:name="android.permission.CLEAR_APP_CACHE"/>
@@ -80,7 +79,9 @@
         </activity>
         <activity android:name=".ui.activities.NotificationActivity">
         </activity>
-        <activity android:name=".ui.activities.DemoActivity2">
+        <activity android:name=".ui.activities.CheckExamActivity">
+        </activity>
+        <activity android:name=".ui.activities.StartExamActivity">
         </activity>
     </application>
 

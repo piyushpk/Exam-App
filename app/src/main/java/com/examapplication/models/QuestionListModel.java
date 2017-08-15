@@ -17,8 +17,7 @@ public class QuestionListModel implements Serializable
     public QuestionListModel()
     {}
 
-    public QuestionListModel(String question, String subQue1, String subQue2, String subQue3, String subQue4, String subQue5
-            ,String subQue6)
+    public QuestionListModel(String question, String subQue1, String subQue2, String subQue3, String subQue4, String subQue5,String subQue6)
     {
         this.question = question;
         this.subQuestion1 = subQue1;

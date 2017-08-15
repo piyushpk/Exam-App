@@ -81,7 +81,7 @@ public class SendToLoginActivity extends ParentActivity implements View.OnClickL
         btnStudent = (Button)findViewById(R.id.btn_student);
         btnStudent.setOnClickListener(this);
 
-//        getCategoryList();
+        getCategoryList();
 
         recyclerCategoryList = (RecyclerView)findViewById(R.id.recycler_category_list);
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, 1);

@@ -60,7 +60,7 @@ public class EditProfileActivity extends ParentActivity implements View.OnClickL
     private Spinner spinnerLocation;
     private PermissionUtility permissionUtility;
     private Bitmap bitmap;
-    private String profileImage = "";
+    private String profileImage = "", selectedCityId = "";
     private ArrayList<String> spinnerArrayName = new ArrayList<>();
     private ArrayList<String> spinnerArrayId = new ArrayList<>();
     private ArrayList<CategoryListModel> categoryListModels = new ArrayList<>();
@@ -109,6 +109,7 @@ public class EditProfileActivity extends ParentActivity implements View.OnClickL
             Picasso.with(mContext)
                    .load(userImage)
                    .into(imgProfile);
+
         }
 
         relativeImage = (RelativeLayout)findViewById(R.id.relative_image);
@@ -129,7 +130,7 @@ public class EditProfileActivity extends ParentActivity implements View.OnClickL
 
         if(v == imgSave)
         {
-
+            saveUserDetails();
         }
 
         if(v == imgSetPhoto)
@@ -215,7 +216,7 @@ public class EditProfileActivity extends ParentActivity implements View.OnClickL
                 imgProfile.setImageBitmap(photo);
                 relativeImage.setBackground(new BitmapDrawable(getResources(), photo));
             } catch (Exception e) {
-                e.printStackTrace();
+
             }
         }
         if (pRequestCode == AppConstants.CAPTURE_IMAGE) {
@@ -268,6 +269,7 @@ public class EditProfileActivity extends ParentActivity implements View.OnClickL
         {
             try
             {
+                showLoadingDialog();
                 JSONObject jsonObject = new JSONObject();
 
                 JsonObjectRequest request = WebRequest.callPostMethod(mContext, jsonObject, Request.Method.GET,
@@ -296,15 +298,19 @@ public class EditProfileActivity extends ParentActivity implements View.OnClickL
         {
             try
             {
+                showLoadingDialog();
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("first_name", fName);
                 jsonObject.put("last_name", lName);
                 jsonObject.put("contact_no", mobile);
-                jsonObject.put("city", fName);
+                jsonObject.put("city", selectedCityId);
+                jsonObject.put("user_image", profileImage);
 
-                JsonObjectRequest request = WebRequest.callPostMethod(mContext, jsonObject, Request.Method.GET,
-                        ApiConstants.GET_CATEGORY_URL, ApiConstants.GET_CATEGORY, this, "");
-                App.getInstance().addToRequestQueue(request, ApiConstants.GET_CATEGORY);
+                String token = AppPreferences.getInstance(mContext).getString(AppConstants.TOKEN, "");
+
+                JsonObjectRequest request = WebRequest.callPostMethod(mContext, jsonObject, Request.Method.POST,
+                        ApiConstants.UPDATE_PROFILE_URL, ApiConstants.UPDATE_PROFILE, this, token);
+                App.getInstance().addToRequestQueue(request, ApiConstants.UPDATE_PROFILE);
 
             }
             catch (Exception e)
@@ -331,12 +337,57 @@ public class EditProfileActivity extends ParentActivity implements View.OnClickL
                     {
                         try
                         {
+                            dismissLoadingDialog();
                             categoryListModels.addAll(jsonResponse.city);
                             for(int i=0; i < categoryListModels.size(); i++)
                             {
                                 spinnerArrayName.add(categoryListModels.get(i).getCityName());
                                 spinnerArrayId.add(categoryListModels.get(i).getCityId());
                             }
+                            spinnerList(spinnerArrayName, spinnerArrayId);
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+            break;
+
+            case ApiConstants.UPDATE_PROFILE:
+            {
+                if (jsonResponse != null)
+                {
+                    if (jsonResponse.SUCCESS != null && jsonResponse.result.equals(jsonResponse.SUCCESS))
+                    {
+                        try
+                        {
+                            dismissLoadingDialog();
+                            AppPreferences.getInstance(mContext).putString(AppConstants.USER_FIRST_NAME,
+                                    jsonResponse.responsedata.getUserFirstName());
+                            AppPreferences.getInstance(mContext).putString(AppConstants.USER_LAST_NAME,
+                                    jsonResponse.responsedata.getUserLastName());
+                            AppPreferences.getInstance(mContext).putString(AppConstants.USER_IMAGE,
+                                    jsonResponse.responsedata.getUserImage());
+                            AppPreferences.getInstance(mContext).putString(AppConstants.USER_EMAIL,
+                                    jsonResponse.responsedata.getEmailId());
+                            AppPreferences.getInstance(mContext).putString(AppConstants.USER_MOBILE,
+                                    jsonResponse.responsedata.getMobileNo());
+                            AppPreferences.getInstance(mContext).putString(AppConstants.USER_ADDRESS,
+                                    jsonResponse.responsedata.getAddress());
+                            AppPreferences.getInstance(mContext).putString(AppConstants.USER_STATE,
+                                    jsonResponse.responsedata.getState());
+                            AppPreferences.getInstance(mContext).putString(AppConstants.USER_CITY,
+                                    jsonResponse.responsedata.getCity());
+                            AppPreferences.getInstance(mContext).putString(AppConstants.TOKEN,
+                                    jsonResponse.responsedata.getAuthorizationToken());
+
+                            edtFirstName.setText(jsonResponse.responsedata.getUserFirstName());
+                            edtLastName.setText(jsonResponse.responsedata.getUserLastName());
+                            edtEmail.setText(jsonResponse.responsedata.getEmailId());
+                            edtPhoneNo.setText(jsonResponse.responsedata.getMobileNo());
+                            userCity = jsonResponse.responsedata.getCity();
                             spinnerList(spinnerArrayName, spinnerArrayId);
                         }
                         catch (Exception e)
@@ -361,6 +412,11 @@ public class EditProfileActivity extends ParentActivity implements View.OnClickL
                 Toast.makeText(mContext, AppConstants.API_FAIL_MESSAGE, Toast.LENGTH_SHORT).show();
             }
             break;
+            case ApiConstants.UPDATE_PROFILE:
+            {
+                Toast.makeText(mContext, AppConstants.API_FAIL_MESSAGE, Toast.LENGTH_SHORT).show();
+            }
+            break;
         }
     }
 
@@ -371,6 +427,11 @@ public class EditProfileActivity extends ParentActivity implements View.OnClickL
         switch (label)
         {
             case ApiConstants.GET_CITY_LIST:
+            {
+                Toast.makeText(mContext, AppConstants.API_FAIL_MESSAGE, Toast.LENGTH_SHORT).show();
+            }
+            break;
+            case ApiConstants.UPDATE_PROFILE:
             {
                 Toast.makeText(mContext, AppConstants.API_FAIL_MESSAGE, Toast.LENGTH_SHORT).show();
             }
@@ -408,7 +469,7 @@ public class EditProfileActivity extends ParentActivity implements View.OnClickL
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position,
                     long id)
             {
-                String item = cityId.get(position);
+                selectedCityId = cityId.get(position);
             }
 
             @Override

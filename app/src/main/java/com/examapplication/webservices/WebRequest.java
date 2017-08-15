@@ -74,7 +74,11 @@ public class WebRequest
                         JsonResponse jsonResponse = gson.fromJson(res, JsonResponse.class);
                         caller.onAsyncSuccess(jsonResponse, label);
                     }
-                    catch (Exception je)
+                    catch (UnsupportedEncodingException e1)
+                    {
+                        e1.printStackTrace();
+                    }
+                    catch (JsonSyntaxException je)
                     {
                         caller.onAsyncFail(error.getMessage() != null && !error.getMessage().equals("") ? error.getMessage() : "Please Contact Server Admin", label, response);
                     }

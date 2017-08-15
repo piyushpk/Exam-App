@@ -38,8 +38,8 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:textStyle="bold"
-        android:layout_marginBottom="30dp"
-        android:layout_below="@+id/toolbar"/>
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="15dp"/>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -93,7 +93,9 @@
                         android:textColorHint="@color/colorWhite"
                         android:textSize="@dimen/text_size_h3"
                         android:layout_weight="1"
-                        android:layout_marginRight="2dp"/>
+                        android:layout_marginRight="2dp"
+                        android:inputType="text"
+                        android:imeOptions="actionNext"/>
 
                     <EditText
                         android:id="@+id/edt_last_name"
@@ -106,9 +108,82 @@
                         android:textColorHint="@color/colorWhite"
                         android:textSize="@dimen/text_size_h3"
                         android:layout_weight="1"
-                        android:layout_marginLeft="0dp"/>
+                        android:layout_marginLeft="0dp"
+                        android:inputType="text"
+                        android:imeOptions="actionNext"/>
 
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorSignUpImageView">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_action_email"
+                        android:padding="8dp"
+                        android:layout_gravity="center"/>
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/edt_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorSignUpEditText"
+                    android:textColor="@color/colorWhite"
+                    android:hint="@string/email"
+                    android:paddingLeft="10dp"
+                    android:textColorHint="@color/colorWhite"
+                    android:textSize="@dimen/text_size_h3"
+                    android:inputType="textEmailAddress"
+                    android:imeOptions="actionNext"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorSignUpImageView">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_action_phone"
+                        android:padding="8dp"
+                        android:layout_gravity="center"/>
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/edt_phone_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorSignUpEditText"
+                    android:textColor="@color/colorWhite"
+                    android:hint="@string/phone_no"
+                    android:paddingLeft="10dp"
+                    android:textColorHint="@color/colorWhite"
+                    android:textSize="@dimen/text_size_h3"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:imeOptions="actionNext"/>
 
             </LinearLayout>
 
@@ -155,23 +230,25 @@
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:src="@drawable/ic_action_email"
+                        android:layout_height="45dp"
+                        android:src="@drawable/ic_action_location"
                         android:padding="8dp"
                         android:layout_gravity="center"/>
 
                 </LinearLayout>
 
                 <EditText
-                    android:id="@+id/edt_email"
+                    android:id="@+id/edt_address"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/colorSignUpEditText"
                     android:textColor="@color/colorWhite"
-                    android:hint="@string/email"
+                    android:hint="@string/address"
                     android:paddingLeft="10dp"
                     android:textColorHint="@color/colorWhite"
-                    android:textSize="@dimen/text_size_h3"/>
+                    android:textSize="@dimen/text_size_h3"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"/>
 
             </LinearLayout>
 
@@ -188,23 +265,61 @@
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:src="@drawable/ic_action_phone"
+                        android:layout_height="45dp"
+                        android:src="@drawable/ic_action_password"
                         android:padding="8dp"
                         android:layout_gravity="center"/>
 
                 </LinearLayout>
 
                 <EditText
-                    android:id="@+id/edt_phone_no"
+                    android:id="@+id/edt_password"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/colorSignUpEditText"
                     android:textColor="@color/colorWhite"
-                    android:hint="@string/phone_no"
+                    android:hint="@string/password"
                     android:paddingLeft="10dp"
                     android:textColorHint="@color/colorWhite"
-                    android:textSize="@dimen/text_size_h3"/>
+                    android:textSize="@dimen/text_size_h3"
+                    android:inputType="textPassword"
+                    android:imeOptions="actionNext"
+                    android:visibility="visible"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorSignUpImageView">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:src="@drawable/ic_action_password"
+                        android:padding="8dp"
+                        android:layout_gravity="center"/>
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/edt_cnf_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorSignUpEditText"
+                    android:textColor="@color/colorWhite"
+                    android:hint="@string/cnf_password"
+                    android:paddingLeft="10dp"
+                    android:textColorHint="@color/colorWhite"
+                    android:textSize="@dimen/text_size_h3"
+                    android:inputType="textPassword"
+                    android:imeOptions="actionGo"/>
 
             </LinearLayout>
 

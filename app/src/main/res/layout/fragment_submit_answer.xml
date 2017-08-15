@@ -1,0 +1,70 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:background="@color/colorFaintBlack">
+
+    <LinearLayout
+        android:id="@+id/linear_main"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:paddingLeft="5dp"
+        android:background="@color/colorDarkBlue">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/que_no"
+            android:textSize="@dimen/text_size_h3"
+            android:layout_weight="0.6"
+            android:layout_gravity="center"
+            android:textColor="@color/colorWhite"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:text="@string/completed"
+            android:textSize="@dimen/text_size_h3"
+            android:layout_gravity="center"
+            android:textColor="@color/colorWhite"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.6"
+            android:gravity="center"
+            android:text="@string/answer_sheet_uploaded"
+            android:textSize="@dimen/text_size_h3"
+            android:layout_gravity="center"
+            android:textColor="@color/colorWhite"/>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_submitted_answers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="0dp"
+        android:background="@color/colorBackground"
+        android:layout_below="@+id/linear_main"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="60dp"/>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:text="@string/submit"
+        android:textAllCaps="false"
+        android:background="@drawable/green_square_button"
+        android:textSize="@dimen/text_size_h3"
+        android:textColor="@color/colorWhite"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

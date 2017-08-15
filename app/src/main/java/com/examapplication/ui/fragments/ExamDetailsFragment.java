@@ -113,7 +113,7 @@ public class ExamDetailsFragment extends Fragment implements View.OnClickListene
         txtInstruction = (TextView)rootView.findViewById(R.id.txt_instruction);
         txtInstructionDesc = (TextView)rootView.findViewById(R.id.txt_instruction_desc);
 
-        btnCourseName.setText(runningNowList.get(position).getExamEducation());
+        btnCourseName.setText(runningNowList.get(position).getExamCategory());
         txtExamName.setText(runningNowList.get(position).getExamName());
         txtAuthorName.setText(runningNowList.get(position).getExamAuthor());
         txtReleasingDate.setText(runningNowList.get(position).getExamSaleStartDate());

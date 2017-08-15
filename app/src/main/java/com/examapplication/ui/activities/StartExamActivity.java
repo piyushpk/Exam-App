@@ -1,11 +1,12 @@
 package com.examapplication.ui.activities;
 
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,11 +15,13 @@ import android.widget.TextView;
 import com.examapplication.R;
 import com.examapplication.ui.fragments.MyComingSoonFragment;
 import com.examapplication.ui.fragments.MyRunningExamFragment;
+import com.examapplication.ui.fragments.QuestionPaperFragment;
+import com.examapplication.ui.fragments.SubmitAnswerFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyExamActivity extends ParentActivity implements View.OnClickListener
+public class StartExamActivity extends ParentActivity implements View.OnClickListener
 {
 
     private Toolbar toolbar;
@@ -32,8 +35,7 @@ public class MyExamActivity extends ParentActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_exam);
-
+        setContentView(R.layout.activity_start_exam);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -45,15 +47,15 @@ public class MyExamActivity extends ParentActivity implements View.OnClickListen
         tabLayout.setupWithViewPager(viewPager);
 
         txtTitle = (TextView)findViewById(R.id.txt_name);
-        txtTitle.setText(getString(R.string.my_exams));
+        txtTitle.setText(getString(R.string.start_exam));
         imgBack = (ImageView)findViewById(R.id.img_back);
         imgBack.setOnClickListener(this);
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new MyRunningExamFragment(), getString(R.string.my_running_exam));
-        adapter.addFragment(new MyComingSoonFragment(), getString(R.string.my_coming_exam));
+        adapter.addFragment(new QuestionPaperFragment(), getString(R.string.question_paper));
+        adapter.addFragment(new SubmitAnswerFragment(), getString(R.string.submit_answer));
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

@@ -1,10 +1,10 @@
 package com.examapplication.ui.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +16,7 @@ import com.examapplication.R;
 import com.examapplication.models.RunningNowModel;
 import com.examapplication.ui.fragments.AuthorDetailsFragment;
 import com.examapplication.ui.fragments.ExamDetailsFragment;
+import com.examapplication.ui.activities.*;
 
 import java.util.ArrayList;
 
@@ -93,6 +94,16 @@ public class MyRunningExamAdapter extends RecyclerView.Adapter<MyRunningExamAdap
                 fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.fade_out);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+            }
+        });
+
+        holder.btnStartExam.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(mContext, StartExamActivity.class);
+                mContext.startActivity(intent);
             }
         });
     }

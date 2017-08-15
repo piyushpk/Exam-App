@@ -47,6 +47,7 @@
     <string name="logout">Logout</string>
     <string name="user_name">User Name</string>
     <string name="password">Password</string>
+    <string name="cnf_password">Confirm Password</string>
 
     <string name="create_exam">Create Exam</string>
     <string name="exam_name">Exam Name</string>
@@ -107,6 +108,14 @@
     <string name="coming">Coming</string>
     <string name="notifications">Notifications</string>
     <string name="hello_guest">Hello Guest</string>
+    <string name="question_paper">Question Paper</string>
+    <string name="submit_answer">Submit Answer</string>
+    <string name="question_">Question</string>
+    <string name="sub_question">Sub Question</string>
+
+    <string name="que_no">Que No.</string>
+    <string name="completed">Completed</string>
+    <string name="answer_sheet_uploaded">Answer Sheet Uploaded</string>
 
 
     <!--Api related strings-->
@@ -115,6 +124,14 @@
     <string name="please_add_user_name">User Name field should not be empty</string>
     <string name="please_add_password">Password field should not be empty</string>
     <string name="user_name_and_password_does_not_match">UserName or Password does not match</string>
+    <string name="first_name_not_be_empty">First Name not be Empty</string>
+    <string name="last_name_not_be_empty">Last Name not be Empty</string>
+    <string name="mobile_no_not_be_empty">Mobile Number not be Empty</string>
+    <string name="email_not_be_empty">Email not be Empty</string>
+    <string name="address_not_be_empty">Address not be Empty</string>
+    <string name="password_not_be_empty">Password not be Empty</string>
+    <string name="cnf_password_not_be_empty">Confirm Password not be Empty</string>
+    <string name="password_and_cnf_does_not_match">Password and Confirm Password Does Not Match</string>
 
 
     <string name="text_dummy_large">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>

@@ -128,8 +128,8 @@ public class LoginActivity extends ParentActivity implements View.OnClickListene
             try
             {
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("username", "priyanka@bynry.com");
-                jsonObject.put("password", "admin");
+                jsonObject.put("username", userName);
+                jsonObject.put("password", password);
                 jsonObject.put("type", type);
 
                 JsonObjectRequest request = WebRequest.callPostMethod(mContext, jsonObject, Request.Method.POST,
@@ -157,7 +157,7 @@ public class LoginActivity extends ParentActivity implements View.OnClickListene
             {
                 if (jsonResponse != null)
                 {
-                    if (jsonResponse.SUCCESS != null && jsonResponse.result.equals(jsonResponse.SUCCESS))
+                    if (jsonResponse.result != null && jsonResponse.result.equals(jsonResponse.SUCCESS))
                     {
                         try
                         {
@@ -198,11 +198,7 @@ public class LoginActivity extends ParentActivity implements View.OnClickListene
                     }
                     else
                     {
-                        if (jsonResponse.result != null && jsonResponse.result.equals(JsonResponse.FAILURE))
-                        {
-                            Toast.makeText(mContext, getString(R.string.user_name_and_password_does_not_match),
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                        Toast.makeText(mContext, jsonResponse.message, Toast.LENGTH_SHORT).show();
                     }
                 }
             }
