@@ -3,9 +3,7 @@ package com.examapplication.ui.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,8 +16,6 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.examapplication.R;
 import com.examapplication.interfaces.ApiServiceCaller;
-import com.examapplication.models.CategoryListModel;
-import com.examapplication.models.UserModel;
 import com.examapplication.utility.App;
 import com.examapplication.utility.AppConstants;
 import com.examapplication.utility.AppPreferences;
@@ -29,8 +25,6 @@ import com.examapplication.webservices.JsonResponse;
 import com.examapplication.webservices.WebRequest;
 
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class LoginActivity extends ParentActivity implements View.OnClickListener, ApiServiceCaller
 {
@@ -157,7 +151,7 @@ public class LoginActivity extends ParentActivity implements View.OnClickListene
             {
                 if (jsonResponse != null)
                 {
-                    if (jsonResponse.result != null && jsonResponse.result.equals(jsonResponse.SUCCESS))
+                    if (jsonResponse.result != null && jsonResponse.result.equals(jsonResponse.result))
                     {
                         try
                         {

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -349,7 +348,7 @@ public class SignUpActivity extends ParentActivity implements View.OnClickListen
             {
                 if (jsonResponse != null)
                 {
-                    if (jsonResponse.SUCCESS != null && jsonResponse.result.equals(jsonResponse.SUCCESS))
+                    if (jsonResponse.result != null && jsonResponse.result.equals(jsonResponse.result))
                     {
                         try
                         {
@@ -376,7 +375,7 @@ public class SignUpActivity extends ParentActivity implements View.OnClickListen
                 if (jsonResponse != null)
                 {
                     dismissLoadingDialog();
-                    if (jsonResponse.SUCCESS != null && jsonResponse.result.equals(jsonResponse.SUCCESS))
+                    if (jsonResponse.result != null && jsonResponse.result.equals(jsonResponse.result))
                     {
                         try
                         {

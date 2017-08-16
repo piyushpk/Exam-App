@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -154,7 +153,7 @@ public class SendToLoginActivity extends ParentActivity implements View.OnClickL
             {
                 if (jsonResponse != null)
                 {
-                    if (jsonResponse.SUCCESS != null && jsonResponse.result.equals(jsonResponse.SUCCESS))
+                    if (jsonResponse.result != null && jsonResponse.result.equals(jsonResponse.result))
                     {
                         try
                         {

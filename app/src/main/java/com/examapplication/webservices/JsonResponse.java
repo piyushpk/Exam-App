@@ -12,9 +12,9 @@ import java.util.ArrayList;
 public class JsonResponse
 {
     //Message and Success
-    public String SUCCESS = "success";
+    public String result = "success";
     public String MESSAGE = "message";
-    public String result = "result";
+//    public String result = "result";
     public String message = "message";
     public static String FAILURE = "failure";
     public String authorization = "token";

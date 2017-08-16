@@ -2,7 +2,6 @@ package com.examapplication.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -35,11 +34,11 @@ public class LandingFacultyActivity extends ParentActivity implements Navigation
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
 
-    RelativeLayout drawerView;
-    RelativeLayout mainView;
+    private RelativeLayout mainView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_faculty);
 
@@ -54,7 +53,6 @@ public class LandingFacultyActivity extends ParentActivity implements Navigation
         tabLayout.setupWithViewPager(viewPager);
 
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        drawerView = (RelativeLayout) findViewById(R.id.drawerView);
         mainView = (RelativeLayout) findViewById(R.id.mainView);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.app_name, R.string.app_name) {
@@ -67,13 +65,12 @@ public class LandingFacultyActivity extends ParentActivity implements Navigation
             }
 
             @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
+            public void onDrawerSlide(View drawerView, float slideOffset)
+            {
                 super.onDrawerSlide(drawerView, slideOffset);
                 mainView.setTranslationX(slideOffset * drawerView.getWidth());
                 mDrawerLayout.bringChildToFront(drawerView);
                 mDrawerLayout.requestLayout();
-
-
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
@@ -84,32 +81,38 @@ public class LandingFacultyActivity extends ParentActivity implements Navigation
 
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager(ViewPager viewPager)
+    {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new AddedExamFragment(), "Added Exam");
         adapter.addFragment(new SubmittedExamFragment(), "Submitted Exam");
         viewPager.setAdapter(adapter);
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
+    class ViewPagerAdapter extends FragmentPagerAdapter
+    {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
-        public ViewPagerAdapter(FragmentManager manager) {
+        public ViewPagerAdapter(FragmentManager manager)
+        {
             super(manager);
         }
 
         @Override
-        public Fragment getItem(int position) {
+        public Fragment getItem(int position)
+        {
             return mFragmentList.get(position);
         }
 
         @Override
-        public int getCount() {
+        public int getCount()
+        {
             return mFragmentList.size();
         }
 
-        public void addFragment(Fragment fragment, String title) {
+        public void addFragment(Fragment fragment, String title)
+        {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
@@ -121,24 +124,28 @@ public class LandingFacultyActivity extends ParentActivity implements Navigation
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
 
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if(id == R.id.action_notification) {
+        if(id == R.id.action_notification)
+        {
             /*Intent intent = new Intent(this, CreateExamActivity.class);
             startActivity(intent);*/
             return true;
         }
 
-        if(id == R.id.action_filter) {
+        if(id == R.id.action_filter)
+        {
             /*FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             FilterFragment fragment = new FilterFragment();
@@ -153,40 +160,50 @@ public class LandingFacultyActivity extends ParentActivity implements Navigation
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if(drawer.isDrawerOpen(GravityCompat.START)) {
+        if(drawer.isDrawerOpen(GravityCompat.START))
+        {
             drawer.closeDrawer(GravityCompat.START);
         }
-        else {
+        else
+        {
             super.onBackPressed();
         }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem item)
+    {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if(id == R.id.nav_camera) {
+        if(id == R.id.nav_camera)
+        {
             item.setChecked(false);
             Intent intent = new Intent(this, CreateExamActivity.class);
             startActivity(intent);
         }
-        else if(id == R.id.nav_gallery) {
+        else if(id == R.id.nav_gallery)
+        {
 
         }
-        else if(id == R.id.nav_slideshow) {
+        else if(id == R.id.nav_slideshow)
+        {
 
         }
-        else if(id == R.id.nav_manage) {
+        else if(id == R.id.nav_manage)
+        {
 
         }
-        else if(id == R.id.nav_share) {
+        else if(id == R.id.nav_share)
+        {
 
         }
-        else if(id == R.id.nav_send) {
+        else if(id == R.id.nav_send)
+        {
 
         }
 

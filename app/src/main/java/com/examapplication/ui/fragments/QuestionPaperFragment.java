@@ -190,7 +190,7 @@ public class QuestionPaperFragment extends ParentFragment implements ApiServiceC
             {
                 if (jsonResponse != null)
                 {
-                    if (jsonResponse.SUCCESS != null && jsonResponse.result.equals(jsonResponse.SUCCESS))
+                    if (jsonResponse.result != null && jsonResponse.result.equals(jsonResponse.result))
                     {
                         try
                         {

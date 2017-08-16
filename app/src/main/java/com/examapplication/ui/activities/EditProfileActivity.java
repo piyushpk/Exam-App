@@ -333,7 +333,7 @@ public class EditProfileActivity extends ParentActivity implements View.OnClickL
             {
                 if (jsonResponse != null)
                 {
-                    if (jsonResponse.SUCCESS != null && jsonResponse.result.equals(jsonResponse.SUCCESS))
+                    if (jsonResponse.result != null && jsonResponse.result.equals(jsonResponse.result))
                     {
                         try
                         {
@@ -359,7 +359,7 @@ public class EditProfileActivity extends ParentActivity implements View.OnClickL
             {
                 if (jsonResponse != null)
                 {
-                    if (jsonResponse.SUCCESS != null && jsonResponse.result.equals(jsonResponse.SUCCESS))
+                    if (jsonResponse.result != null && jsonResponse.result.equals(jsonResponse.result))
                     {
                         try
                         {

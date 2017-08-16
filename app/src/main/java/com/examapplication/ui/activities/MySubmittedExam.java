@@ -101,7 +101,7 @@ public class MySubmittedExam extends ParentActivity implements ApiServiceCaller,
             {
                 if (jsonResponse != null)
                 {
-                    if (jsonResponse.SUCCESS != null && jsonResponse.result.equals(jsonResponse.SUCCESS))
+                    if (jsonResponse.result != null && jsonResponse.result.equals(jsonResponse.result))
                     {
                         try
                         {

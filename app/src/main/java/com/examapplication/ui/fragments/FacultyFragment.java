@@ -20,7 +20,6 @@ import com.examapplication.interfaces.FilterInterface;
 import com.examapplication.models.FacultyModel;
 import com.examapplication.ui.activities.FilterActivity;
 import com.examapplication.ui.adapters.FacultyAdapter;
-import com.examapplication.ui.adapters.StreamAdapter;
 import com.examapplication.utility.App;
 import com.examapplication.utility.AppConstants;
 import com.examapplication.utility.CommonUtility;
@@ -193,7 +192,7 @@ public class FacultyFragment extends Fragment implements ApiServiceCaller, Filte
             {
                 if (jsonResponse != null)
                 {
-                    if (jsonResponse.SUCCESS != null && jsonResponse.result.equals(jsonResponse.SUCCESS))
+                    if (jsonResponse.result != null && jsonResponse.result.equals(jsonResponse.result))
                     {
                         try
                         {
