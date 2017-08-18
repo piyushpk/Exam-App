@@ -4,11 +4,11 @@ package com.examapplication.webservices;
 public class ApiConstants
 {
 
-//    public static final String DOMAIN_URL = "http://192.168.1.13:8987"; //  Mayur
+    public static final String DOMAIN_URL = "http://192.168.1.13:8987"; //  Mayur
 
 //    public static final String DOMAIN_URL = "http://192.168.1.47:9999"; //  Sirji
 
-    public static final String DOMAIN_URL = "http://ec2-35-154-241-9.ap-south-1.compute.amazonaws.com:8000"; //  PROD
+//    public static final String DOMAIN_URL = "http://ec2-35-154-241-9.ap-south-1.compute.amazonaws.com:8000"; //  PROD
 
 
     public static final String BASE_URL = DOMAIN_URL+"/api/";

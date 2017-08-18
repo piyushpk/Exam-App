@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Bundle;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.examapplication.R;
 import com.examapplication.utility.AppConstants;

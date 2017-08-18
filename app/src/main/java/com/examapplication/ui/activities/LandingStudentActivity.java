@@ -34,7 +34,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class LandingStudentActivity extends ParentActivity implements NavigationView.OnNavigationItemSelectedListener
+public class LandingStudentActivity extends ParentActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener
 {
     private Context mContext;
     private Toolbar toolbar;
@@ -167,6 +167,10 @@ public class LandingStudentActivity extends ParentActivity implements Navigation
             }
         });
     }
+
+    @Override
+    public void onClick(View v)
+    {}
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
